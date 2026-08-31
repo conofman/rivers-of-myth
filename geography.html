@@ -34,6 +34,23 @@
   .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
   .sitenav-links a:hover{ color:var(--parchment); }
   .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+  .sitenav-links .nav-group{ position:relative; display:flex; align-items:center; }
+  .sitenav-links .nav-dropdown{
+    display:none; position:absolute; top:100%; left:0;
+    background:var(--basalt-2); border:1px solid var(--line-faint); border-top:2px solid var(--gold);
+    min-width:240px; z-index:200; box-shadow:0 8px 22px rgba(0,0,0,0.35); padding:6px 0;
+  }
+  .sitenav-links .nav-group:hover .nav-dropdown,
+  .sitenav-links .nav-group:focus-within .nav-dropdown{ display:block; }
+  .sitenav-links .nav-dropdown a{
+    display:block; padding:8px 16px; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--parchment-dim); border-bottom:none; white-space:normal;
+  }
+  .sitenav-links .nav-dropdown a:hover{ color:var(--parchment); border-color:transparent; }
+  .sitenav-links .nav-dropdown .drop-section{
+    padding:10px 16px 4px; font-family:'IBM Plex Mono', monospace; font-size:9.5px;
+    color:var(--gold); letter-spacing:0.12em; text-transform:uppercase; opacity:0.75;
+  }
 
   header{ max-width:920px; margin:0 auto; padding:64px 28px 20px; }
   .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
@@ -90,8 +107,33 @@
       Rivers of Myth
     </span>
     <div class="sitenav-links">
-      <a href="index.html">Lineage Map</a>
+      <a href="lineage.html">Lineage Map</a>
       <a href="myth-match.html">Myth Match</a>
+      <div class="nav-group">
+        <a href="scrutiny.html">Biblical Scrutiny &#9662;</a>
+        <div class="nav-dropdown">
+          <div class="drop-section">The Document</div>
+          <a href="scrutiny.html#contradictions">I &mdash; Internal Contradictions</a>
+          <a href="scrutiny.html#authorship">II &mdash; Authorship Questions</a>
+          <a href="scrutiny.html#jedp">III &mdash; The Four Sources (JEDP)</a>
+          <a href="scrutiny.html#flood">IV &mdash; The Flood: A Case Study</a>
+          <a href="scrutiny.html#anachronisms">V &mdash; Anachronisms &amp; the Patriarchs</a>
+          <a href="scrutiny.html#moses">VI &mdash; Moses &amp; the Exodus</a>
+          <div class="drop-section">Origins</div>
+          <a href="scrutiny.html#borrowed">VII &mdash; Borrowed Mythology</a>
+          <a href="scrutiny.html#polytheism">VIII &mdash; Polytheistic Origins</a>
+          <a href="scrutiny.html#canon">IX &mdash; Formation of the Canon</a>
+          <div class="drop-section">What It Got Wrong</div>
+          <a href="scrutiny.html#prophecy">X &mdash; Failed Prophecies</a>
+          <a href="scrutiny.html#transmission">XI &mdash; Textual Corruption</a>
+          <a href="scrutiny.html#jesus">XII &mdash; The Historical Jesus Problem</a>
+          <a href="scrutiny.html#virgin">XIII &mdash; The Virgin Birth Problem</a>
+          <div class="drop-section">What It Conceals</div>
+          <a href="scrutiny.html#violence">XIV &mdash; Divine Violence</a>
+          <a href="scrutiny.html#slavery">XV &mdash; Slavery &amp; the Bible</a>
+          <a href="scrutiny.html#reading">&mdash; Scholarly Reading List</a>
+        </div>
+      </div>
       <a href="canon.html">How the Book Got Made</a>
       <a href="geography.html" class="active">Born on Third Base</a>
       <a href="hell.html">Hell's Family Tree</a>
