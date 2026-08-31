@@ -3,510 +3,648 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rivers of Myth — Mesopotamian Roots of Biblical and Greek Tradition</title>
+<title>Biblical Scrutiny — A Critical Reference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --basalt: #16140f;
-    --basalt-2: #1e1b14;
-    --parchment: #ede3cc;
-    --parchment-dim: #cfc4a8;
-    --ink: #2a2416;
-    --lapis: #3d6ea5;
-    --lapis-dim: #2a4d78;
-    --brick: #a8523a;
-    --brick-dim: #7c3c29;
-    --oxblood: #8a3636;
-    --oxblood-dim: #642626;
-    --verdigris: #5f8577;
-    --verdigris-dim: #45645a;
-    --gold: #c19a5b;
-    --line-faint: rgba(237,227,204,0.14);
+  :root {
+    --basalt: #1c1a16;
+    --basalt-mid: #242018;
+    --basalt-light: #2c2820;
+    --parchment: #ede0c4;
+    --parchment-dim: #c8b898;
+    --gold: #d4a84b;
+    --gold-dim: #a07830;
+    --ember: #c46a2b;
+    --slate: #5a7a8a;
+    --slate-light: #8ab0c4;
+    --text: #ddd0b8;
+    --text-dim: #a89878;
+    --border: #3a342c;
+    --danger: #b04040;
+    --danger-light: #d05858;
   }
 
-  *{ box-sizing:border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html,body{
-    margin:0; padding:0;
-    background:var(--basalt);
-    color:var(--parchment);
-    font-family:'Source Serif 4', serif;
+  body {
+    background: var(--basalt);
+    color: var(--text);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
   }
 
-  ::selection{ background:var(--gold); color:var(--basalt); }
+  /* NAV */
+  nav {
+    background: var(--basalt-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1rem 0.9rem;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    display: block;
+  }
+  nav a:hover { color: var(--parchment); }
+  nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-  h1,h2,h3, .display{
-    font-family:'Spectral', serif;
-    font-weight:600;
-    letter-spacing:0.01em;
+  .nav-group { position: relative; display: flex; align-items: stretch; }
+  .nav-group > a { border-bottom: 2px solid transparent; color: var(--text-dim); }
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--basalt-mid);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    min-width: 240px;
+    z-index: 200;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .nav-group:hover .nav-dropdown,
+  .nav-group:focus-within .nav-dropdown { display: block; }
+  .nav-dropdown a {
+    display: block;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    letter-spacing: 0.06em;
+  }
+  .nav-dropdown a:hover { color: var(--text); background: var(--basalt-light); border-left-color: var(--gold); }
+  .nav-dropdown .drop-section {
+    padding: 0.4rem 1.1rem 0.2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    margin-top: 0.25rem;
   }
 
-  .mono{
-    font-family:'IBM Plex Mono', monospace;
-    letter-spacing:0.02em;
+  /* HERO */
+  .hero {
+    padding: 6rem 2rem 5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    font-weight: 700;
+    color: var(--parchment);
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.06em;
+    font-weight: 400;
+  }
+  .hero-lead {
+    font-size: 1.2rem;
+    color: var(--text);
+    max-width: 680px;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 660px;
+    line-height: 1.75;
+    font-style: italic;
   }
 
-  header{
-    max-width:920px;
-    margin:0 auto;
-    padding:76px 28px 40px;
+  /* PREMISE */
+  .premise {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  @media (max-width: 640px) { .premise { grid-template-columns: 1fr; gap: 2rem; } }
+  .premise-block h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  .premise-block p {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.8;
   }
 
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    letter-spacing:0.18em;
-    text-transform:uppercase;
-    color:var(--gold);
-    margin-bottom:18px;
+  /* ROADMAP */
+  .roadmap-header {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem 1.5rem;
+  }
+  .roadmap-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--parchment);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.03em;
+  }
+  .roadmap-header p {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 660px;
+    line-height: 1.75;
+    font-style: italic;
   }
 
-  h1{
-    font-size:clamp(34px, 5vw, 54px);
-    line-height:1.08;
-    margin:0 0 20px;
-    color:var(--parchment);
+  /* ACT SECTIONS */
+  .act {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .act:last-of-type { border-bottom: none; }
+
+  .act-label {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .act-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .act-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--parchment);
+    letter-spacing: 0.03em;
+  }
+  .act-thesis {
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    font-style: italic;
+    max-width: 640px;
+    line-height: 1.75;
+    margin-bottom: 2rem;
   }
 
-  h1 em{
-    font-style:italic;
-    color:var(--gold);
+  /* SECTION CARDS */
+  .section-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .section-card {
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem 1.4rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .section-card:hover {
+    border-color: var(--gold-dim);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .card-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+  .card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--parchment);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .card-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+  }
+  .card-arrow {
+    position: absolute;
+    bottom: 1.1rem;
+    right: 1.2rem;
+    color: var(--gold-dim);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .section-card:hover .card-arrow { opacity: 1; }
+
+  /* SITE MAP LINKS (other pages) */
+  .site-pages {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    border-top: 1px solid var(--border);
+  }
+  .site-pages h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.04em;
+  }
+  .site-pages p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .page-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+  .page-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .page-link:hover { border-color: var(--gold-dim); }
+  .page-link .pl-title {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    color: var(--parchment);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .page-link .pl-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    line-height: 1.5;
   }
 
-  header p{
-    font-size:17px;
-    line-height:1.65;
-    color:var(--parchment-dim);
-    max-width:680px;
-    margin:0 0 14px;
+  /* FOOTER */
+  footer {
+    background: var(--basalt-mid);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
   }
-
-  .legend{
-    max-width:920px;
-    margin:0 auto 10px;
-    padding:0 28px 30px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:22px 34px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    color:var(--parchment-dim);
-    border-bottom:1px solid var(--line-faint);
-  }
-
-  .legend-item{ display:flex; align-items:center; gap:9px; }
-  .legend-swatch{ width:26px; height:2px; flex-shrink:0; }
-  .legend-swatch.dashed{ background-image: linear-gradient(90deg, currentColor 60%, transparent 40%); background-size: 8px 2px; height:2px; background-color:transparent; }
-  .sw-lapis{ background:var(--lapis); }
-  .sw-brick{ background:var(--brick); }
-  .sw-oxblood{ background:var(--oxblood); }
-  .sw-verdigris{ background:var(--verdigris); }
-  .sw-contested{ color:var(--parchment-dim); }
-
-  .chart-region{
-    padding:56px 0 90px;
-    overflow-x:auto;
-    overflow-y:visible;
-  }
-
-  .chart-wrap{
-    position:relative;
-    max-width:1500px;
-    min-width:1180px;
-    margin:0 auto;
-    padding:0 40px;
-  }
-
-  svg.rivers{
-    position:absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    pointer-events:none;
-    overflow:visible;
-  }
-
-  .columns{
-    display:grid;
-    grid-template-columns: 1.05fr 0.85fr 1.15fr 1fr;
-    gap:56px;
-    position:relative;
-    z-index:2;
-  }
-
-  .col-head{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:11px;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--parchment-dim);
-    margin-bottom:22px;
-    padding-bottom:10px;
-    border-bottom:1px solid var(--line-faint);
-  }
-
-  .col-head span{ display:block; color:var(--gold); font-size:11px; margin-top:4px; }
-
-  .col{ display:flex; flex-direction:column; gap:26px; }
-  .col.stack-gap{ margin-top:64px; }
-
-  .node{
-    background:var(--parchment);
-    color:var(--ink);
-    border-radius:2px;
-    padding:16px 18px 15px;
-    position:relative;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.35);
-  }
-
-  .node::before, .node::after{
-    content:"";
-    position:absolute;
-    width:7px; height:7px;
-    background:var(--basalt);
-    top:0; 
-  }
-  .node::before{ left:0; clip-path: polygon(0 0, 100% 0, 0 100%); }
-  .node::after{ right:0; clip-path: polygon(100% 0, 100% 100%, 0 0); }
-
-  .node-tag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10.5px;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    margin-bottom:7px;
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    opacity:0.72;
-  }
-
-  .node h3{
-    font-size:16.5px;
-    line-height:1.28;
-    margin:0 0 7px;
-    font-weight:600;
-  }
-
-  .node p{
-    font-size:13.3px;
-    line-height:1.5;
-    margin:0;
-    color:#4a4130;
-  }
-
-  .node.accent-lapis{ border-left:4px solid var(--lapis); }
-  .node.accent-brick{ border-left:4px solid var(--brick); }
-  .node.accent-oxblood{ border-left:4px solid var(--oxblood); }
-  .node.accent-verdigris{ border-left:4px solid var(--verdigris); }
-  .node.accent-gold{ border-left:4px solid var(--gold); }
-
-  .node.contested{ opacity:0.92; }
-  .contested-flag{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10px;
-    color:#8a3636;
-    margin-top:8px;
-    padding-top:7px;
-    border-top:1px dashed #c9bfa4;
-  }
-
-  footer{
-    max-width:920px;
-    margin:0 auto;
-    padding:10px 28px 90px;
-    border-top:1px solid var(--line-faint);
-    padding-top:36px;
-  }
-
-  footer h2{
-    font-size:19px;
-    color:var(--gold);
-    margin:0 0 14px;
-  }
-
-  footer p{
-    font-size:14.5px;
-    line-height:1.7;
-    color:var(--parchment-dim);
-    max-width:700px;
-  }
-
-  footer .sources{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px;
-    color:var(--parchment-dim);
-    line-height:2;
-    margin-top:18px;
-  }
-
-  @media (max-width: 700px){
-    header{ padding:52px 20px 30px; }
-    .legend{ padding:0 20px 24px; }
-  }
-
-  .sitenav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(22,20,15,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid var(--line-faint);
-  }
-  .sitenav-inner{
-    max-width:1500px; margin:0 auto;
-    padding:14px 40px;
-    display:flex; align-items:center; gap:28px;
-  }
-  .sitenav-mark{
-    display:flex; align-items:center; gap:8px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--parchment);
-    white-space:nowrap;
-  }
-  .sitenav-links{ display:flex; gap:22px; margin-left:auto; }
-  .sitenav-links a{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
-    color:var(--parchment-dim); text-decoration:none;
-    padding-bottom:3px; border-bottom:2px solid transparent;
-    transition:color 0.15s, border-color 0.15s;
-  }
-  .sitenav-links a:hover{ color:var(--parchment); }
-  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
-  @media (max-width:700px){ .sitenav-inner{ padding:12px 20px; gap:16px; } .sitenav-links{ gap:14px; } }
 </style>
 </head>
 <body>
 
-<nav class="sitenav">
-  <div class="sitenav-inner">
-    <span class="sitenav-mark">
-      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
-      Rivers of Myth
-    </span>
-    <div class="sitenav-links">
-      <a href="index.html" class="active">Lineage Map</a>
-      <a href="myth-match.html">Myth Match</a>
-      <a href="canon.html">How the Book Got Made</a>
-      <a href="geography.html">Born on Third Base</a>
-      <a href="hell.html">Hell's Family Tree</a>
-      <a href="pantheon.html">El and Asherah</a>
-      <a href="rites.html">Borrowed Rites</a>
-      <a href="decline.html">Post-Christianity</a>
-      <a href="consistency.html">Consistency Test</a>
-      <a href="scientist.html">God as Scientist</a>
+<nav>
+  <a href="index.html" class="active">Home</a>
+  <a href="lineage.html">Lineage Map</a>
+  <a href="myth-match.html">Myth Match</a>
+  <a href="rites.html">Borrowed Rites</a>
+  <div class="nav-group">
+    <a href="scrutiny.html">Biblical Scrutiny ▾</a>
+    <div class="nav-dropdown">
+      <div class="drop-section">The Document</div>
+      <a href="scrutiny.html#contradictions">I — Internal Contradictions</a>
+      <a href="scrutiny.html#authorship">II — Authorship Questions</a>
+      <a href="scrutiny.html#jedp">III — The Four Sources (JEDP)</a>
+      <a href="scrutiny.html#flood">IV — The Flood: A Case Study</a>
+      <a href="scrutiny.html#anachronisms">V — Anachronisms &amp; the Patriarchs</a>
+      <a href="scrutiny.html#moses">VI — Moses &amp; the Exodus</a>
+      <div class="drop-section">Origins</div>
+      <a href="scrutiny.html#borrowed">VII — Borrowed Mythology</a>
+      <a href="scrutiny.html#polytheism">VIII — Polytheistic Origins</a>
+      <a href="scrutiny.html#canon">IX — Formation of the Canon</a>
+      <div class="drop-section">What It Got Wrong</div>
+      <a href="scrutiny.html#prophecy">X — Failed Prophecies</a>
+      <a href="scrutiny.html#transmission">XI — Textual Corruption</a>
+      <a href="scrutiny.html#jesus">XII — The Historical Jesus Problem</a>
+      <a href="scrutiny.html#virgin">XIII — The Virgin Birth Problem</a>
+      <div class="drop-section">What It Conceals</div>
+      <a href="scrutiny.html#violence">XIV — Divine Violence</a>
+      <a href="scrutiny.html#slavery">XV — Slavery &amp; the Bible</a>
+      <a href="scrutiny.html#reading">— Scholarly Reading List</a>
     </div>
   </div>
+  <a href="canon.html">Canon</a>
+  <a href="pantheon.html">El &amp; Asherah</a>
+  <a href="hell.html">Hell's Family Tree</a>
+  <a href="geography.html">Born on Third Base</a>
+  <a href="decline.html">Post-Christianity</a>
+  <a href="consistency.html">Consistency Test</a>
+  <a href="scientist.html">God as Scientist</a>
 </nav>
 
-<header>
-  <div class="eyebrow">Comparative Mythology — A Lineage Map</div>
-  <h1>Rivers of Myth: <em>Mesopotamia downstream</em></h1>
-  <p>Long before Genesis or Hesiod were written down, the scribes of Sumer and Akkad were already recording floods, creations, and gods who crossed into the underworld. This chart traces the strongest documented lines from those cuneiform originals into the Hebrew Bible and Greek mythology, and marks where later popular claims (Christ and the "dying-and-rising god," in particular) reach further than the primary texts support.</p>
-  <p>Read left to right: wellspring, transmission, and the two downstream traditions. Solid lines mark parallels with strong textual or linguistic evidence. Dashed lines mark real but contested or structurally looser connections.</p>
-</header>
-
-<div class="legend">
-  <div class="legend-item"><span class="legend-swatch sw-lapis"></span> Mesopotamian source thread</div>
-  <div class="legend-item"><span class="legend-swatch sw-brick"></span> Into Greek myth</div>
-  <div class="legend-item"><span class="legend-swatch sw-oxblood"></span> Into Hebrew Bible</div>
-  <div class="legend-item"><span class="legend-swatch sw-verdigris"></span> Intermediate transmission</div>
-  <div class="legend-item"><span class="legend-swatch dashed sw-contested" style="color:#cfc4a8;"></span> Contested or structurally loose</div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Rivers of Myth · Biblical Scrutiny</div>
+  <h1>The <em>Case</em> Against</h1>
+  <div class="hero-subtitle">A Critical Reference on the Bible's Origins, Authorship, and Claims</div>
+  <p class="hero-lead">In 1998, Lee Strobel published <em>The Case for Christ</em> — a former journalist's structured argument for the historical reliability of the Gospels, presenting witness after witness for the defense. This is the other side of that courtroom.</p>
+  <p class="hero-sub">What follows is organized the way a prosecuting attorney builds a case: establishing what the document actually is before examining what it borrowed, what it got wrong, and what it has historically concealed. Each section calls a different witness — archaeologist, textual critic, historian, linguist — and each witness says something the pew never hears.</p>
 </div>
 
-<div class="chart-region">
-  <div class="chart-wrap" id="chartWrap">
-    <svg class="rivers" id="rivers"></svg>
+<!-- PREMISE -->
+<div class="premise">
+  <div class="premise-block">
+    <h2>The Methodological Starting Point</h2>
+    <p>The Bible is treated here as what it demonstrably is: a library of texts produced over roughly a millennium by many hands, in multiple languages, compiled under political and theological pressure. That is not a taunt — it is the methodological starting point of modern historical criticism, practiced by scholars at seminaries, divinity schools, and secular universities alike. It is what allows the texts to become <em>explainable</em> rather than merely quoted.</p>
+  </div>
+  <div class="premise-block">
+    <h2>What This Is Not</h2>
+    <p>This is not an argument that religious experience is invalid, that meaning cannot be found in ancient texts, or that everyone who believes is deceived. It is an argument about <em>historical claims specifically</em> — authorship, dating, archaeology, prophecy, and textual integrity. Where the evidence is strong, no false balance is offered. Where scholarly opinion is genuinely divided, that is flagged. The goal is accuracy, not polemics.</p>
+  </div>
+</div>
 
-    <div class="columns">
+<!-- ROADMAP HEADER -->
+<div class="roadmap-header">
+  <h2>The Roadmap</h2>
+  <p>Fifteen sections organized into four acts. Read straight through or jump directly to any section. The argument builds — but every section also stands on its own.</p>
+</div>
 
-      <div class="col">
-        <div class="col-head">Wellspring<span>Sumerian &amp; Akkadian, c. 2100–1200 BCE</span></div>
-        <div class="node accent-lapis" id="S1">
-          <div class="node-tag"><span>Sumerian / Akkadian</span><span>c. 2100–1200 BCE</span></div>
-          <h3>Eridu Genesis, Atrahasis &amp; Gilgamesh's Flood</h3>
-          <p>A god warns one man of a coming flood, he builds a boat, loads animals aboard, sends out birds to find dry land, and offers sacrifice afterward. The template both later flood myths follow almost beat for beat.</p>
-        </div>
-        <div class="node accent-lapis" id="S2">
-          <div class="node-tag"><span>Babylonian</span><span>c. 1750–1100 BCE</span></div>
-          <h3>Enuma Elish</h3>
-          <p>Marduk orders the cosmos out of Tiamat, the primordial salt-water chaos. A watery formlessness organized into a structured world by a ruling god.</p>
-        </div>
-        <div class="node accent-lapis" id="S3">
-          <div class="node-tag"><span>Sumerian</span><span>c. 1900 BCE</span></div>
-          <h3>Dumuzid &amp; the Descent of Inanna</h3>
-          <p>A shepherd-consort god passes into the underworld and returns for part of each year, tied to the seasonal death and revival of vegetation.</p>
-        </div>
-        <div class="node accent-lapis" id="S4">
-          <div class="node-tag"><span>Akkadian</span><span>c. 1400 BCE</span></div>
-          <h3>Adapa and the South Wind</h3>
-          <p>A wise man is offered the bread and water of immortality before the gods and, misled, refuses them. Immortality lost through a choice at a divine table.</p>
-        </div>
+<!-- ACT I -->
+<div class="act">
+  <div class="act-label">
+    <span class="act-num">Act I</span>
+    <span class="act-title">The Document Itself</span>
+  </div>
+  <p class="act-thesis">Before examining what the Bible claims, we examine what it actually is: who wrote it, when, under what circumstances, and what the texts reveal about their own composite origins. This is where the defense's first premise — that the Bible is a unified, reliably transmitted, historically accurate document — begins to come apart.</p>
+
+  <div class="section-cards">
+    <a href="scrutiny.html#contradictions" class="section-card">
+      <span class="card-num">Section I</span>
+      <div class="card-title">Internal Contradictions</div>
+      <div class="card-desc">The Bible contradicts itself — on who killed Goliath, how Judas died, what happened at the empty tomb, how many animals Noah took, and whether God changes his mind. These are not peripheral puzzles. They are seams where independent source documents were stitched together, still visible to any careful reader.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#authorship" class="section-card">
+      <span class="card-num">Section II</span>
+      <div class="card-title">Authorship Questions</div>
+      <div class="card-desc">Moses did not write the Torah. Isaiah did not write all of Isaiah. The Gospels were written by anonymous Greeks, not eyewitness disciples. The Pastoral Epistles were written decades after Paul's death in Paul's name. This section catalogs what critical scholars — including those at Catholic and Protestant seminaries — actually conclude about who wrote each major book.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#jedp" class="section-card">
+      <span class="card-num">Section III</span>
+      <div class="card-title">The Four Sources (JEDP)</div>
+      <div class="card-desc">The Torah is not a single document but a composite of four source traditions — the Yahwist, the Elohist, the Deuteronomist, and the Priestly source — each written by a different faction, in a different century, with a distinct political and theological agenda. This section identifies each source, its fingerprints, and its motivations.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#flood" class="section-card">
+      <span class="card-num">Section IV</span>
+      <div class="card-title">The Flood: A Case Study</div>
+      <div class="card-desc">The Flood narrative in Genesis is the textbook demonstration of the Documentary Hypothesis. Separated by divine name and vocabulary, two complete, internally consistent, and mutually contradictory flood myths emerge — each with its own theology, its own animal count, its own duration, and its own portrait of God. They were never reconciled because the editor's job was preservation, not harmonization.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#anachronisms" class="section-card">
+      <span class="card-num">Section V</span>
+      <div class="card-title">Anachronisms &amp; the Patriarchs</div>
+      <div class="card-desc">Abraham's camels did not exist in his era. The Philistines he interacts with hadn't arrived yet. "Ur of the Chaldeans" references a people who didn't exist until centuries later. The city of Dan wasn't called Dan. Each anachronism is a timestamp proving these narratives were written not in the Bronze Age but in the Iron Age — and reflect the world of their authors, not their subjects.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#moses" class="section-card">
+      <span class="card-num">Section VI</span>
+      <div class="card-title">Moses &amp; the Exodus</div>
+      <div class="card-desc">There is no Egyptian record of a mass Israelite enslavement, no archaeological trace of a forty-year wilderness sojourn for two million people, and no evidence of a large-scale migration into Canaan from Egypt. The numbers in the text itself are impossible. What leading archaeologists — including Israel Finkelstein and William Dever — actually conclude about the origins of the Mosaic tradition.</div>
+      <span class="card-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ACT II -->
+<div class="act">
+  <div class="act-label">
+    <span class="act-num">Act II</span>
+    <span class="act-title">Where It Came From</span>
+  </div>
+  <p class="act-thesis">The Bible did not emerge from a vacuum. Its stories, rituals, and theology were shaped by — and in many cases borrowed directly from — the older cultures surrounding ancient Israel. This act traces those origins, from Mesopotamian flood myths to Egyptian wisdom literature to the Canaanite gods Israel's own ancestors worshipped.</p>
+
+  <div class="section-cards">
+    <a href="scrutiny.html#borrowed" class="section-card">
+      <span class="card-num">Section VII</span>
+      <div class="card-title">Borrowed Mythology</div>
+      <div class="card-desc">The Flood story predates the Bible by centuries in the Epic of Gilgamesh and the Atrahasis Epic. Moses's basket-in-the-river birth mirrors the birth legend of Sargon of Akkad. Proverbs 22–23 is a near-direct translation of the Egyptian Instruction of Amenemope. Psalm 104 parallels the Hymn to the Aten. These are not vague thematic similarities — they are specific, sequenced, textual parallels with documented Mesopotamian and Egyptian sources.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#polytheism" class="section-card">
+      <span class="card-num">Section VIII</span>
+      <div class="card-title">Polytheistic Origins of Judaism</div>
+      <div class="card-desc">Yahweh had a consort named Asherah — we know because 8th-century BCE inscriptions say so. The Dead Sea Scrolls preserve an older text of Deuteronomy 32 in which the Most High divides the nations among "the sons of God," with Yahweh receiving Israel as his portion. Psalm 82 shows God presiding over a council of other gods. Strict monotheism was a late development, and what the prophets called "idolatry" was Israel's own ancestral Canaanite religion.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#canon" class="section-card">
+      <span class="card-num">Section IX</span>
+      <div class="card-title">Formation of the Canon</div>
+      <div class="card-desc">The Bible was assembled over centuries by human beings making contested decisions. Marcion of Sinope — a heretic — inadvertently forced the proto-orthodox church to define its canon. The Council of Nicaea did not vote on which books to include (a persistent myth). The 27-book New Testament is first listed in a bishop's Easter letter of 367 CE. The deuterocanonical books were added and removed based on theological disputes about purgatory.</div>
+      <span class="card-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ACT III -->
+<div class="act">
+  <div class="act-label">
+    <span class="act-num">Act III</span>
+    <span class="act-title">What It Got Wrong</span>
+  </div>
+  <p class="act-thesis">If the Bible is divinely inspired and inerrant, its specific historical and prophetic claims should be verifiable. This act examines the record: prophecies that failed by the authors' own admission, manuscripts that were demonstrably altered, a central doctrine built on a mistranslation, and the remarkable thinness of the evidence for the Bible's central historical figure.</p>
+
+  <div class="section-cards">
+    <a href="scrutiny.html#prophecy" class="section-card">
+      <span class="card-num">Section X</span>
+      <div class="card-title">Failed Prophecies</div>
+      <div class="card-desc">Ezekiel predicted Nebuchadnezzar would destroy Tyre. He didn't — and Ezekiel acknowledged the failure in a later oracle, offering Egypt as a make-good. Daniel's end-times timeline was about Antiochus IV Epiphanes in 165 BCE, not a distant future — and the prediction failed when Antiochus died in Persia rather than Israel as predicted. Yahweh promised David an eternal throne. It ended in 586 BCE and has never been restored.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#transmission" class="section-card">
+      <span class="card-num">Section XI</span>
+      <div class="card-title">Textual Corruption</div>
+      <div class="card-desc">The woman caught in adultery (John 8) is not in the oldest manuscripts. The resurrection appearances in Mark (16:9–20) were added by a later scribe to a Gospel that originally ended with an empty tomb and frightened women. The explicit Trinitarian proof-text (1 John 5:7) appears in no Greek manuscript before the 14th century — it is a Latin interpolation that Erasmus refused to include until pressured. These are not fringe claims; they appear in the footnotes of every modern study Bible.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#jesus" class="section-card">
+      <span class="card-num">Section XII</span>
+      <div class="card-title">The Historical Jesus Problem</div>
+      <div class="card-desc">Not a single contemporary source mentions Jesus. Josephus's famous passage is at least partly a Christian forgery. Tacitus, writing 80 years later, reports what Christians of his own day believed — not what an archive confirmed. The mythicist position (that Jesus began as a celestial figure, not a historical man) is a serious minority view held by credentialed scholars, though the mainstream disagrees. What we can say with genuine historical confidence is remarkably sparse.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#virgin" class="section-card">
+      <span class="card-num">Section XIII</span>
+      <div class="card-title">The Virgin Birth Problem</div>
+      <div class="card-desc">The doctrine rests on a Greek mistranslation of a Hebrew word. Isaiah 7:14 uses <em>almah</em> (young woman); the Septuagint rendered it as <em>parthenos</em> (virgin); Matthew built his birth narrative on the Greek. The original passage is explicitly about the 8th-century BCE Syro-Ephraimite war — a sign to King Ahaz, not a prediction seven centuries forward. The two Gospel birth narratives are also irreconcilable with each other, and Paul, Mark, and John never mention a virgin birth at all.</div>
+      <span class="card-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- ACT IV -->
+<div class="act">
+  <div class="act-label">
+    <span class="act-num">Act IV</span>
+    <span class="act-title">What It Conceals</span>
+  </div>
+  <p class="act-thesis">The final act examines not what the Bible got factually wrong but what it endorses that its modern defenders would rather not discuss — and what the apologetic responses to those endorsements reveal about the nature of the text itself. Every defense of the conquest narratives and the slavery passages ultimately concedes that the Bible reflects the moral horizon of the humans who wrote it.</p>
+
+  <div class="section-cards">
+    <a href="scrutiny.html#violence" class="section-card">
+      <span class="card-num">Section XIV</span>
+      <div class="card-title">Divine Violence</div>
+      <div class="card-desc">God commands the complete extermination of the Canaanites, including infants. Saul is rejected as king for failing to complete the genocide of the Amalekites. The Midianite campaign ends with Moses ordering the killing of every non-virgin woman and girl. The best evangelical defense of these passages — Paul Copan's <em>Is God a Moral Monster?</em> — ultimately appeals to cultural convention and archaeological uncertainty to soften them. That appeal concedes exactly what it is trying to deny.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#slavery" class="section-card">
+      <span class="card-num">Section XV</span>
+      <div class="card-title">Slavery &amp; the Bible</div>
+      <div class="card-desc">Exodus 21 specifies that a slave beaten to death slowly is not a homicide — "for the slave is his money." Leviticus 25 licenses the permanent purchase of foreign slaves as heritable property. The New Testament instructs slaves to obey their masters. American slaveholders cited these texts accurately. The abolitionist movement ultimately succeeded not because of scripture but despite it — driven by Enlightenment arguments about human dignity that owe nothing to Leviticus. The "cultural context" apologetic concedes the very point it means to refute.</div>
+      <span class="card-arrow">→</span>
+    </a>
+    <a href="scrutiny.html#reading" class="section-card">
+      <span class="card-num">Appendix</span>
+      <div class="card-title">Scholarly Reading List</div>
+      <div class="card-desc">The load-bearing sources behind every section — Friedman, Finkelstein, Silberman, Dever, Ehrman, Meier, Metzger, Avalos, Carrier, and others. Includes the best apologetic counterargument (Copan) so you know what you're engaging with. Annotated for where to start and what each work actually establishes.</div>
+      <span class="card-arrow">→</span>
+    </a>
+  </div>
+</div>
+
+<!-- OTHER PAGES -->
+<div class="site-pages">
+  <h2>Also in This Collection</h2>
+  <p>Biblical Scrutiny is one part of a larger comparative-religion reference. The other pages examine where these stories came from, what happened to belief, and what comes next.</p>
+  <div class="page-links">
+    <a href="lineage.html" class="page-link">
+      <div>
+        <span class="pl-title">Lineage Map</span>
+        <span class="pl-desc">An SVG river-delta tracing Mesopotamian myth roots into Greek and Hebrew traditions, evidence-graded.</span>
       </div>
-
-      <div class="col">
-        <div class="col-head">Transmission<span>Anatolia &amp; the Levant, c. 1400–700 BCE</span></div>
-        <div class="node accent-verdigris" id="I1">
-          <div class="node-tag"><span>Hurrian–Hittite</span><span>c. 1400–1200 BCE</span></div>
-          <h3>The Kumarbi Cycle</h3>
-          <p>A generational succession of sky-gods, each overthrowing the father before him, passed down through Anatolia toward the Aegean.</p>
-        </div>
-        <div class="node accent-verdigris" id="I2">
-          <div class="node-tag"><span>Northwest Semitic</span><span>c. 1200–800 BCE</span></div>
-          <h3>The Title "Adon" (Lord)</h3>
-          <p>A Semitic honorific for a consort-god, carried into the Greek world and eventually adopted as a proper name.</p>
-        </div>
-        <div class="node accent-gold" id="GP1">
-          <div class="node-tag"><span>Greek philosophy</span><span>c. 300 BCE–1st c. CE</span></div>
-          <h3>Stoic &amp; Platonic Logos</h3>
-          <p>An independent Greek philosophical line, not Mesopotamian: the ordering rational principle of the cosmos, later grafted onto Hebrew wisdom tradition.</p>
-        </div>
+    </a>
+    <a href="myth-match.html" class="page-link">
+      <div>
+        <span class="pl-title">Myth Match</span>
+        <span class="pl-desc">14-topic accordion comparing origin myths across Mesopotamian, Greek, and Biblical traditions.</span>
       </div>
-
-      <div class="col">
-        <div class="col-head">Greek Myth<span>Archaic–Classical, c. 750–100 BCE</span></div>
-        <div class="node accent-brick" id="G1">
-          <div class="node-tag"><span>Greek</span><span>recorded c. 1st c. BCE</span></div>
-          <h3>Deucalion &amp; Pyrrha</h3>
-          <p>Zeus floods a corrupted earth; a righteous couple survives by boat and repopulates the world. Independent descent from the same Near Eastern flood tradition as Genesis, not a copy of it.</p>
-        </div>
-        <div class="node accent-brick" id="G2">
-          <div class="node-tag"><span>Greek</span><span>c. 700 BCE</span></div>
-          <h3>Hesiod's Theogony</h3>
-          <p>Uranus is overthrown by Cronus, Cronus by Zeus. The succession pattern maps closely onto the Kumarbi cycle's line of deposed sky-fathers.</p>
-        </div>
-        <div class="node accent-brick" id="G3">
-          <div class="node-tag"><span>Greek</span><span>archaic–classical</span></div>
-          <h3>Adonis</h3>
-          <p>A mortal beloved of Aphrodite who dies young and is mourned each year. The name and the seasonal death-and-mourning structure both trace to Dumuzid by way of the Semitic title "adon."</p>
-        </div>
-
-        <div class="col-head" style="margin-top:64px;">Hebrew Bible<span>Composed / compiled c. 6th c. BCE</span></div>
-        <div class="node accent-oxblood" id="H1">
-          <div class="node-tag"><span>Hebrew</span><span>c. 6th c. BCE</span></div>
-          <h3>Genesis 6–9, Noah's Flood</h3>
-          <p>Same sequence as the Mesopotamian flood texts: divine warning, an ark, paired animals, birds sent to test for land, sacrifice on landing. Likely transmitted during or after the Babylonian exile.</p>
-        </div>
-        <div class="node accent-oxblood" id="H2">
-          <div class="node-tag"><span>Hebrew</span><span>c. 6th c. BCE</span></div>
-          <h3>Genesis 1, Creation from the Deep</h3>
-          <p>The Hebrew tehom, the primordial deep, is linguistically related to Tiamat. Formless waters are separated and ordered into a structured cosmos by a single ruling god.</p>
-        </div>
-        <div class="node accent-oxblood contested" id="H3">
-          <div class="node-tag"><span>Hebrew</span><span>c. 6th c. BCE</span></div>
-          <h3>Genesis 2–3, Eden's Forbidden Fruit</h3>
-          <p>Adapa is offered immortality and refuses it; Eden's couple is forbidden fruit and take it anyway. A real thematic echo, but inverted, not a direct copy.</p>
-          <div class="contested-flag">Structural echo, reversed mechanism</div>
-        </div>
+    </a>
+    <a href="rites.html" class="page-link">
+      <div>
+        <span class="pl-title">Borrowed Rites</span>
+        <span class="pl-desc">Ancient Near Eastern scapegoat and substitute-king rituals set against Leviticus 16 and Christian atonement theology.</span>
       </div>
-
-      <div class="col stack-gap">
-        <div class="col-head">Later Reception<span>Contested or overreaching parallels</span></div>
-        <div class="node accent-gold contested" id="E1">
-          <div class="node-tag"><span>Egyptian</span><span>independent, c. 2400 BCE+</span></div>
-          <h3>Osiris</h3>
-          <p>Often grouped with Dumuzid and Adonis as a "dying-and-rising god." Osiris in fact becomes lord of the dead rather than returning among the living, and the Egyptian tradition is old enough to be independent rather than borrowed.</p>
-          <div class="contested-flag">Popular grouping overstates the parallel</div>
-        </div>
-        <div class="node accent-gold" id="C1">
-          <div class="node-tag"><span>Christian, NT</span><span>c. 90–110 CE</span></div>
-          <h3>John 1:1, "In the beginning was the Word"</h3>
-          <p>Logos is imported directly from Greek philosophy, not from Mesopotamian myth. A case of Greek metaphysics grafted onto Hebrew wisdom writing.</p>
-        </div>
-        <div class="node accent-oxblood contested" id="C2">
-          <div class="node-tag"><span>Popular claim</span><span>widely circulated</span></div>
-          <h3>Resurrection &amp; the "Dying-and-Rising God"</h3>
-          <p>The category itself has been challenged by scholars, notably Jonathan Z. Smith, as a template imposed on myths that don't actually share a resurrection structure in their original texts.</p>
-          <div class="contested-flag">Category disputed by comparative religion scholarship</div>
-        </div>
+    </a>
+    <a href="canon.html" class="page-link">
+      <div>
+        <span class="pl-title">How the Book Got Made</span>
+        <span class="pl-desc">Canon formation timeline, excluded gospels, and translation shifts including the almah-to-parthenos mistranslation.</span>
       </div>
-
-    </div>
+    </a>
+    <a href="pantheon.html" class="page-link">
+      <div>
+        <span class="pl-title">El &amp; Asherah</span>
+        <span class="pl-desc">The Ugaritic pantheon, Yahweh's Canaanite origins, and the archaeological evidence for early Israelite polytheism.</span>
+      </div>
+    </a>
+    <a href="hell.html" class="page-link">
+      <div>
+        <span class="pl-title">Hell's Family Tree</span>
+        <span class="pl-desc">Word study of Sheol, Hades, Gehenna, and Tartarus — the 16-point timeline of how hell was invented.</span>
+      </div>
+    </a>
+    <a href="geography.html" class="page-link">
+      <div>
+        <span class="pl-title">Born on Third Base</span>
+        <span class="pl-desc">Pew data on religious concentration by country and retention rates — the geographic lottery of belief.</span>
+      </div>
+    </a>
+    <a href="decline.html" class="page-link">
+      <div>
+        <span class="pl-title">Post-Christianity</span>
+        <span class="pl-desc">U.S. secularization trends 1972–2024, Scandinavian believing-without-belonging, and Pew 2070 projections.</span>
+      </div>
+    </a>
+    <a href="consistency.html" class="page-link">
+      <div>
+        <span class="pl-title">The Consistency Test</span>
+        <span class="pl-desc">An interactive constitutional-principle tool: four scenarios, political mirror, no scoring, no data collection.</span>
+      </div>
+    </a>
+    <a href="scientist.html" class="page-link">
+      <div>
+        <span class="pl-title">God as Scientist</span>
+        <span class="pl-desc">A non-interventionist creator hypothesis — constructive speculation, deliberately marked as such, with its own visual identity.</span>
+      </div>
+    </a>
   </div>
 </div>
 
 <footer>
-  <h2>Reading this chart</h2>
-  <p>This is a simplified map, not a complete stemma. Oral tradition moved through trade routes, migration, and conquest for centuries before any of these texts were fixed in writing, so "borrowing" here means the closest documented ancestor, not a single traceable act of copying. Where a popular claim outruns what the primary sources say, that's marked rather than smoothed over.</p>
-  <div class="sources">
-    Key primary sources: Epic of Gilgamesh · Atrahasis · Enuma Elish · Sumerian King List · Inanna's Descent · Adapa and the South Wind · Hesiod, Theogony · Ovid, Metamorphoses · Genesis · Gospel of John<br>
-    Key scholarship: Mark S. Smith on Near Eastern cosmology · Jonathan Z. Smith, "Dying and Rising Gods" · W. G. Lambert on Babylonian creation myths
-  </div>
+  Rivers of Myth · github.com/jontification/mythmaking · Evidence-graded comparative religion reference · No tracking, no ads
 </footer>
-
-<script>
-(function(){
-  var connections = [
-    // Mesopotamian wellspring -> transmission / direct
-    { from:'S1', to:'G1', color:'var(--brick)' },
-    { from:'S1', to:'H1', color:'var(--oxblood)' },
-    { from:'S2', to:'H2', color:'var(--oxblood)' },
-    { from:'S2', to:'I1', color:'var(--verdigris)' },
-    { from:'S3', to:'I2', color:'var(--verdigris)' },
-    { from:'S3', to:'E1', color:'var(--gold)', dashed:true },
-    { from:'S4', to:'H3', color:'var(--oxblood)', dashed:true },
-    // transmission -> greek
-    { from:'I1', to:'G2', color:'var(--brick)' },
-    { from:'I2', to:'G3', color:'var(--brick)' },
-    { from:'GP1', to:'C1', color:'var(--gold)' },
-    // later reception, contested
-    { from:'G3', to:'C2', color:'var(--oxblood)', dashed:true },
-    { from:'E1', to:'C2', color:'var(--oxblood)', dashed:true }
-  ];
-
-  var svg = document.getElementById('rivers');
-  var wrap = document.getElementById('chartWrap');
-
-  function resolveColor(v){
-    if (v.indexOf('var(') === 0){
-      var name = v.slice(4, -1).trim();
-      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    }
-    return v;
-  }
-
-  function draw(){
-    svg.innerHTML = '';
-    var wrapRect = wrap.getBoundingClientRect();
-    svg.setAttribute('width', wrapRect.width);
-    svg.setAttribute('height', wrapRect.height);
-
-    connections.forEach(function(c){
-      var a = document.getElementById(c.from);
-      var b = document.getElementById(c.to);
-      if(!a || !b) return;
-      var ra = a.getBoundingClientRect();
-      var rb = b.getBoundingClientRect();
-
-      var x1 = ra.right - wrapRect.left;
-      var y1 = ra.top + ra.height/2 - wrapRect.top;
-      var x2 = rb.left - wrapRect.left;
-      var y2 = rb.top + rb.height/2 - wrapRect.top;
-
-      var dx = Math.max(40, (x2 - x1) * 0.5);
-      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
-      var d = 'M ' + x1 + ' ' + y1 + ' C ' + (x1+dx) + ' ' + y1 + ', ' + (x2-dx) + ' ' + y2 + ', ' + x2 + ' ' + y2;
-      path.setAttribute('d', d);
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke', resolveColor(c.color));
-      path.setAttribute('stroke-width', '1.6');
-      path.setAttribute('opacity', '0.72');
-      if(c.dashed){ path.setAttribute('stroke-dasharray', '5 5'); }
-      svg.appendChild(path);
-
-      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      dot.setAttribute('cx', x2); dot.setAttribute('cy', y2); dot.setAttribute('r', '2.5');
-      dot.setAttribute('fill', resolveColor(c.color));
-      svg.appendChild(dot);
-    });
-  }
-
-  window.addEventListener('load', draw);
-  window.addEventListener('resize', draw);
-  if (document.fonts && document.fonts.ready){ document.fonts.ready.then(draw); }
-})();
-</script>
 
 </body>
 </html>

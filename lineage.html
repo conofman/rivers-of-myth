@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rivers of Myth — Mesopotamian Roots of Biblical and Greek Tradition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f;
+    --basalt-2: #1e1b14;
+    --parchment: #ede3cc;
+    --parchment-dim: #cfc4a8;
+    --ink: #2a2416;
+    --lapis: #3d6ea5;
+    --lapis-dim: #2a4d78;
+    --brick: #a8523a;
+    --brick-dim: #7c3c29;
+    --oxblood: #8a3636;
+    --oxblood-dim: #642626;
+    --verdigris: #5f8577;
+    --verdigris-dim: #45645a;
+    --gold: #c19a5b;
+    --line-faint: rgba(237,227,204,0.14);
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background:var(--basalt);
+    color:var(--parchment);
+    font-family:'Source Serif 4', serif;
+  }
+
+  ::selection{ background:var(--gold); color:var(--basalt); }
+
+  h1,h2,h3, .display{
+    font-family:'Spectral', serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  header{
+    max-width:920px;
+    margin:0 auto;
+    padding:76px 28px 40px;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:18px;
+  }
+
+  h1{
+    font-size:clamp(34px, 5vw, 54px);
+    line-height:1.08;
+    margin:0 0 20px;
+    color:var(--parchment);
+  }
+
+  h1 em{
+    font-style:italic;
+    color:var(--gold);
+  }
+
+  header p{
+    font-size:17px;
+    line-height:1.65;
+    color:var(--parchment-dim);
+    max-width:680px;
+    margin:0 0 14px;
+  }
+
+  .legend{
+    max-width:920px;
+    margin:0 auto 10px;
+    padding:0 28px 30px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:22px 34px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--parchment-dim);
+    border-bottom:1px solid var(--line-faint);
+  }
+
+  .legend-item{ display:flex; align-items:center; gap:9px; }
+  .legend-swatch{ width:26px; height:2px; flex-shrink:0; }
+  .legend-swatch.dashed{ background-image: linear-gradient(90deg, currentColor 60%, transparent 40%); background-size: 8px 2px; height:2px; background-color:transparent; }
+  .sw-lapis{ background:var(--lapis); }
+  .sw-brick{ background:var(--brick); }
+  .sw-oxblood{ background:var(--oxblood); }
+  .sw-verdigris{ background:var(--verdigris); }
+  .sw-contested{ color:var(--parchment-dim); }
+
+  .chart-region{
+    padding:56px 0 90px;
+    overflow-x:auto;
+    overflow-y:visible;
+  }
+
+  .chart-wrap{
+    position:relative;
+    max-width:1500px;
+    min-width:1180px;
+    margin:0 auto;
+    padding:0 40px;
+  }
+
+  svg.rivers{
+    position:absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    overflow:visible;
+  }
+
+  .columns{
+    display:grid;
+    grid-template-columns: 1.05fr 0.85fr 1.15fr 1fr;
+    gap:56px;
+    position:relative;
+    z-index:2;
+  }
+
+  .col-head{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--parchment-dim);
+    margin-bottom:22px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--line-faint);
+  }
+
+  .col-head span{ display:block; color:var(--gold); font-size:11px; margin-top:4px; }
+
+  .col{ display:flex; flex-direction:column; gap:26px; }
+  .col.stack-gap{ margin-top:64px; }
+
+  .node{
+    background:var(--parchment);
+    color:var(--ink);
+    border-radius:2px;
+    padding:16px 18px 15px;
+    position:relative;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.35);
+  }
+
+  .node::before, .node::after{
+    content:"";
+    position:absolute;
+    width:7px; height:7px;
+    background:var(--basalt);
+    top:0; 
+  }
+  .node::before{ left:0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+  .node::after{ right:0; clip-path: polygon(100% 0, 100% 100%, 0 0); }
+
+  .node-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-bottom:7px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    opacity:0.72;
+  }
+
+  .node h3{
+    font-size:16.5px;
+    line-height:1.28;
+    margin:0 0 7px;
+    font-weight:600;
+  }
+
+  .node p{
+    font-size:13.3px;
+    line-height:1.5;
+    margin:0;
+    color:#4a4130;
+  }
+
+  .node.accent-lapis{ border-left:4px solid var(--lapis); }
+  .node.accent-brick{ border-left:4px solid var(--brick); }
+  .node.accent-oxblood{ border-left:4px solid var(--oxblood); }
+  .node.accent-verdigris{ border-left:4px solid var(--verdigris); }
+  .node.accent-gold{ border-left:4px solid var(--gold); }
+
+  .node.contested{ opacity:0.92; }
+  .contested-flag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10px;
+    color:#8a3636;
+    margin-top:8px;
+    padding-top:7px;
+    border-top:1px dashed #c9bfa4;
+  }
+
+  footer{
+    max-width:920px;
+    margin:0 auto;
+    padding:10px 28px 90px;
+    border-top:1px solid var(--line-faint);
+    padding-top:36px;
+  }
+
+  footer h2{
+    font-size:19px;
+    color:var(--gold);
+    margin:0 0 14px;
+  }
+
+  footer p{
+    font-size:14.5px;
+    line-height:1.7;
+    color:var(--parchment-dim);
+    max-width:700px;
+  }
+
+  footer .sources{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--parchment-dim);
+    line-height:2;
+    margin-top:18px;
+  }
+
+  @media (max-width: 700px){
+    header{ padding:52px 20px 30px; }
+    .legend{ padding:0 20px 24px; }
+  }
+
+  .sitenav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(22,20,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-faint);
+  }
+  .sitenav-inner{
+    max-width:1500px; margin:0 auto;
+    padding:14px 40px;
+    display:flex; align-items:center; gap:28px;
+  }
+  .sitenav-mark{
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--parchment);
+    white-space:nowrap;
+  }
+  .sitenav-links{ display:flex; gap:22px; margin-left:auto; }
+  .sitenav-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--parchment-dim); text-decoration:none;
+    padding-bottom:3px; border-bottom:2px solid transparent;
+    transition:color 0.15s, border-color 0.15s;
+  }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+  .sitenav-links .nav-group{ position:relative; display:flex; align-items:center; }
+  .sitenav-links .nav-dropdown{
+    display:none; position:absolute; top:100%; left:0;
+    background:var(--basalt-2); border:1px solid var(--line-faint); border-top:2px solid var(--gold);
+    min-width:240px; z-index:200; box-shadow:0 8px 22px rgba(0,0,0,0.35); padding:6px 0;
+  }
+  .sitenav-links .nav-group:hover .nav-dropdown,
+  .sitenav-links .nav-group:focus-within .nav-dropdown{ display:block; }
+  .sitenav-links .nav-dropdown a{
+    display:block; padding:8px 16px; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--parchment-dim); border-bottom:none; white-space:normal;
+  }
+  .sitenav-links .nav-dropdown a:hover{ color:var(--parchment); border-color:transparent; }
+  .sitenav-links .nav-dropdown .drop-section{
+    padding:10px 16px 4px; font-family:'IBM Plex Mono', monospace; font-size:9.5px;
+    color:var(--gold); letter-spacing:0.12em; text-transform:uppercase; opacity:0.75;
+  }
+  @media (max-width:700px){ .sitenav-inner{ padding:12px 20px; gap:16px; } .sitenav-links{ gap:14px; } }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="lineage.html" class="active">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <div class="nav-group">
+        <a href="scrutiny.html">Biblical Scrutiny &#9662;</a>
+        <div class="nav-dropdown">
+          <div class="drop-section">The Document</div>
+          <a href="scrutiny.html#contradictions">I &mdash; Internal Contradictions</a>
+          <a href="scrutiny.html#authorship">II &mdash; Authorship Questions</a>
+          <a href="scrutiny.html#jedp">III &mdash; The Four Sources (JEDP)</a>
+          <a href="scrutiny.html#flood">IV &mdash; The Flood: A Case Study</a>
+          <a href="scrutiny.html#anachronisms">V &mdash; Anachronisms &amp; the Patriarchs</a>
+          <a href="scrutiny.html#moses">VI &mdash; Moses &amp; the Exodus</a>
+          <div class="drop-section">Origins</div>
+          <a href="scrutiny.html#borrowed">VII &mdash; Borrowed Mythology</a>
+          <a href="scrutiny.html#polytheism">VIII &mdash; Polytheistic Origins</a>
+          <a href="scrutiny.html#canon">IX &mdash; Formation of the Canon</a>
+          <div class="drop-section">What It Got Wrong</div>
+          <a href="scrutiny.html#prophecy">X &mdash; Failed Prophecies</a>
+          <a href="scrutiny.html#transmission">XI &mdash; Textual Corruption</a>
+          <a href="scrutiny.html#jesus">XII &mdash; The Historical Jesus Problem</a>
+          <a href="scrutiny.html#virgin">XIII &mdash; The Virgin Birth Problem</a>
+          <div class="drop-section">What It Conceals</div>
+          <a href="scrutiny.html#violence">XIV &mdash; Divine Violence</a>
+          <a href="scrutiny.html#slavery">XV &mdash; Slavery &amp; the Bible</a>
+          <a href="scrutiny.html#reading">&mdash; Scholarly Reading List</a>
+        </div>
+      </div>
+      <a href="canon.html">How the Book Got Made</a>
+      <a href="geography.html">Born on Third Base</a>
+      <a href="hell.html">Hell's Family Tree</a>
+      <a href="pantheon.html">El and Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Comparative Mythology — A Lineage Map</div>
+  <h1>Rivers of Myth: <em>Mesopotamia downstream</em></h1>
+  <p>Long before Genesis or Hesiod were written down, the scribes of Sumer and Akkad were already recording floods, creations, and gods who crossed into the underworld. This chart traces the strongest documented lines from those cuneiform originals into the Hebrew Bible and Greek mythology, and marks where later popular claims (Christ and the "dying-and-rising god," in particular) reach further than the primary texts support.</p>
+  <p>Read left to right: wellspring, transmission, and the two downstream traditions. Solid lines mark parallels with strong textual or linguistic evidence. Dashed lines mark real but contested or structurally looser connections.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch sw-lapis"></span> Mesopotamian source thread</div>
+  <div class="legend-item"><span class="legend-swatch sw-brick"></span> Into Greek myth</div>
+  <div class="legend-item"><span class="legend-swatch sw-oxblood"></span> Into Hebrew Bible</div>
+  <div class="legend-item"><span class="legend-swatch sw-verdigris"></span> Intermediate transmission</div>
+  <div class="legend-item"><span class="legend-swatch dashed sw-contested" style="color:#cfc4a8;"></span> Contested or structurally loose</div>
+</div>
+
+<div class="chart-region">
+  <div class="chart-wrap" id="chartWrap">
+    <svg class="rivers" id="rivers"></svg>
+
+    <div class="columns">
+
+      <div class="col">
+        <div class="col-head">Wellspring<span>Sumerian &amp; Akkadian, c. 2100–1200 BCE</span></div>
+        <div class="node accent-lapis" id="S1">
+          <div class="node-tag"><span>Sumerian / Akkadian</span><span>c. 2100–1200 BCE</span></div>
+          <h3>Eridu Genesis, Atrahasis &amp; Gilgamesh's Flood</h3>
+          <p>A god warns one man of a coming flood, he builds a boat, loads animals aboard, sends out birds to find dry land, and offers sacrifice afterward. The template both later flood myths follow almost beat for beat.</p>
+        </div>
+        <div class="node accent-lapis" id="S2">
+          <div class="node-tag"><span>Babylonian</span><span>c. 1750–1100 BCE</span></div>
+          <h3>Enuma Elish</h3>
+          <p>Marduk orders the cosmos out of Tiamat, the primordial salt-water chaos. A watery formlessness organized into a structured world by a ruling god.</p>
+        </div>
+        <div class="node accent-lapis" id="S3">
+          <div class="node-tag"><span>Sumerian</span><span>c. 1900 BCE</span></div>
+          <h3>Dumuzid &amp; the Descent of Inanna</h3>
+          <p>A shepherd-consort god passes into the underworld and returns for part of each year, tied to the seasonal death and revival of vegetation.</p>
+        </div>
+        <div class="node accent-lapis" id="S4">
+          <div class="node-tag"><span>Akkadian</span><span>c. 1400 BCE</span></div>
+          <h3>Adapa and the South Wind</h3>
+          <p>A wise man is offered the bread and water of immortality before the gods and, misled, refuses them. Immortality lost through a choice at a divine table.</p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-head">Transmission<span>Anatolia &amp; the Levant, c. 1400–700 BCE</span></div>
+        <div class="node accent-verdigris" id="I1">
+          <div class="node-tag"><span>Hurrian–Hittite</span><span>c. 1400–1200 BCE</span></div>
+          <h3>The Kumarbi Cycle</h3>
+          <p>A generational succession of sky-gods, each overthrowing the father before him, passed down through Anatolia toward the Aegean.</p>
+        </div>
+        <div class="node accent-verdigris" id="I2">
+          <div class="node-tag"><span>Northwest Semitic</span><span>c. 1200–800 BCE</span></div>
+          <h3>The Title "Adon" (Lord)</h3>
+          <p>A Semitic honorific for a consort-god, carried into the Greek world and eventually adopted as a proper name.</p>
+        </div>
+        <div class="node accent-gold" id="GP1">
+          <div class="node-tag"><span>Greek philosophy</span><span>c. 300 BCE–1st c. CE</span></div>
+          <h3>Stoic &amp; Platonic Logos</h3>
+          <p>An independent Greek philosophical line, not Mesopotamian: the ordering rational principle of the cosmos, later grafted onto Hebrew wisdom tradition.</p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-head">Greek Myth<span>Archaic–Classical, c. 750–100 BCE</span></div>
+        <div class="node accent-brick" id="G1">
+          <div class="node-tag"><span>Greek</span><span>recorded c. 1st c. BCE</span></div>
+          <h3>Deucalion &amp; Pyrrha</h3>
+          <p>Zeus floods a corrupted earth; a righteous couple survives by boat and repopulates the world. Independent descent from the same Near Eastern flood tradition as Genesis, not a copy of it.</p>
+        </div>
+        <div class="node accent-brick" id="G2">
+          <div class="node-tag"><span>Greek</span><span>c. 700 BCE</span></div>
+          <h3>Hesiod's Theogony</h3>
+          <p>Uranus is overthrown by Cronus, Cronus by Zeus. The succession pattern maps closely onto the Kumarbi cycle's line of deposed sky-fathers.</p>
+        </div>
+        <div class="node accent-brick" id="G3">
+          <div class="node-tag"><span>Greek</span><span>archaic–classical</span></div>
+          <h3>Adonis</h3>
+          <p>A mortal beloved of Aphrodite who dies young and is mourned each year. The name and the seasonal death-and-mourning structure both trace to Dumuzid by way of the Semitic title "adon."</p>
+        </div>
+
+        <div class="col-head" style="margin-top:64px;">Hebrew Bible<span>Composed / compiled c. 6th c. BCE</span></div>
+        <div class="node accent-oxblood" id="H1">
+          <div class="node-tag"><span>Hebrew</span><span>c. 6th c. BCE</span></div>
+          <h3>Genesis 6–9, Noah's Flood</h3>
+          <p>Same sequence as the Mesopotamian flood texts: divine warning, an ark, paired animals, birds sent to test for land, sacrifice on landing. Likely transmitted during or after the Babylonian exile.</p>
+        </div>
+        <div class="node accent-oxblood" id="H2">
+          <div class="node-tag"><span>Hebrew</span><span>c. 6th c. BCE</span></div>
+          <h3>Genesis 1, Creation from the Deep</h3>
+          <p>The Hebrew tehom, the primordial deep, is linguistically related to Tiamat. Formless waters are separated and ordered into a structured cosmos by a single ruling god.</p>
+        </div>
+        <div class="node accent-oxblood contested" id="H3">
+          <div class="node-tag"><span>Hebrew</span><span>c. 6th c. BCE</span></div>
+          <h3>Genesis 2–3, Eden's Forbidden Fruit</h3>
+          <p>Adapa is offered immortality and refuses it; Eden's couple is forbidden fruit and take it anyway. A real thematic echo, but inverted, not a direct copy.</p>
+          <div class="contested-flag">Structural echo, reversed mechanism</div>
+        </div>
+      </div>
+
+      <div class="col stack-gap">
+        <div class="col-head">Later Reception<span>Contested or overreaching parallels</span></div>
+        <div class="node accent-gold contested" id="E1">
+          <div class="node-tag"><span>Egyptian</span><span>independent, c. 2400 BCE+</span></div>
+          <h3>Osiris</h3>
+          <p>Often grouped with Dumuzid and Adonis as a "dying-and-rising god." Osiris in fact becomes lord of the dead rather than returning among the living, and the Egyptian tradition is old enough to be independent rather than borrowed.</p>
+          <div class="contested-flag">Popular grouping overstates the parallel</div>
+        </div>
+        <div class="node accent-gold" id="C1">
+          <div class="node-tag"><span>Christian, NT</span><span>c. 90–110 CE</span></div>
+          <h3>John 1:1, "In the beginning was the Word"</h3>
+          <p>Logos is imported directly from Greek philosophy, not from Mesopotamian myth. A case of Greek metaphysics grafted onto Hebrew wisdom writing.</p>
+        </div>
+        <div class="node accent-oxblood contested" id="C2">
+          <div class="node-tag"><span>Popular claim</span><span>widely circulated</span></div>
+          <h3>Resurrection &amp; the "Dying-and-Rising God"</h3>
+          <p>The category itself has been challenged by scholars, notably Jonathan Z. Smith, as a template imposed on myths that don't actually share a resurrection structure in their original texts.</p>
+          <div class="contested-flag">Category disputed by comparative religion scholarship</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <h2>Reading this chart</h2>
+  <p>This is a simplified map, not a complete stemma. Oral tradition moved through trade routes, migration, and conquest for centuries before any of these texts were fixed in writing, so "borrowing" here means the closest documented ancestor, not a single traceable act of copying. Where a popular claim outruns what the primary sources say, that's marked rather than smoothed over.</p>
+  <div class="sources">
+    Key primary sources: Epic of Gilgamesh · Atrahasis · Enuma Elish · Sumerian King List · Inanna's Descent · Adapa and the South Wind · Hesiod, Theogony · Ovid, Metamorphoses · Genesis · Gospel of John<br>
+    Key scholarship: Mark S. Smith on Near Eastern cosmology · Jonathan Z. Smith, "Dying and Rising Gods" · W. G. Lambert on Babylonian creation myths
+  </div>
+</footer>
+
+<script>
+(function(){
+  var connections = [
+    // Mesopotamian wellspring -> transmission / direct
+    { from:'S1', to:'G1', color:'var(--brick)' },
+    { from:'S1', to:'H1', color:'var(--oxblood)' },
+    { from:'S2', to:'H2', color:'var(--oxblood)' },
+    { from:'S2', to:'I1', color:'var(--verdigris)' },
+    { from:'S3', to:'I2', color:'var(--verdigris)' },
+    { from:'S3', to:'E1', color:'var(--gold)', dashed:true },
+    { from:'S4', to:'H3', color:'var(--oxblood)', dashed:true },
+    // transmission -> greek
+    { from:'I1', to:'G2', color:'var(--brick)' },
+    { from:'I2', to:'G3', color:'var(--brick)' },
+    { from:'GP1', to:'C1', color:'var(--gold)' },
+    // later reception, contested
+    { from:'G3', to:'C2', color:'var(--oxblood)', dashed:true },
+    { from:'E1', to:'C2', color:'var(--oxblood)', dashed:true }
+  ];
+
+  var svg = document.getElementById('rivers');
+  var wrap = document.getElementById('chartWrap');
+
+  function resolveColor(v){
+    if (v.indexOf('var(') === 0){
+      var name = v.slice(4, -1).trim();
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+    return v;
+  }
+
+  function draw(){
+    svg.innerHTML = '';
+    var wrapRect = wrap.getBoundingClientRect();
+    svg.setAttribute('width', wrapRect.width);
+    svg.setAttribute('height', wrapRect.height);
+
+    connections.forEach(function(c){
+      var a = document.getElementById(c.from);
+      var b = document.getElementById(c.to);
+      if(!a || !b) return;
+      var ra = a.getBoundingClientRect();
+      var rb = b.getBoundingClientRect();
+
+      var x1 = ra.right - wrapRect.left;
+      var y1 = ra.top + ra.height/2 - wrapRect.top;
+      var x2 = rb.left - wrapRect.left;
+      var y2 = rb.top + rb.height/2 - wrapRect.top;
+
+      var dx = Math.max(40, (x2 - x1) * 0.5);
+      var path = document.createElementNS('http://www.w3.org/2000/svg','path');
+      var d = 'M ' + x1 + ' ' + y1 + ' C ' + (x1+dx) + ' ' + y1 + ', ' + (x2-dx) + ' ' + y2 + ', ' + x2 + ' ' + y2;
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', resolveColor(c.color));
+      path.setAttribute('stroke-width', '1.6');
+      path.setAttribute('opacity', '0.72');
+      if(c.dashed){ path.setAttribute('stroke-dasharray', '5 5'); }
+      svg.appendChild(path);
+
+      var dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx', x2); dot.setAttribute('cy', y2); dot.setAttribute('r', '2.5');
+      dot.setAttribute('fill', resolveColor(c.color));
+      svg.appendChild(dot);
+    });
+  }
+
+  window.addEventListener('load', draw);
+  window.addEventListener('resize', draw);
+  if (document.fonts && document.fonts.ready){ document.fonts.ready.then(draw); }
+})();
+</script>
+
+</body>
+</html>
