@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How the Book Got Made — Canon Formation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f;
+    --basalt-2: #1e1b14;
+    --parchment: #ede3cc;
+    --parchment-dim: #cfc4a8;
+    --ink: #2a2416;
+    --lapis: #3d6ea5;
+    --brick: #a8523a;
+    --oxblood: #8a3636;
+    --verdigris: #5f8577;
+    --gold: #c19a5b;
+    --line-faint: rgba(237,227,204,0.14);
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{ margin:0; padding:0; background:var(--basalt); color:var(--parchment); font-family:'Source Serif 4', serif; }
+  ::selection{ background:var(--gold); color:var(--basalt); }
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  .sitenav{ position:sticky; top:0; z-index:50; background:rgba(22,20,15,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line-faint); }
+  .sitenav-inner{ max-width:1500px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px; }
+  .sitenav-mark{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment); white-space:nowrap; }
+  .sitenav-links{ display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
+  .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+
+  header{ max-width:920px; margin:0 auto; padding:64px 28px 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1{ font-size:clamp(32px, 5vw, 50px); line-height:1.08; margin:0 0 20px; }
+  header p{ font-size:16.5px; line-height:1.65; color:var(--parchment-dim); max-width:680px; margin:0 0 14px; }
+
+  section{ max-width:920px; margin:0 auto; padding:10px 28px 56px; }
+  .section-head{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin:0 0 26px; padding-top:38px; border-top:1px solid var(--line-faint); }
+
+  /* timeline */
+  .timeline{ position:relative; margin-top:6px; }
+  .timeline::before{ content:""; position:absolute; top:6px; bottom:6px; left:144px; width:2px; background:var(--line-faint); }
+  .t-item{ display:grid; grid-template-columns:130px 28px 1fr; column-gap:0; margin-bottom:30px; }
+  .t-date{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); text-align:right; padding-right:16px; padding-top:4px; line-height:1.4; }
+  .t-dot-col{ position:relative; }
+  .t-dot{ width:10px; height:10px; border-radius:50%; background:var(--basalt); border:2px solid var(--gold); margin-left:8px; margin-top:6px; }
+  .t-item.myth .t-dot{ border-color:var(--oxblood); background:var(--oxblood); }
+  .t-card{ padding-left:20px; }
+  .t-card h3{ font-size:17px; margin:0 0 7px; color:var(--parchment); }
+  .t-card p{ font-size:14.3px; line-height:1.6; color:var(--parchment-dim); margin:0; max-width:600px; }
+  .myth-badge{ display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:#d99b9b; background:rgba(138,54,54,0.15); border:1px dashed rgba(138,54,54,0.55); padding:2px 7px; border-radius:2px; margin-bottom:8px; }
+
+  @media (max-width:640px){
+    .timeline::before{ left:0; display:none; }
+    .t-item{ grid-template-columns:1fr; }
+    .t-date{ text-align:left; padding-right:0; padding-bottom:4px; }
+    .t-dot-col{ display:none; }
+    .t-card{ padding-left:0; border-left:2px solid var(--line-faint); padding-left:14px; }
+  }
+
+  /* excluded texts grid */
+  .text-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .text-grid{ grid-template-columns:1fr; } }
+  .text-card{ background:var(--parchment); color:var(--ink); border-radius:2px; padding:15px 17px 16px; border-left:4px solid var(--verdigris); }
+  .text-card h4{ font-size:15px; margin:0 0 6px; }
+  .text-card p{ font-size:13px; line-height:1.5; margin:0; color:#4a4130; }
+
+  /* translation cards */
+  .trans-card{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:3px; padding:20px 22px; margin-bottom:14px; }
+  .trans-card h4{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); margin:0 0 10px; }
+  .trans-card h3{ font-size:17px; margin:0 0 10px; color:var(--parchment); }
+  .trans-card p{ font-size:14.3px; line-height:1.65; color:var(--parchment-dim); margin:0; max-width:680px; }
+
+  footer{ max-width:920px; margin:0 auto; padding:10px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
+  footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
+  footer .sources{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--parchment-dim); line-height:2; margin-top:16px; }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <a href="canon.html" class="active">How the Book Got Made</a>
+      <a href="geography.html">Born on Third Base</a>
+      <a href="hell.html">Hell's Family Tree</a>
+      <a href="pantheon.html">El and Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Canon Formation</div>
+  <h1>How the Book Got Made</h1>
+  <p>The Bible wasn't handed down complete. It was assembled over four centuries by specific people making specific decisions, some theological, some political, some as blunt as "which texts does everyone already agree on." This is the actual timeline, what got left out along the way, and a few translation choices that changed what the text says.</p>
+</header>
+
+<section>
+  <div class="section-head">The Timeline</div>
+  <div class="timeline">
+
+    <div class="t-item">
+      <div class="t-date">c. 50–60s CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Paul's Letters Come First</h3>
+        <p>Paul's authentic letters, Romans, 1 Corinthians, Galatians, and others, are the earliest Christian writings that survive, written years before any Gospel. The Jesus movement existed for a generation as letters and oral tradition, not a book.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">c. 70–100 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>The Four Gospels Are Written</h3>
+        <p>Mark is generally dated first, around 70 CE, near the fall of the Jerusalem Temple. Matthew and Luke follow around 80–90 CE, both drawing on Mark and a hypothesized shared sayings-source scholars call Q. John comes last, around 90–100 CE, with noticeably different theology and chronology from the other three.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">c. 100–150 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Many Gospels, No Fixed List</h3>
+        <p>Dozens of gospels, acts, and revelations circulate among different Christian communities, including the Gospel of Thomas, the Gospel of Peter, and the Infancy Gospel of Thomas. There is no single authoritative New Testament yet, just a patchwork of texts read in different regions.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">c. 144 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Marcion Forces the Issue</h3>
+        <p>Marcion of Sinope proposes the first fixed Christian canon: an edited Gospel of Luke and ten Pauline letters, and nothing else, rejecting the entire Hebrew Bible as the work of a lesser god. The wider church declares him a heretic, but his hard line pushes everyone else to start defining their own.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">c. 170 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>The Muratorian Fragment</h3>
+        <p>The earliest surviving list that resembles the eventual New Testament, naming most of the familiar books while explicitly flagging others as disputed, the Apocalypse of Peter among them, with the note that "some do not want it read in church."</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">c. 180 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Irenaeus Argues for Exactly Four</h3>
+        <p>Irenaeus of Lyon insists there must be exactly four gospels, no more and no fewer, reasoning from the four corners of the earth and the four winds. A theological argument, not a historical or evidentiary one.</p>
+      </div>
+    </div>
+
+    <div class="t-item myth">
+      <div class="t-date">325 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <span class="myth-badge">Popular myth, corrected</span>
+        <h3>Nicaea (Not About the Canon)</h3>
+        <p>Despite what circulates online, the Council of Nicaea did not vote on which books belong in the Bible. It was convened to settle the Arian controversy, the argument over whether Christ was of the same substance as God the Father, and produced the Nicene Creed. Canon formation was never on its agenda.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">367 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Athanasius Names the 27</h3>
+        <p>In his Easter letter, Bishop Athanasius of Alexandria becomes the first person on record to list exactly the 27 books that make up today's New Testament, and only those 27, nothing more and nothing less.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">393 &amp; 397 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Regional Councils Ratify It</h3>
+        <p>The Councils of Hippo and Carthage, regional North African church councils, formally endorse Athanasius's list for the Western church, though it takes centuries more before it's treated as fully settled everywhere.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">1546 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Trent Locks the Old Testament</h3>
+        <p>In direct response to the Protestant Reformation, the Catholic Council of Trent formally dogmatizes its Old Testament canon, including the deuterocanonical books, Tobit, Judith, Wisdom, Sirach, Baruch, 1 and 2 Maccabees, that Protestant Bibles leave out.</p>
+      </div>
+    </div>
+
+    <div class="t-item">
+      <div class="t-date">16th c.</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Luther Draws a Different Line</h3>
+        <p>Martin Luther moves those same deuterocanonical books into a separate Apocrypha section, useful for reading but not authoritative for doctrine, and privately doubted James, Hebrews, Jude, and Revelation, though he kept all 27 New Testament books in his translation.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="section-head">What Got Left Out</div>
+  <div class="text-grid">
+    <div class="text-card">
+      <h4>Gospel of Thomas</h4>
+      <p>A "sayings gospel," 114 numbered lines attributed to Jesus with no narrative, no crucifixion, no resurrection. Associated with early Christian mysticism.</p>
+    </div>
+    <div class="text-card">
+      <h4>Gospel of Judas</h4>
+      <p>Rediscovered in the 20th century. Portrays Judas not as a betrayer but as the one disciple who truly understood Jesus, acting at his request.</p>
+    </div>
+    <div class="text-card">
+      <h4>Gospel of Mary</h4>
+      <p>Centers Mary Magdalene as a leading disciple and visionary, in open tension with the other apostles over her authority to teach.</p>
+    </div>
+    <div class="text-card">
+      <h4>Infancy Gospel of Thomas</h4>
+      <p>Stories of a child Jesus performing miracles, some startling and violent. Popular reading, never seriously considered for the canon.</p>
+    </div>
+    <div class="text-card">
+      <h4>Shepherd of Hermas</h4>
+      <p>Widely read and even bound into some early manuscript collections, including Codex Sinaiticus, but ultimately left out of the final list.</p>
+    </div>
+    <div class="text-card">
+      <h4>Didache</h4>
+      <p>An early church training manual on ethics and ritual, influential enough that it came close to inclusion in some regional canons.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">Translation Shifts That Mattered</div>
+
+  <div class="trans-card">
+    <h4>Isaiah 7:14</h4>
+    <h3>"Young Woman" Becomes "Virgin"</h3>
+    <p>The Hebrew word almah means "young woman," with no necessary implication of virginity, that's a separate Hebrew word, betulah. The Greek Septuagint translates almah as parthenos, "virgin," and Matthew's Gospel cites that Greek version, not the Hebrew, to frame Jesus's birth as a fulfillment of prophecy.</p>
+  </div>
+
+  <div class="trans-card">
+    <h4>Psalm 22:16</h4>
+    <h3>"Like a Lion" or "They Pierced"</h3>
+    <p>The Masoretic Hebrew text reads "like a lion, my hands and feet," while the Dead Sea Scrolls and the Greek Septuagint preserve a different reading, "they pierced my hands and feet." Which version is original has been debated for centuries, and the pierced reading became central to later crucifixion-as-prophecy arguments.</p>
+  </div>
+
+  <div class="trans-card">
+    <h4>Multiple Words, One English Term</h4>
+    <h3>"Hell" as a Catch-All</h3>
+    <p>English Bibles translate at least four distinct underlying words, Sheol, Hades, Gehenna, and Tartarus, as a single word, hell. Each had its own separate meaning in its original context. Flattening them into one English term erases centuries of theological development, and is its own chart on this site.</p>
+  </div>
+</section>
+
+<footer>
+  <p>None of this requires bad faith on anyone's part to explain. Canons form the way most institutional documents form, through argument, regional habit, and eventually consensus, not a single moment of decree. The Nicaea myth is worth killing specifically because it's the most repeated claim about this whole process and the least accurate one.</p>
+  <div class="sources">
+    Key scholarship: Bruce Metzger, The Canon of the New Testament · Bart Ehrman, Lost Christianities and Misquoting Jesus · Elaine Pagels, The Gnostic Gospels · The Muratorian Fragment (primary source) · Athanasius, 39th Festal Letter (primary source)
+  </div>
+</footer>
+
+</body>
+</html>

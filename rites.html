@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borrowed Rites — The Logic of Substitution</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f; --basalt-2: #1e1b14; --parchment: #ede3cc; --parchment-dim: #cfc4a8;
+    --ink: #2a2416; --lapis: #3d6ea5; --brick: #a8523a; --oxblood: #8a3636; --verdigris: #5f8577;
+    --gold: #c19a5b; --line-faint: rgba(237,227,204,0.14);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--basalt); color:var(--parchment); font-family:'Source Serif 4', serif; }
+  ::selection{ background:var(--gold); color:var(--basalt); }
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .sitenav{ position:sticky; top:0; z-index:50; background:rgba(22,20,15,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line-faint); }
+  .sitenav-inner{ max-width:1500px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px; }
+  .sitenav-mark{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment); white-space:nowrap; }
+  .sitenav-links{ display:flex; gap:16px; margin-left:auto; flex-wrap:wrap; }
+  .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+  header{ max-width:920px; margin:0 auto; padding:64px 28px 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1{ font-size:clamp(30px, 5vw, 50px); line-height:1.08; margin:0 0 20px; }
+  header p{ font-size:16.5px; line-height:1.65; color:var(--parchment-dim); max-width:680px; margin:0 0 14px; }
+  section{ max-width:920px; margin:0 auto; padding:10px 28px 20px; }
+  .section-head{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin:0 0 8px; padding-top:44px; border-top:1px solid var(--line-faint); }
+  .section-sub{ font-size:15px; line-height:1.62; color:var(--parchment-dim); max-width:700px; margin:0 0 26px; }
+  .badge{ display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; padding:2px 7px; border-radius:2px; margin-bottom:9px; }
+  .badge.contested{ color:#a9c9bb; background:rgba(95,133,119,0.15); border:1px dashed rgba(95,133,119,0.55); }
+  .badge.strong{ color:#9fc1e6; background:rgba(61,110,165,0.18); border:1px solid rgba(61,110,165,0.5); }
+
+  .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .info-grid{ grid-template-columns:1fr; } }
+  .info-card{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:3px; padding:20px 22px; }
+  .info-card h3{ font-size:16px; margin:0 0 10px; color:var(--parchment); }
+  .info-card p{ font-size:13.6px; line-height:1.6; color:var(--parchment-dim); margin:0 0 10px; }
+  .info-card p:last-child{ margin-bottom:0; }
+
+  .timeline{ position:relative; margin-top:6px; }
+  .timeline::before{ content:""; position:absolute; top:6px; bottom:6px; left:150px; width:2px; background:var(--line-faint); }
+  .t-item{ display:grid; grid-template-columns:136px 28px 1fr; column-gap:0; margin-bottom:26px; }
+  .t-date{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--gold); text-align:right; padding-right:16px; padding-top:4px; line-height:1.4; }
+  .t-dot-col{ position:relative; }
+  .t-dot{ width:10px; height:10px; border-radius:50%; background:var(--basalt); border:2px solid var(--gold); margin-left:8px; margin-top:6px; }
+  .t-card{ padding-left:20px; }
+  .t-card h3{ font-size:16px; margin:0 0 6px; color:var(--parchment); }
+  .t-card p{ font-size:13.6px; line-height:1.56; color:var(--parchment-dim); margin:0; max-width:600px; }
+  @media (max-width:640px){
+    .timeline::before{ display:none; } .t-item{ grid-template-columns:1fr; }
+    .t-date{ text-align:left; padding-right:0; padding-bottom:4px; } .t-dot-col{ display:none; }
+    .t-card{ padding-left:14px; border-left:2px solid var(--line-faint); }
+  }
+
+  .theory-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:640px){ .theory-grid{ grid-template-columns:1fr; } }
+  .theory-card{ background:var(--parchment); color:var(--ink); border-radius:2px; padding:16px 18px; border-left:4px solid var(--verdigris); }
+  .theory-card h4{ font-size:14.5px; margin:0 0 3px; }
+  .theory-card .who{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; text-transform:uppercase; color:#6b5f45; margin-bottom:8px; }
+  .theory-card p{ font-size:12.8px; line-height:1.52; margin:0; color:#4a4130; }
+
+  footer{ max-width:920px; margin:0 auto; padding:20px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
+  footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
+  footer .sources{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--parchment-dim); line-height:2; margin-top:16px; }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <a href="canon.html">Book Got Made</a>
+      <a href="geography.html">Third Base</a>
+      <a href="hell.html">Hell's Tree</a>
+      <a href="pantheon.html">El &amp; Asherah</a>
+      <a href="rites.html" class="active">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Sacrifice and Substitution</div>
+  <h1>Borrowed Rites</h1>
+  <p>The idea at the center of the crucifixion, that guilt can be transferred onto a substitute who bears the consequence in someone else's place, didn't arrive from nowhere. It's one of the oldest ritual technologies in the ancient Near East, attested in Hittite, Assyrian, and Eblaite texts centuries before Leviticus was written, let alone the New Testament.</p>
+</header>
+
+<section>
+  <div class="section-head">The Ancient Near Eastern Toolkit</div>
+  <p class="section-sub">Scholars call these "elimination rites": a danger, an impurity, or a guilt is ritually loaded onto a substitute, then removed from the community by killing, banishing, or destroying that substitute. The pattern shows up across the region well before Israel existed as a distinct people.</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>Transfer-and-Expel Rituals</h3>
+      <p>Eblaite, Hittite, Ugaritic, and Neo-Assyrian texts all describe rites where sin or impurity is transferred onto an animal, object, or figure, then physically sent away from the community, sometimes using bulls, sometimes mice or frogs, depending on the specific danger being addressed.</p>
+      <p>David P. Wright's landmark study, The Disposal of Impurity, catalogs these as a shared regional ritual grammar rather than a single borrowed text, comparative context rather than proof of direct copying.</p>
+    </div>
+    <div class="info-card">
+      <h3>The Substitute King</h3>
+      <p>In the Assyrian šar pūhi ritual, when omens predicted a king's death, a substitute, often a condemned prisoner, was formally enthroned in his place. The danger was ritually redirected onto the substitute, who was later killed to complete the fate the real king had been destined for.</p>
+      <p>Related Hittite versions used a captive who was expelled rather than killed, carrying the danger away from the kingdom entirely. Either way, the logic is the same: a designated substitute absorbs a fate that was never really his.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">Leviticus 16 in Context</div>
+  <span class="badge contested">Parallel, not proven borrowing</span>
+  <p class="section-sub" style="margin-top:0;">On the Day of Atonement, two goats are brought before the high priest. One is sacrificed. The other, the "scapegoat," has the sins of the people confessed onto it, hands laid on its head, and is driven into the wilderness carrying that guilt away, never sacrificed at all.</p>
+  <p class="section-sub">A useful scholarly caution worth keeping honest: David Wright and others argue the goat isn't a punishment-substitute in the way popular retellings assume, its actual job is disposal, carrying impurity out of the community, closer to the Hittite and Mesopotamian elimination rites above than to a courtroom transaction. The two ideas, carrying guilt away versus paying a penalty in someone's place, get merged in later Christian theology, but they start as two related, not identical, ritual logics.</p>
+</section>
+
+<section>
+  <div class="section-head">Christian Atonement Theories Through History</div>
+  <p class="section-sub">The New Testament itself never settles on one explanation for what Jesus's death accomplished. Church history spent the next fifteen hundred years arguing about it, and produced at least four genuinely different answers.</p>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-date">1st c. CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Paul's Sacrificial Language</h3>
+        <p>Paul's letters describe Christ's death using blood-sacrifice imagery drawn directly from the Levitical system, and Hebrews 9:22 states the principle outright: "without the shedding of blood there is no forgiveness." The framework is inherited wholesale from the Temple sacrificial system, not invented fresh.</p>
+      </div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">c. 130–500 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Ransom and Christus Victor</h3>
+        <p>The dominant early view, articulated by Origen and others: Christ's death is a ransom, paid not to God but to the devil, who held humanity in bondage through sin. This "classic" framing centers on Christ's victory over death and evil powers rather than a legal transaction, and holds the field in the West for roughly a thousand years.</p>
+      </div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">1098 CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>Anselm Rewrites the Ledger</h3>
+        <p>In Cur Deus Homo, Anselm of Canterbury rejects the idea that God owes the devil anything. Instead, human sin is a debt against God's own honor, and Christ's death repays that debt on humanity's behalf. This "satisfaction theory" becomes the dominant Catholic framing and marks a decisive shift, the transaction is now between humanity and God directly.</p>
+      </div>
+    </div>
+    <div class="t-item">
+      <div class="t-date">16th c. CE</div>
+      <div class="t-dot-col"><div class="t-dot"></div></div>
+      <div class="t-card">
+        <h3>The Reformers Add Punishment</h3>
+        <p>Calvin and Luther take Anselm's debt framework and give it a legal, forensic edge: Christ isn't just repaying an honor debt, he's being punished in humanity's place, absorbing the penalty God's justice requires. This "penal substitution" becomes the dominant view in Protestant, especially evangelical, theology to this day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">Four Theories, Side by Side</div>
+  <p class="section-sub">These aren't minor variations. They disagree about who Christ's death is even paid to.</p>
+  <div class="theory-grid">
+    <div class="theory-card">
+      <h4>Ransom</h4>
+      <div class="who">Origen, c. 3rd century</div>
+      <p>A ransom paid to the devil, who holds a legitimate claim over sinful humanity until the debt is settled.</p>
+    </div>
+    <div class="theory-card">
+      <h4>Christus Victor</h4>
+      <div class="who">Patristic "classic" view</div>
+      <p>Not a payment to anyone, a battle, and a victory over sin, death, and evil powers on humanity's behalf.</p>
+    </div>
+    <div class="theory-card">
+      <h4>Satisfaction</h4>
+      <div class="who">Anselm, 1098 CE</div>
+      <p>A debt owed to God's own honor, wounded by human sin, repaid by Christ's voluntary death.</p>
+    </div>
+    <div class="theory-card">
+      <h4>Penal Substitution</h4>
+      <div class="who">Calvin, 16th century</div>
+      <p>A legal penalty, the punishment humanity's sin deserved, absorbed by Christ in humanity's place.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>None of this requires that the crucifixion "means nothing." It means the specific mechanism most modern Christians assume is the obvious, single reading of the cross, Christ punished in your place to satisfy God's wrath, is actually the youngest of the major theories, five hundred years old, not two thousand, and built on a substitution logic the ancient Near East had already been using for a very long time before anyone nailed anything to anything.</p>
+  <div class="sources">
+    Key scholarship: David P. Wright, The Disposal of Impurity: Elimination Rites in the Bible and in Hittite and Mesopotamian Literature · Jacob Milgrom, Leviticus 1–16 (Anchor Bible) · Gustaf Aulén, Christus Victor · Anselm of Canterbury, Cur Deus Homo · Ida Zatelli on the Eblaite scapegoat parallels
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biblical Scrutiny — Rivers of Myth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --basalt: #1c1a16;
+    --basalt-mid: #242018;
+    --basalt-light: #2c2820;
+    --parchment: #ede0c4;
+    --parchment-dim: #c8b898;
+    --gold: #d4a84b;
+    --gold-dim: #a07830;
+    --ember: #c46a2b;
+    --slate: #5a7a8a;
+    --slate-light: #8ab0c4;
+    --text: #ddd0b8;
+    --text-dim: #a89878;
+    --border: #3a342c;
+    --danger: #b04040;
+    --danger-light: #d05858;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--basalt);
+    color: var(--text);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--basalt-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1rem 0.9rem;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    display: block;
+  }
+  nav a:hover { color: var(--parchment); }
+  nav a.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* DROPDOWN */
+  .nav-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+  }
+  .nav-group > a {
+    border-bottom: 2px solid var(--gold);
+    color: var(--gold);
+  }
+  .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--basalt-mid);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold);
+    min-width: 240px;
+    z-index: 200;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .nav-group:hover .nav-dropdown,
+  .nav-group:focus-within .nav-dropdown {
+    display: block;
+  }
+  .nav-dropdown a {
+    display: block;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.68rem;
+    color: var(--text-dim);
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    letter-spacing: 0.06em;
+  }
+  .nav-dropdown a:hover {
+    color: var(--text);
+    background: var(--basalt-light);
+    border-left-color: var(--gold);
+  }
+  .nav-dropdown .drop-section {
+    padding: 0.4rem 1.1rem 0.2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    margin-top: 0.25rem;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 5rem 2rem 4rem;
+    max-width: 860px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--parchment);
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.02em;
+  }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 680px;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* METHOD BOX */
+  .method-box {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .method-box p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    max-width: 700px;
+  }
+  .method-box p + p { margin-top: 1rem; }
+
+  /* SECTION NAV */
+  .section-nav {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem;
+  }
+  .section-nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    transition: background 0.2s, color 0.2s;
+    border: 1px solid transparent;
+  }
+  .section-nav a:hover {
+    background: var(--basalt-light);
+    color: var(--parchment);
+    border-color: var(--border);
+  }
+  .section-nav a .num {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-dim);
+    font-size: 0.75rem;
+    min-width: 1.4rem;
+  }
+
+  /* MAIN CONTENT */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+
+  /* CONTENT SECTIONS */
+  .content-section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .content-section:last-child { border-bottom: none; }
+
+  .section-label {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .section-num {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--parchment);
+    letter-spacing: 0.02em;
+  }
+
+  h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  p { margin-bottom: 1.2rem; }
+  p:last-child { margin-bottom: 0; }
+
+  em { color: var(--parchment-dim); font-style: italic; }
+  strong { color: var(--parchment); font-weight: 500; }
+
+  /* EVIDENCE CARDS */
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .evidence-card {
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .evidence-card .card-head {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .evidence-card .card-head.strong { color: var(--danger-light); }
+  .evidence-card .card-head.parallel { color: var(--gold); }
+  .evidence-card .card-head.contested { color: var(--slate-light); }
+  .evidence-card h4 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+  }
+  .evidence-card p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* CONTRADICTION TABLE */
+  .contra-block {
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+  .contra-head {
+    background: var(--basalt-mid);
+    padding: 0.8rem 1.25rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    border-bottom: 1px solid var(--border);
+  }
+  .contra-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .contra-row:last-child { border-bottom: none; }
+  .contra-cell {
+    padding: 1rem 1.25rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .contra-cell:first-child {
+    border-right: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .contra-cell:last-child { color: var(--text-dim); }
+  .contra-cell .verse {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  /* SOURCE BREAKDOWN */
+  .source-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .source-card {
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.25rem;
+  }
+  .source-card .source-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .source-card.j .source-label { color: #c9814c; }
+  .source-card.e .source-label { color: #4c8ac9; }
+  .source-card.d .source-label { color: #8ac94c; }
+  .source-card.p .source-label { color: #c9c44c; }
+  .source-card .source-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    letter-spacing: 0.06em;
+  }
+  .source-card p {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* FLOOD TABLE */
+  .flood-comparison {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th {
+    background: var(--basalt-mid);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border);
+  }
+  th.j-head { color: #c9814c; }
+  th.p-head { color: #c9c44c; }
+  th.q-head { color: var(--parchment-dim); }
+  td {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  td strong { color: var(--parchment); }
+
+  /* PROPHECY BLOCK */
+  .prophecy-block {
+    background: var(--basalt-light);
+    border-left: 3px solid var(--danger-light);
+    border-radius: 0 6px 6px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .prophecy-block .prop-head {
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: var(--parchment);
+    margin-bottom: 0.5rem;
+  }
+  .prophecy-block .prop-ref {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--danger-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .prophecy-block p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+  }
+  .prophecy-block .verdict {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--danger-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* CAVEAT BOX */
+  .caveat-box {
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--slate);
+    border-radius: 0 0 6px 6px;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .caveat-box .caveat-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    color: var(--slate-light);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+  .caveat-box p {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+  .caveat-box p:last-child { margin-bottom: 0; }
+
+  /* SCHOLAR CITE */
+  cite {
+    font-style: normal;
+    color: var(--parchment-dim);
+    font-size: 0.88rem;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    margin: 1.5rem 0;
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--border);
+  }
+  .timeline-entry {
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .timeline-entry::before {
+    content: '';
+    position: absolute;
+    left: -1.6rem;
+    top: 0.45rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: 2px solid var(--basalt);
+  }
+  .timeline-date {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    color: var(--gold-dim);
+    margin-bottom: 0.3rem;
+  }
+  .timeline-entry p {
+    font-size: 0.92rem;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  /* READING LIST */
+  .reading-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .book-card {
+    background: var(--basalt-light);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+  }
+  .book-card .book-title {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    color: var(--parchment);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+  .book-card .book-author {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: var(--gold-dim);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+  }
+  .book-card p {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--basalt-mid);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 640px) {
+    .contra-row { grid-template-columns: 1fr; }
+    .contra-cell:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .section-title { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Lineage Map</a>
+  <a href="myth-match.html">Myth Match</a>
+  <a href="rites.html">Borrowed Rites</a>
+  <div class="nav-group">
+    <a href="scrutiny.html" class="active">Biblical Scrutiny ▾</a>
+    <div class="nav-dropdown">
+      <div class="drop-section">The Document</div>
+      <a href="scrutiny.html#contradictions">I — Internal Contradictions</a>
+      <a href="scrutiny.html#authorship">II — Authorship Questions</a>
+      <a href="scrutiny.html#jedp">III — The Four Sources (JEDP)</a>
+      <a href="scrutiny.html#flood">IV — The Flood: A Case Study</a>
+      <a href="scrutiny.html#anachronisms">V — Anachronisms &amp; the Patriarchs</a>
+      <a href="scrutiny.html#moses">VI — Moses &amp; the Exodus</a>
+      <div class="drop-section">Origins</div>
+      <a href="scrutiny.html#borrowed">VII — Borrowed Mythology</a>
+      <a href="scrutiny.html#polytheism">VIII — Polytheistic Origins</a>
+      <a href="scrutiny.html#canon">IX — Formation of the Canon</a>
+      <div class="drop-section">What It Got Wrong</div>
+      <a href="scrutiny.html#prophecy">X — Failed Prophecies</a>
+      <a href="scrutiny.html#transmission">XI — Textual Corruption</a>
+      <a href="scrutiny.html#jesus">XII — The Historical Jesus Problem</a>
+      <a href="scrutiny.html#virgin">XIII — The Virgin Birth Problem</a>
+      <div class="drop-section">What It Conceals</div>
+      <a href="scrutiny.html#violence">XIV — Divine Violence</a>
+      <a href="scrutiny.html#slavery">XV — Slavery &amp; the Bible</a>
+      <a href="scrutiny.html#reading">— Scholarly Reading List</a>
+    </div>
+  </div>
+  <a href="canon.html">Canon</a>
+  <a href="pantheon.html">El &amp; Asherah</a>
+  <a href="hell.html">Hell's Family Tree</a>
+  <a href="geography.html">Born on Third Base</a>
+  <a href="decline.html">Post-Christianity</a>
+  <a href="consistency.html">Consistency Test</a>
+  <a href="scientist.html">God as Scientist</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">A Critical Reference</div>
+  <h1>Biblical Scrutiny</h1>
+  <p class="hero-sub">What modern biblical scholarship actually says about who wrote the Bible, when, why, and what it got wrong — organized for people doing the work of serious inquiry.</p>
+</div>
+
+<div class="method-box">
+  <p>This document treats the Bible as what it demonstrably is: a library of texts produced over roughly a millennium by many hands, in multiple languages, compiled under political and theological pressure. That is not a taunt. It is the methodological starting point of modern historical criticism — and it is what lets the texts become <em>explainable</em> rather than merely quoted.</p>
+  <p>Everything here draws on mainstream critical scholarship. Where conclusions are contested, that is flagged. Where they are near-universal among non-confessional scholars, no false balance is offered. This is a reference tool for critical inquiry, not a devotional text.</p>
+</div>
+
+<div class="section-nav">
+  <a href="#contradictions"><span class="num">I</span> Internal Contradictions</a>
+  <a href="#authorship"><span class="num">II</span> Authorship &amp; the Documentary Hypothesis</a>
+  <a href="#jedp"><span class="num">III</span> The Four Sources</a>
+  <a href="#flood"><span class="num">IV</span> The Flood: A Case Study</a>
+  <a href="#anachronisms"><span class="num">V</span> Anachronisms &amp; the Patriarchs</a>
+  <a href="#moses"><span class="num">VI</span> Moses &amp; the Exodus</a>
+  <a href="#borrowed"><span class="num">VII</span> Borrowed Mythology</a>
+  <a href="#polytheism"><span class="num">VIII</span> Polytheistic Origins of Judaism</a>
+  <a href="#canon"><span class="num">IX</span> Formation of the Canon</a>
+  <a href="#prophecy"><span class="num">X</span> Failed Prophecies</a>
+  <a href="#transmission"><span class="num">XI</span> Textual Corruption</a>
+  <a href="#jesus"><span class="num">XII</span> The Historical Jesus Problem</a>
+  <a href="#virgin"><span class="num">XIII</span> The Virgin Birth Problem</a>
+  <a href="#violence"><span class="num">XIV</span> Divine Violence</a>
+  <a href="#slavery"><span class="num">XV</span> Slavery &amp; the Bible</a>
+  <a href="#reading"><span class="num">—</span> Scholarly Reading List</a>
+</div>
+
+<main>
+
+<!-- I. CONTRADICTIONS -->
+<section class="content-section" id="contradictions">
+  <div class="section-label">
+    <span class="section-num">I</span>
+    <h2 class="section-title">Internal Contradictions</h2>
+  </div>
+  <p>The contradictions cataloged below are best understood not as "difficulties" to be harmonized but as seams — the visible joints where independent source documents were stitched together by later editors. Source criticism emerged precisely because scholars refused to accept forced harmonizations of texts that cannot both be true.</p>
+
+  <h3>Cosmological</h3>
+  <div class="contra-block">
+    <div class="contra-head">Order of Creation — Genesis 1 vs. Genesis 2</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Genesis 1 (Priestly / P source)</span>
+        Plants → Day 3. Animals → Days 5–6. Humans (male and female together) → Day 6, last.
+      </div>
+      <div class="contra-cell">
+        <span class="verse">Genesis 2 (Yahwist / J source)</span>
+        Man formed first (2:7). Plants/Eden created next (2:8). Animals formed as potential companions (2:19). Woman created last from the man's rib (2:22).
+      </div>
+    </div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Genesis 1:3</span>
+        Light created on Day 1.
+      </div>
+      <div class="contra-cell">
+        <span class="verse">Genesis 1:14–19</span>
+        Sun, moon, and stars not made until Day 4. Light is treated as conceptually independent of its source — an ancient cosmological assumption, not an oversight.
+      </div>
+    </div>
+  </div>
+
+  <h3>Historical &amp; Narrative</h3>
+  <div class="contra-block">
+    <div class="contra-head">Who Killed Goliath?</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">1 Samuel 17:50</span>
+        David kills Goliath.
+      </div>
+      <div class="contra-cell">
+        <span class="verse">2 Samuel 21:19</span>
+        "Elhanan son of Jaare-oregim, the Bethlehemite, struck down Goliath the Gittite." A different man, named plainly. 1 Chronicles 20:5 later inserted "the brother of" to harmonize — the King James Bible quietly added it to 2 Samuel too.
+      </div>
+    </div>
+  </div>
+
+  <div class="contra-block">
+    <div class="contra-head">The Death of Judas</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Matthew 27:3–8</span>
+        Judas repents, throws the silver into the temple, and hangs himself. The priests then use the money to buy the Potter's Field.
+      </div>
+      <div class="contra-cell">
+        <span class="verse">Acts 1:18–19</span>
+        Judas himself buys a field with the money, then falls headlong, his body bursting open so that "all his bowels gushed out." No hanging. No priests buying the field.
+      </div>
+    </div>
+  </div>
+
+  <div class="contra-block">
+    <div class="contra-head">The Resurrection: Who Was at the Tomb?</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Mark 16:1–8</span>
+        Three women. One young man inside, in a white robe. The women flee and tell no one. Original Mark ends here — no appearances of the risen Jesus.
+      </div>
+      <div class="contra-cell">
+        <span class="verse">Matthew 28 / Luke 24 / John 20</span>
+        Matthew: earthquake, angel rolls the stone away, sits on it outside. Luke: two men in dazzling clothes inside. John: Mary Magdalene comes alone, finds the stone already moved, later sees two angels and Jesus.
+      </div>
+    </div>
+  </div>
+
+  <div class="contra-block">
+    <div class="contra-head">The Flood Animals (Two Sources, One Story)</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Genesis 6:19–20 (Priestly / P)</span>
+        "Two of every living thing… male and female" — one pair of each kind.
+      </div>
+      <div class="contra-cell">
+        <span class="verse">Genesis 7:2–3 (Yahwist / J)</span>
+        "Seven pairs of every clean animal… one pair of unclean animals." The discrepancy exists because J's Noah sacrifices animals after the flood — which requires extras so the species survive.
+      </div>
+    </div>
+  </div>
+
+  <h3>Theological</h3>
+  <div class="contra-block">
+    <div class="contra-head">Does God Change His Mind?</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Numbers 23:19 / 1 Samuel 15:29</span>
+        "God is not a man, that he should lie, or a son of man, that he should change his mind."
+      </div>
+      <div class="contra-cell">
+        <span class="verse">Genesis 6:6 / Exodus 32:14 / 1 Samuel 15:11</span>
+        God "regretted" making humankind. God "relented" from destroying Israel after Moses's intercession. God "regretted" making Saul king.
+      </div>
+    </div>
+  </div>
+
+  <div class="contra-block">
+    <div class="contra-head">Faith vs. Works</div>
+    <div class="contra-row">
+      <div class="contra-cell">
+        <span class="verse">Romans 3:28</span>
+        "A person is justified by faith apart from the works of the law."
+      </div>
+      <div class="contra-cell">
+        <span class="verse">James 2:24</span>
+        "A person is justified by works and not by faith alone."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- II. AUTHORSHIP -->
+<section class="content-section" id="authorship">
+  <div class="section-label">
+    <span class="section-num">II</span>
+    <h2 class="section-title">Authorship Questions</h2>
+  </div>
+  <p>Traditional attributions of biblical books to specific ancient figures — Moses, David, Isaiah, the apostles — are almost uniformly rejected by modern critical scholarship. The evidence ranges from anachronisms within the texts themselves to stylistic analysis, linguistic data, and manuscript history.</p>
+
+  <h3>The Torah (Pentateuch)</h3>
+  <p>Traditionally attributed to Moses. But the text refers to Moses in the third person throughout, records his own death (Deuteronomy 34), uses place names that didn't exist in Moses's lifetime, and contains the anachronisms detailed in Section V. The <strong>Documentary Hypothesis</strong> — developed systematically by Julius Wellhausen in his <cite>Prolegomena zur Geschichte Israels</cite> (1878) and refined by Richard Elliott Friedman in <cite>Who Wrote the Bible?</cite> (1987) — identifies four source traditions (J, E, D, P) woven together by a series of redactors, with Ezra a candidate for the final compilation around 458–400 BCE.</p>
+
+  <h3>Isaiah</h3>
+  <p>Johann Christoph Döderlein first argued in 1775 that chapters 40–66 were written by an anonymous prophet of the Babylonian exile ("Deutero-Isaiah"). Bernhard Duhm (1892) further split off chapters 56–66 as "Trito-Isaiah." The evidence: chapters 40–55 presuppose the exile as a present reality and name <strong>Cyrus of Persia</strong> by name (44:28–45:1) — two centuries after Isaiah of Jerusalem — alongside a marked shift in style, vocabulary, and theology. Multiple authorship of Isaiah is among the most widely accepted conclusions in critical scholarship.</p>
+
+  <h3>Daniel</h3>
+  <p>Traditionally set in the 6th century BCE. Critical scholars date the book to approximately 165 BCE because its "prophecies" of Greek history (Daniel 11) are accurate in detail up to the reign of Antiochus IV Epiphanes — and then fail. See Section X for the full prophecy-failure analysis.</p>
+
+  <h3>The New Testament</h3>
+  <p>All four Gospels are anonymous. The names Matthew, Mark, Luke, and John were attached in the second century. None were written by eyewitnesses; they are structured theological biographies composed in Greek, 40–70 years after the events they describe, by authors working outside Palestine. Mark is universally recognized as the earliest (c. 70 CE); Matthew and Luke both copied heavily from Mark and from a shared sayings source scholars call Q.</p>
+  <p>Of the thirteen letters bearing Paul's name, only seven are considered authentically his by consensus: Romans, 1–2 Corinthians, Galatians, Philippians, 1 Thessalonians, and Philemon. The <strong>Pastoral Epistles</strong> (1–2 Timothy, Titus) are pseudepigraphical — written decades after Paul's death by someone in his tradition, addressing church organizational concerns and proto-Gnostic challenges that postdate Paul's era. Bart Ehrman's <cite>Forged</cite> (2011) counts eleven of the twenty-seven New Testament books as pseudonymous, with eight more written anonymously.</p>
+  <p>Revelation was written by "John of Patmos," an itinerant prophet in Asia Minor around 95 CE. As early as Dionysius of Alexandria (mid-3rd century), preserved in Eusebius's <cite>Ecclesiastical History</cite>, the marked differences in vocabulary, style, and grammar between Revelation and the Gospel of John were noted as evidence of different authorship.</p>
+</section>
+
+<!-- III. JEDP -->
+<section class="content-section" id="jedp">
+  <div class="section-label">
+    <span class="section-num">III</span>
+    <h2 class="section-title">The Four Sources (JEDP)</h2>
+  </div>
+  <p>The Documentary Hypothesis holds that the Torah is not a single authored text but a composite woven from four primary source documents, each produced by a different faction within ancient Israel at a different historical moment, with distinct theological agendas.</p>
+
+  <div class="source-grid">
+    <div class="source-card j">
+      <div class="source-label">J</div>
+      <div class="source-meta">Yahwist · c. 850 BCE · Kingdom of Judah</div>
+      <p>Uses the divine name <strong>Yahweh</strong> from the start of human history. God is anthropomorphic — he walks in the garden, molds Adam from dirt, sews clothes, regrets decisions. Style is folkloric, earthy, narrative-driven. Politically champions Judah, the Davidic monarchy, and the Aaronid priesthood.</p>
+    </div>
+    <div class="source-card e">
+      <div class="source-label">E</div>
+      <div class="source-meta">Elohist · c. 750 BCE · Kingdom of Israel (North)</div>
+      <p>Uses <strong>Elohim</strong> until the divine name is formally revealed to Moses at the burning bush. God is more abstract and distant — communicating through dreams, visions, and angels rather than walking the earth. Focuses on northern heroes (Joseph, Joshua) and the northern priesthood at Shiloh.</p>
+    </div>
+    <div class="source-card d">
+      <div class="source-label">D</div>
+      <div class="source-meta">Deuteronomist · c. 622 BCE · Jerusalem</div>
+      <p>Characterized by the phrase "Yahweh your God" and a rhetorical, sermonic style. Theology is entirely about the covenant: obey and prosper, disobey and be destroyed. Politically, D mandates centralized worship in Jerusalem only — giving the Temple priesthood a monopoly by outlawing rural altars. "Discovered" in the Temple under King Josiah.</p>
+    </div>
+    <div class="source-card p">
+      <div class="source-label">P</div>
+      <div class="source-meta">Priestly · 6th–5th century BCE · Babylonian Exile</div>
+      <p>Uses Elohim or El Shaddai until Exodus 6. God is a transcendent cosmic architect — no talking animals, no dreams, no angels. God creates by speaking things into existence (Genesis 1). Deeply concerned with ritual purity, dates, measurements, and genealogy. Written to preserve Jewish identity in exile: Sabbath, dietary laws, and circumcision as portable identity markers.</p>
+    </div>
+  </div>
+
+  <h3>The Redactor</h3>
+  <p>After Assyria destroyed the northern kingdom in 722 BCE, refugees brought the E text south, where scribes combined it with the J text. Centuries later, during or after the Babylonian Exile, an editor (or school of editors — historically associated with Ezra) wove JE, D, and P into the Torah. The Redactor did not erase the contradictions between the sources. Instead, they preserved them side by side — honoring the distinct, deeply rooted traditions of a fractured community in the service of a unified national document. This is why both creation accounts are still in Genesis, and why the flood narrative contains two sets of irreconcilable numbers that can be separated into two internally coherent stories.</p>
+</section>
+
+<!-- IV. FLOOD CASE STUDY -->
+<section class="content-section" id="flood">
+  <div class="section-label">
+    <span class="section-num">IV</span>
+    <h2 class="section-title">The Flood: A Documentary Hypothesis Case Study</h2>
+  </div>
+  <p>Genesis 6–9 is the textbook demonstration of the Documentary Hypothesis. Read straight through, the story repeats itself and its numbers don't add up. Separated by the divine names used (Yahweh vs. Elohim), two complete, distinct, and internally consistent flood myths emerge — each with its own theology, its own version of the animals, its own cause and duration of the flood, and its own portrait of God.</p>
+
+  <div class="flood-comparison">
+    <table>
+      <thead>
+        <tr>
+          <th class="q-head">Element</th>
+          <th class="j-head">J Source (Yahwist)</th>
+          <th class="p-head">P Source (Priestly)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Animals taken</strong></td>
+          <td>Seven pairs of clean animals, one pair of unclean (7:2–3). Noah needs extras because he will sacrifice after the flood.</td>
+          <td>One pair of every kind (6:19–20). P's Noah cannot sacrifice — ritual sacrifice begins at Sinai in P's theology.</td>
+        </tr>
+        <tr>
+          <td><strong>Cause of flood</strong></td>
+          <td>Rain — natural, forty days and forty nights (7:12).</td>
+          <td>Cosmic undoing of creation: "the fountains of the great deep burst apart, and the windows of the heavens were opened" (7:11). The waters separated on Day 2 of Genesis 1 crash back together.</td>
+        </tr>
+        <tr>
+          <td><strong>Duration</strong></td>
+          <td>40 days of rain, then waters recede. Noah sends a dove three times (8:8–12).</td>
+          <td>Waters rise for 150 days. Total event: exactly one year and ten days. Noah sends a raven (8:7).</td>
+        </tr>
+        <tr>
+          <td><strong>Portrait of God</strong></td>
+          <td>Anthropomorphic. Yahweh feels grief in his heart (6:6). He physically shuts Noah in (7:16). He smells the pleasing sacrifice and decides never to curse the ground again (8:21).</td>
+          <td>Transcendent and formal. Elohim operates through covenants and decrees. He gives Noah precise architectural blueprints (6:15). After the flood: a formal legal covenant, a rainbow as divine signature (9:12–17). No smell, no emotion.</td>
+        </tr>
+        <tr>
+          <td><strong>Mesopotamian parallel</strong></td>
+          <td colspan="2">Both traditions reflect the earlier <strong>Atrahasis Epic</strong> and <strong>Tablet XI of the Epic of Gilgamesh</strong>: one favored man, a boat with specified dimensions, animal loading, a great flood, grounding on a mountain, birds sent out, post-flood sacrifice. Gilgamesh XI's flood narrative predates Genesis by centuries and tracks J's version almost point for point.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- V. ANACHRONISMS -->
+<section class="content-section" id="anachronisms">
+  <div class="section-label">
+    <span class="section-num">V</span>
+    <h2 class="section-title">Anachronisms &amp; the Patriarchs</h2>
+  </div>
+  <p>The patriarchal narratives (Abraham, Isaac, Jacob) contain details that are impossible for their supposed Bronze Age setting — c. 2000–1500 BCE. These anachronisms are not peripheral; they indicate that the texts were written or heavily edited in the first millennium BCE and reflect the geopolitical realities of that later era.</p>
+
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="card-head strong">Decisive</div>
+      <h4>Domesticated Camels</h4>
+      <p>Genesis depicts Abraham using large camel caravans (Gen 24). Radiocarbon dating of camel bones at Aravah Valley copper-smelting sites by Lidar Sapir-Hen and Erez Ben-Yosef (<em>Tel Aviv</em>, 2013) established that domesticated camels did not appear in the Levant until the late 10th century BCE — roughly 930 BCE — nearly a millennium after Abraham supposedly lived. Tel Aviv University's own release called the Genesis references "direct proof that the text was compiled well after the events it describes."</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head strong">Decisive</div>
+      <h4>The Philistines</h4>
+      <p>Abraham interacts with "Abimelech king of the Philistines" in Gerar (Gen 21, 26). The Philistines were Sea Peoples who did not settle in the coastal Levant until approximately 1175–1200 BCE — centuries after the patriarchal era. DNA analysis of Philistine burials at Ashkelon (2019) confirms a genuine Aegean migratory population arriving in the 12th century, corroborating the late arrival.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head strong">Decisive</div>
+      <h4>Ur of the Chaldeans</h4>
+      <p>Genesis 11:31 places Abraham's origins at "Ur of the Chaldeans." The Chaldeans did not become a dominant Mesopotamian power until the 9th–8th centuries BCE. The designation is a first-millennium anachronism — like referencing "New York, USA" in a story set in the 14th century.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head strong">Decisive</div>
+      <h4>The City of Dan</h4>
+      <p>Genesis 14:14 has Abraham pursuing enemies to "Dan." But according to the Bible's own timeline (Judges 18:29), the city was called Laish and was not renamed Dan until the Danite migration — hundreds of years after Abraham. The author used the contemporary name of his own era.</p>
+    </div>
+  </div>
+
+  <p>Finkelstein and Silberman (<em>The Bible Unearthed</em>, 2001) conclude that the patriarchal narratives are Iron Age constructions — retrojections reflecting the geopolitics and place-names of the 8th–7th centuries BCE, not memories of the second millennium. The historical Abraham is, on current evidence, unsupported.</p>
+</section>
+
+<!-- VI. MOSES -->
+<section class="content-section" id="moses">
+  <div class="section-label">
+    <span class="section-num">VI</span>
+    <h2 class="section-title">Moses &amp; the Exodus</h2>
+  </div>
+  <p>Despite Moses's central role in the Torah, no Egyptian record, no contemporary document, and no archaeological trace corroborates his existence or the Exodus as described. During the supposed Exodus period, Egypt militarily dominated Canaan — a fact the biblical authors appear not to know, because they wrote centuries later.</p>
+
+  <h3>The Absence of Egyptian Records</h3>
+  <p>Egypt maintained extensive and well-preserved administrative records. No Egyptian text references a large enslaved Israelite population, a series of devastating national plagues, the destruction of a pharaoh's army in the sea, or the departure of two million people. The period is not obscure — the New Kingdom pharaohs were meticulous record-keepers. The silence is not merely an absence of evidence; it is an evidential fact that requires explanation.</p>
+
+  <h3>Archaeological Evidence</h3>
+  <p>Extensive surveys of the Sinai have found no trace of a mass encampment or forty-year wilderness sojourn for two million people. The highland villages of early Israel that archaeologists have excavated — beginning around 1200 BCE — show a gradual, indigenous Canaanite development, not an influx of people from Egypt with Egyptian cultural markers. Finkelstein and Silberman describe the archaeological record as consistent with a population that never left Canaan.</p>
+
+  <h3>Numerical Impossibility</h3>
+  <p>Numbers 1:46 counts 603,550 fighting men (males twenty and older), implying a total population exceeding two million. The Egyptologist James K. Hoffmeier estimates the <em>entire</em> population of Egypt during the Ramesside period at approximately 3.5 million — meaning the Israelites alone would have constituted more than half of Egypt's total population. The Sinai could not sustain two million people for forty years; such a population would leave enormous quantities of physical remains. The internal biblical evidence itself is inconsistent: Numbers 3:43 counts only 22,273 firstborn males — implying impossibly large families under any reading.</p>
+
+  <h3>What the Scholars Say</h3>
+  <p>William Dever, Israel Finkelstein, and Neil Asher Silberman hold that there was no Exodus as the Bible describes it. At most, a small group may have escaped Egypt and later contributed a tradition that was universalized to the whole nation. Finkelstein and Silberman argue that the Mosaic tradition served the state-building agenda of King Josiah's Judah in the 7th century BCE, not a memory of the Late Bronze Age.</p>
+
+  <div class="caveat-box">
+    <div class="caveat-label">Honest Caveat</div>
+    <p>Absence of evidence is not proof of absence. Conservative scholars press this point. But the critical case does not rest on silence alone — it rests on positive counter-evidence: datable anachronisms, demographic impossibility, the indigenous Canaanite origins of early Israel, and the textual seams of the source documents themselves.</p>
+  </div>
+</section>
+
+<!-- VII. BORROWED MYTHOLOGY -->
+<section class="content-section" id="borrowed">
+  <div class="section-label">
+    <span class="section-num">VII</span>
+    <h2 class="section-title">Borrowed Mythology</h2>
+  </div>
+  <p>Israel's signature narratives repeatedly turn out to be later versions of stories that circulated earlier and more widely across the ancient Near East. The borrowing case is strong precisely because of the specificity and matching sequence of shared motifs — these are not vague thematic similarities but close narrative and textual parallels.</p>
+
+  <div class="evidence-grid">
+    <div class="evidence-card">
+      <div class="card-head strong">Strongest Case</div>
+      <h4>The Flood: Gilgamesh &amp; Atrahasis</h4>
+      <p>The <strong>Atrahasis Epic</strong> (Old Babylonian, early 2nd millennium BCE) and <strong>Tablet XI of the Epic of Gilgamesh</strong> share with Genesis the full arc: divine decision to destroy humanity, one favored man instructed to build a great boat with specified dimensions, animal loading, the deluge, vessel grounding on a mountain, successive birds sent out, post-flood sacrifice pleasing to the deity. Genesis 8:8–12 (dove sent three times) tracks Gilgamesh XI point for point. Utnapishtim is even called "Atrahasis" within Gilgamesh, and certain lines are near-identical. The parallels are, as scholars including Tikva Frymer-Kensky note, "well known, striking, and incontrovertible."</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head parallel">Strong Case</div>
+      <h4>Creation: Enuma Elish</h4>
+      <p>The Babylonian <em>Enuma Elish</em> shares with Genesis 1: primeval watery chaos, division of waters into upper and lower realms by a firmament, light before the luminaries, a broadly similar sequence culminating in humanity, and divine rest. Most tellingly, the Hebrew word for "the deep," <strong>tehom</strong> (Genesis 1:2), is cognate with <strong>Tiamat</strong>, the salt-water goddess whose corpse Marduk splits to fashion sky and earth. Genesis 1 functions as a monotheizing polemic that strips this cosmogony of its warring gods.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head strong">Strongest Case</div>
+      <h4>Moses's Birth: Sargon of Akkad</h4>
+      <p>The <strong>Sargon Birth Legend</strong> (Akkadian): Sargon's mother "set me in a wicker basket, with bitumen she made my opening water-tight," and cast him upon the river; he was drawn out and raised by Aqqi the water-drawer. Exodus 2: Moses placed by his mother in a bulrush basket "daubed with slime and pitch" on the Nile, drawn out by Pharaoh's daughter. The parallel is direct and specific — the identical improbable device of the sealed floating basket. Brian Lewis's <em>The Sargon Legend</em> (ASOR, 1978) is the standard critical treatment.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head parallel">Strong Case</div>
+      <h4>Psalm 104 &amp; the Hymn to Aten</h4>
+      <p>The <strong>Great Hymn to the Aten</strong>, composed under Pharaoh Akhenaten (c. 1353–1336 BCE), shares striking parallels with Psalm 104: nightfall bringing predators while people sleep, humanity rising to work at dawn, the manifold breadth of creation as evidence of a single creator. The correspondences concentrate in Psalm 104:20–30. James Henry Breasted drew attention to these parallels over a century ago; most scholars posit either direct literary dependence or transmission through a shared Levantine wisdom tradition.</p>
+    </div>
+    <div class="evidence-card">
+      <div class="card-head strong">Strongest Case</div>
+      <h4>Proverbs &amp; the Instruction of Amenemope</h4>
+      <p>The Egyptian <strong>Instruction of Amenemope</strong> (c. 1100 BCE), organized into thirty numbered chapters, is the direct source for Proverbs 22:17–23:11. Adolf Erman demonstrated this in 1924 by using Amenemope to emend a textual problem in Proverbs 22:20 — reading "thirty sayings" to match Amenemope's thirty chapters. The parallel couplets are numerous and specific: "Rob not the poor, for he is poor" / "Beware of robbing the poor"; wealth "maketh to itself wings, like an eagle" / riches "have made themselves wings like geese." J. A. Emerton's rebuttal (2001) to conservative challenges is definitive. Near-consensus: the direction of borrowing runs Egyptian → Hebrew.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VIII. POLYTHEISM -->
+<section class="content-section" id="polytheism">
+  <div class="section-label">
+    <span class="section-num">VIII</span>
+    <h2 class="section-title">Polytheistic Origins of Judaism</h2>
+  </div>
+  <p>Strict monotheism — the belief that only one god <em>exists</em> — is a late development in Israelite history, solidifying only during and after the Babylonian Exile (6th century BCE). Prior to this, Israelite religion was polytheistic and later henotheistic (worshipping one god while acknowledging others exist). The evidence comes from the biblical texts themselves and from archaeology.</p>
+
+  <h3>Asherah: Yahweh's Consort</h3>
+  <p>Inscriptions from <strong>Kuntillet Ajrud</strong> (a desert waystation in the northern Sinai, excavated by Ze'ev Meshel, dated to the 8th century BCE) invoke blessing "by Yahweh of Samaria and his Asherah" and "by Yahweh of Teman and his Asherah." The <strong>Khirbet el-Qom</strong> tomb inscription (c. 725 BCE) similarly blesses a man "by Yahweh… and by his Asherah." Asherah was the consort of the high god El in the Ugaritic pantheon, and her worship alongside Yahweh — attested in household figurines across Israelite sites — appears to have been widespread popular practice for centuries. William Dever (<em>Did God Have a Wife?</em>, 2005) argues that "folk religion" venerating Asherah was deliberately suppressed and written out by the elite "book religion" of the biblical authors.</p>
+
+  <h3>The Divine Council</h3>
+  <p>Deuteronomy 32:8 (preserved in the Dead Sea Scrolls and the Septuagint) states that the Most High apportioned the nations "according to the number of the sons of God" — a divine council of seventy, echoing the seventy sons of El and Athirat at Ugarit — with Yahweh receiving Israel as his allotted portion (32:9). The Masoretic Text altered "sons of God" to "sons of Israel," a change that the textual critic Emanuel Tov calls an "anti-polytheistic alteration." <strong>Psalm 82:1</strong> depicts God presiding over a "divine council" and judging among the other <em>elohim</em> (gods). Mark S. Smith and John Day read these as fossils of an older theology in which Yahweh was one of El's divine sons.</p>
+
+  <h3>Canaanite Roots and Late Monotheism</h3>
+  <p>Mark S. Smith (<em>The Early History of God</em>, 1990/2002; <em>The Origins of Biblical Monotheism</em>, 2001) argues that Israelite religion was largely Canaanite in origin — El, Baal, and Asherah were not foreign intrusions but part of Israel's own heritage. Yahweh likely originated as a warrior-god of the Edom/Midian/Teman region, absorbed into the highland pantheon headed by El, while assimilating storm-god traits from Baal. Full exclusive monotheism, on Smith's reading, did not appear until roughly the 6th century BCE. What the Deuteronomistic and Priestly writers condemned as foreign "idolatry" was in fact Israel's own ancestral Canaanite religion. As Smith puts it: "the history of monotheism is the story of ancient Israel breaking with its own Canaanite origins."</p>
+</section>
+
+<!-- IX. CANON -->
+<section class="content-section" id="canon">
+  <div class="section-label">
+    <span class="section-num">IX</span>
+    <h2 class="section-title">Formation of the Biblical Canon</h2>
+  </div>
+  <p>The Bible is not a book handed down from heaven but a curated anthology. The process of selection was driven by theological battles, political crises, and human contests over authority. No single act of divine or conciliar determination fixed its contents.</p>
+
+  <h3>The Hebrew Bible</h3>
+  <p>The Torah was authoritative by the time of Ezra (5th century BCE). The Prophets were largely closed by the 2nd century BCE. The Writings remained fluid longer. The notion of a Council of Jamnia (c. 90 CE) formally closing the Hebrew canon — proposed by Heinrich Graetz in 1871 — has been discredited by scholars including Jack P. Lewis and Sid Z. Leiman: the rabbinic discussions at Yavneh concerned only the disputed status of a few books (Ecclesiastes, Song of Songs), not a wholesale determination of the canon. The Hebrew canon emerged gradually, over centuries, by broad consensus.</p>
+
+  <h3>Marcion: The Catalyst</h3>
+  <p>Around 144 CE, Marcion of Sinope proposed the first known Christian canon: an edited Gospel of Luke plus ten letters of Paul, premised on his doctrine that the God of the Old Testament was an evil demiurge distinct from the higher God of love. Marcion was excommunicated at Rome, but his movement spread widely. Alarmed proto-orthodox leaders — Tertullian wrote five books <em>Against Marcion</em> — responded by beginning to define authoritative scripture. Marcion functioned as a catalyst who forced the church to articulate a canon.</p>
+
+  <h3>Nicaea Did Not Decide the Canon</h3>
+  <p>The Council of Nicaea (325 CE), convened by Constantine, addressed the Arian controversy over the divinity of Christ. It had nothing to do with selecting the books of the New Testament. The 27-book New Testament is first attested in its final form in Athanasius's 39th Festal Letter of 367 CE and was ratified at the regional Synods of Hippo (393) and Carthage (397).</p>
+
+  <h3>The Deuterocanonical Dispute</h3>
+  <p>Books including Tobit, Judith, Wisdom of Solomon, Sirach, Baruch, and 1–2 Maccabees were included in the Greek Septuagint and used freely by much of the early church. Jerome distinguished them from the shorter Hebrew canon when translating the Vulgate. At the Reformation, Luther removed them from the Old Testament in part because 2 Maccabees 12 supports prayer for the dead and purgatory. The Catholic Church affirmed them dogmatically at the Council of Trent (1546) — in direct response to Protestant challenges. The dispute reflects theological and polemical motivations as much as disinterested historical judgment.</p>
+</section>
+
+<!-- X. PROPHECY -->
+<section class="content-section" id="prophecy">
+  <div class="section-label">
+    <span class="section-num">X</span>
+    <h2 class="section-title">Failed Prophecies</h2>
+  </div>
+  <p>Several Old Testament prophecies demonstrably did not come true as written. In the most striking case, the prophet himself acknowledged the failure.</p>
+
+  <div class="prophecy-block">
+    <div class="prop-ref">Ezekiel 26 / 29:17–20</div>
+    <div class="prop-head">Ezekiel's Prophecy Against Tyre</div>
+    <p>Ezekiel 26 predicts that Nebuchadnezzar, specifically, will destroy Tyre: breaking down her towers, scraping her dust away, making her "a bare rock… never to be rebuilt." The prophecy is detailed and named.</p>
+    <p>Nebuchadnezzar besieged Tyre for thirteen years (c. 586–573 BCE) and failed to take the island. In Ezekiel 29:17–20 — dated to 571 BCE, the book's final oracle — the prophet acknowledges: "Nebuchadnezzar king of Babylon made his army labor hard against Tyre… yet neither he nor his army got anything from Tyre." As compensation, Yahweh promises to give Egypt instead. Scholars at the Protestant Theological University acknowledge the plain reading: the later oracle "is aware of the earlier one and assumes it did not come to pass."</p>
+    <p>The Egypt oracle (29–30) also failed: Nebuchadnezzar never conquered Egypt, which was never depopulated or desolated for forty years.</p>
+    <div class="verdict">Verdict: Acknowledged failure. The prophet issued a make-good on an unfulfilled prediction.</div>
+  </div>
+
+  <div class="prophecy-block">
+    <div class="prop-ref">Daniel 11:36–45</div>
+    <div class="prop-head">Daniel's End-Times Timeline</div>
+    <p>The "time, times, and half a time" (three and a half years) of Daniel 7:25 and 12:7, the 1,290 and 1,335 days (12:11–12), and the "abomination that makes desolate" map with precision onto the persecution of Jews by Antiochus IV Epiphanes (167–164 BCE). Critical scholarship dates Daniel's final form to c. 165 BCE because Daniel 11 recounts the wars of the Hellenistic kingdoms in accurate detail up to Antiochus — and then the accurate "prophecy" stops exactly where the writer's own knowledge stopped.</p>
+    <p>Daniel 11:40–45 predicts Antiochus's final campaigns and his death "between the sea and the glorious holy mountain" — in the land of Israel. Antiochus died in Persia in 164 BCE. The predicted end of the age tied to his fall did not occur. The dispensationalist apologetic — that Daniel silently leaps two thousand years forward from Antiochus to a future Antichrist — has no basis in the Hebrew text.</p>
+    <div class="verdict">Verdict: Accurate as history, failed as prophecy. The text is vaticinium ex eventu (prophecy after the fact) that ran out of knowledge.</div>
+  </div>
+
+  <div class="prophecy-block">
+    <div class="prop-ref">2 Samuel 7:16 / Psalm 89 / Jeremiah 33:17</div>
+    <div class="prop-head">The Eternal Davidic Throne</div>
+    <p>Yahweh promises David: "Your house and your kingdom shall be made sure forever… your throne shall be established forever." Jeremiah 33:17 reiterates: "David shall never lack a man to sit on the throne of the house of Israel." The Davidic monarchy ended permanently in 586 BCE when Nebuchadnezzar destroyed Jerusalem and no descendant of David has held a throne since.</p>
+    <p>The biblical authors felt the failure acutely. Psalm 89, after fifty verses celebrating the eternal covenant, turns to bitter complaint: "But now you have cast off and rejected… you have renounced the covenant with your servant." Two biblical texts respond to the same failure in incompatible ways — itself evidence that the "eternal" promise had visibly failed and required theological salvage.</p>
+    <div class="verdict">Verdict: Monarchy ended permanently in 586 BCE. The "forever" promise was unfulfilled on any literal reading.</div>
+  </div>
+</section>
+
+<!-- XI. TEXTUAL CORRUPTION -->
+<section class="content-section" id="transmission">
+  <div class="section-label">
+    <span class="section-num">XI</span>
+    <h2 class="section-title">Textual Transmission &amp; Corruption</h2>
+  </div>
+  <p>We possess no original of any New Testament book. What exists are copies of copies, with the earliest fragments from the second century and complete codices from the fourth — a gap of a century or more between composition and the earliest full witnesses. Bart Ehrman's <em>Misquoting Jesus</em> (2005) popularized the figure of roughly 400,000 textual variants across approximately 5,800 Greek manuscripts. Most are trivial (spelling differences, word order in an inflected language). But three additions are doctrinally significant and demonstrably not original.</p>
+
+  <h3>The Pericope Adulterae (John 7:53–8:11)</h3>
+  <p>The story of the woman caught in adultery — "let him who is without sin among you be the first to throw a stone" — is absent from the earliest and best manuscripts: P66, P75, Codex Vaticanus, and Codex Sinaiticus. Vaticanus marks the spot with an <em>umlaut</em>, noting a textual question. Where later manuscripts include it, scribes frequently flag it with marks signaling doubtful authenticity, and the passage <em>floats</em> — appearing after John 7:36, after John 21:25, and in one manuscript family, after Luke 21:38. Its vocabulary and style are un-Johannine. The scholarly consensus — including conservative textual critics — is that it was not written by the author of John. Modern translations (ESV, NIV, NRSV) bracket it with an explicit note.</p>
+
+  <h3>The Longer Ending of Mark (16:9–20)</h3>
+  <p>Mark's Gospel originally ended at 16:8 — the women flee the empty tomb "for they were afraid" — with no resurrection appearances of Jesus. Verses 9–20, which supply the appearances, the Great Commission, and the promises that believers will handle serpents and drink deadly poison unharmed, are absent from Sinaiticus and Vaticanus and from the Old Syriac. Both Eusebius and Jerome state explicitly that the ending was missing from almost all Greek copies known to them. Multiple competing endings exist in the manuscript tradition — the "shorter ending" and the expanded "Freer Logion" in Codex Washingtonianus — which is strong evidence that early scribes were improvising conclusions to a Gospel that unsettlingly lacked resurrection appearances.</p>
+
+  <h3>The Johannine Comma (1 John 5:7–8)</h3>
+  <p>The single most explicit statement of the Trinity in the entire Bible — "For there are three that bear record in heaven, the Father, the Word, and the Holy Ghost: and these three are one" (KJV) — appears in no Greek manuscript before roughly the 14th century. It is absent from every early Greek witness and from the Greek Fathers, who would have deployed it relentlessly in the fierce fourth-century Trinitarian controversies had it existed. It originated as a Latin gloss — probably a marginal interpretive comment — that gradually migrated into the Vulgate text. Erasmus omitted it from his first two printed Greek New Testaments (1516, 1519) for lack of Greek manuscript support. He included it in his third edition (1522) only after being shown a single suspect Greek manuscript (Codex Montfortianus) now recognized as a recent translation from the Latin. Bruce Metzger's <em>The Text of the New Testament</em> documents the episode fully.</p>
+
+  <div class="caveat-box">
+    <div class="caveat-label">What This Means for Inerrancy</div>
+    <p>Inerrantists retreat to the claim that only the "original autographs" were inspired — documents no one has ever seen. A doctrine of inspiration that applies only to lost originals, and that failed to preserve the church from reading demonstrable forgeries as the word of God for over a millennium, is a doctrine emptied of practical content.</p>
+  </div>
+</section>
+
+<!-- XII. HISTORICAL JESUS -->
+<section class="content-section" id="jesus">
+  <div class="section-label">
+    <span class="section-num">XII</span>
+    <h2 class="section-title">The Historical Jesus Problem</h2>
+  </div>
+  <p>Not a single contemporary source mentions Jesus. No Roman administrative record, no Judean chronicle, nothing written by anyone who saw or heard him survives. The earliest references are the authentic letters of Paul, written roughly two decades after the traditional crucifixion date by a man who never met the living Jesus.</p>
+
+  <h3>Josephus: What He Actually Wrote</h3>
+  <p>The <em>Testimonium Flavianum</em> (<em>Antiquities</em> 18.63–64) as it survives calls Jesus "the Christ," reports his post-resurrection appearances, and says the prophets foretold these things. No practicing Jew wrote those words. The passage is a Christian confession of faith. The scholarly options: total interpolation (Carrier, Olson), or partial interpolation — Josephus wrote something that a later Christian scribe embellished. The phrase "he was the Christ" and the resurrection report are universally recognized as impossible from Josephus's pen. All surviving Greek manuscripts of <em>Antiquities</em> descend from a single textual tradition, so a uniform early interpolation would now be invisible. The <em>Testimonium</em> cannot bear the evidentiary weight placed on it.</p>
+  <p>The second Josephan reference (<em>Antiquities</em> 20.200) mentions the execution of "the brother of Jesus, who was called Christ, whose name was James." Most scholars regard this as authentic. Richard Carrier has argued in a peer-reviewed article that the phrase "who was called Christ" is an accidental interpolation from a marginal note, and that the James in question was the brother of the high priest Jesus ben Damneus — a genuinely contested scholarly dispute.</p>
+
+  <h3>Tacitus, Pliny, Suetonius</h3>
+  <p>Tacitus (<em>Annals</em> 15.44, c. 116 CE) notes that "Christus… had undergone the death penalty in the reign of Tiberius, by sentence of the procurator Pontius Pilatus." Most scholars accept this as authentic to Tacitus — but it dates to more than 80 years after the crucifixion, and Tacitus almost certainly reports what Christians of his own day believed, not a consulted archive. He even calls Pilate "procurator" — the anachronistic title of Tacitus's own era; Pilate was actually a prefect. Pliny the Younger (c. 112 CE) reports only that Christians sang hymns to "Christ as to a god" — extracted from tortured deaconesses. Suetonius's reference to "Chrestus" in Rome around 49 CE is disputed; the grammar implies someone present in Rome at the time.</p>
+
+  <h3>The Mythicist Position</h3>
+  <p>Richard Carrier (<em>On the Historicity of Jesus</em>, Sheffield Phoenix Press, 2014) and Robert Price (<em>The Christ-Myth Theory and Its Problems</em>, 2011) argue that Jesus began as a mythic celestial figure who was later historicized. Carrier applies Bayesian probability analysis; Price notes that the Gospel biography is a conscious reworking of Septuagint and Greek literary models. Mainstream scholarship firmly rejects these conclusions — Bart Ehrman's <em>Did Jesus Exist?</em> (2012) is the secular rebuttal. But the mythicists are more credentialed than believers typically acknowledge, and Ehrman treats their arguments as worth answering at book length.</p>
+
+  <h3>What We Can Actually Say</h3>
+  <p>John P. Meier's multi-volume <em>A Marginal Jew</em> (Doubleday/Yale, 1991–2016) applies five criteria of authenticity (embarrassment, discontinuity, multiple attestation, coherence, rejection/execution) to the tradition. His results are strikingly minimal: only four Synoptic parables survive his own criteria with fair certitude. The floor of responsible history is: a first-century Galilean Jew, an apocalyptic prophet baptized by John, who gathered followers, taught in parables, ran afoul of the authorities, and was crucified under Pontius Pilate around 30 CE. That is a great deal less than the creeds assert.</p>
+</section>
+
+<!-- XIII. VIRGIN BIRTH -->
+<section class="content-section" id="virgin">
+  <div class="section-label">
+    <span class="section-num">XIII</span>
+    <h2 class="section-title">The Virgin Birth Problem</h2>
+  </div>
+
+  <h3>almah vs. betulah vs. parthenos</h3>
+  <p>Matthew 1:22–23 claims that Jesus's virgin birth fulfills Isaiah 7:14. The Hebrew of Isaiah 7:14 does not say <em>virgin</em>. It uses <em>almah</em>, which denotes a young woman of childbearing age. The standard lexicon (HALOT) glosses it "marriageable girl / young woman." Hebrew has a specific, unambiguous word for virgin — <em>betulah</em>, used 51 times in the Hebrew Bible precisely where virginity is the legal point (Genesis 24:16; Leviticus 21:14; Deuteronomy 22). Isaiah did not use it. The "virgin" reading enters through the Septuagint, whose translators rendered <em>almah</em> with the Greek <em>parthenos</em>, which carries the sense of virgin. Matthew, quoting the Septuagint, built his narrative around a Greek translation of a Hebrew word that did not mean what the Greek made it mean.</p>
+
+  <h3>The Original Context</h3>
+  <p>Isaiah 7:14 is a sign to King Ahaz during the Syro-Ephraimite crisis (c. 734 BCE): before the Immanuel child is old enough to tell right from wrong, the two enemy kings threatening Judah will be destroyed (7:16). Isaiah 8 then describes the prophet fathering a son by "the prophetess" as a sign operating on the identical military timetable. A prediction whose entire payoff is "these two kings will be gone within a couple of years" cannot simultaneously be a prediction about a birth seven hundred years away — such a birth would be no <em>sign</em> to a terrified 8th-century king.</p>
+
+  <h3>The Self-Undermining Genealogy</h3>
+  <p>Matthew opens with a genealogy establishing Jesus's Davidic descent <em>through Joseph</em> — "Jacob the father of Joseph the husband of Mary, of whom Jesus was born." The Davidic messiah required Davidic descent. But Matthew then insists that Joseph was <em>not</em> the biological father. The two claims cut against each other: without Joseph's paternity, the genealogy transfers nothing. Luke's genealogy (3:23–38) diverges from Matthew's at nearly every name between David and Joseph — confirming these are theological constructions, not biological records.</p>
+
+  <h3>The Silence</h3>
+  <p>The virgin birth is absent from the entire rest of the New Testament. Paul says only that Jesus was "born of a woman" (Galatians 4:4) and "descended from David according to the flesh" (Romans 1:3) — the latter implying ordinary Davidic paternity. Mark has no birth narrative. John has no birth narrative. No epistle, no sermon in Acts, no other New Testament text so much as mentions it. A doctrine of this theological magnitude, unknown to Paul, to the earliest Gospel, and to the entire remaining New Testament, bears every mark of a later legendary development.</p>
+</section>
+
+<!-- XIV. DIVINE VIOLENCE -->
+<section class="content-section" id="violence">
+  <div class="section-label">
+    <span class="section-num">XIV</span>
+    <h2 class="section-title">The Problem of Divine Violence</h2>
+  </div>
+  <p>This is not primarily a moral complaint. It is a textual and historical argument: the violence commanded and celebrated in these texts is best explained as the product of Iron Age human authors sharing the assumptions of their world, and the apologetic defenses deployed to justify it end up conceding exactly that.</p>
+
+  <h3>The herem and the Conquest</h3>
+  <p>Deuteronomy 7 commands Israel to "utterly destroy" (<em>haram</em>) the seven Canaanite nations, to "show them no mercy." Deuteronomy 20:16–17 specifies: "in the cities of these peoples you shall save alive nothing that breathes." Joshua narrates the execution: Jericho, Ai, and city after city put to the sword, "both men and women, young and old." The <em>herem</em> is the ritual annihilation of an entire population as a devotional offering to the deity.</p>
+
+  <h3>Saul and the Amalekites (1 Samuel 15)</h3>
+  <p>Samuel relays Yahweh's command to Saul: "kill both man and woman, child and infant, ox and sheep, camel and donkey." Saul destroys the Amalekites but spares their king Agag and the best livestock — and for this incomplete genocide Yahweh rejects Saul as king. Samuel then personally "hewed Agag in pieces before the Lord." The moral universe of the text is one in which the sin is <em>insufficient</em> slaughter.</p>
+
+  <h3>How Apologists Respond — and What It Reveals</h3>
+  <p>Paul Copan's <em>Is God a Moral Monster?</em> (Baker, 2010) is the most sophisticated evangelical defense. It fails on its own terms in instructive ways.</p>
+  <p>The <strong>"Canaanite moral corruption" argument</strong> — that the Canaanites were so wicked that their destruction amounted to corporate capital punishment — justifies killing infants and children for the sins of their culture. Infants who committed no such crimes. Copan's own framing of this as "capital punishment" concedes that the victims included those incapable of any capital offense.</p>
+  <p>Most revealingly, the <strong>"it didn't actually happen" argument</strong>: Copan leans on the mainstream archaeological consensus that the conquest as described did not occur, and claims that "utterly destroy" language is Ancient Near Eastern war-rhetoric hyperbole — the same kind found in Egyptian and Moabite inscriptions. The Mesha Stele (the Moabite Stone, c. 840 BCE) boasts in nearly identical terms that Chemosh commanded the extermination of the Israelite inhabitants of Nebo. The moment the apologist appeals to shared cultural convention to soften the text, he has conceded that the biblical text is a human cultural artifact participating in standard Ancient Near Eastern royal war-propaganda. That is the entire argument in one sentence.</p>
+</section>
+
+<!-- XV. SLAVERY -->
+<section class="content-section" id="slavery">
+  <div class="section-label">
+    <span class="section-num">XV</span>
+    <h2 class="section-title">Slavery &amp; the Bible</h2>
+  </div>
+  <p>The argument here is textual, not primarily moral: if the Bible contains timeless moral revelation from an omniscient God, its endorsement of chattel slavery without condemnation requires explanation. A God who communicated intricate rules about mixed fabrics and sacrificial blood but could not communicate "do not own human beings as property" has not been coherently described.</p>
+
+  <h3>The Texts</h3>
+  <p><strong>Exodus 21:20–21:</strong> "When a man strikes his slave, male or female, with a rod and the slave dies under his hand, he shall be avenged. But if the slave survives a day or two, he is not to be avenged, for the slave is his money." A slave beaten to death slowly represents a property loss, not a homicide. The text explicitly treats the slave as the owner's financial asset.</p>
+  <p><strong>Leviticus 25:44–46:</strong> "You may buy male and female slaves from among the nations… You may bequeath them to your sons after you to inherit as a possession forever." Foreign slaves are defined as purchasable, inheritable, permanent property — sharply distinguished from the temporary regulated servitude permitted for fellow Israelites. This is chattel slavery, licensed in detail.</p>
+  <p>The New Testament does not abolish it. Ephesians 6:5, Colossians 3:22, and 1 Peter 2:18 instruct slaves to obey their masters. 1 Timothy 6:1–2 tells slaves to regard masters "worthy of all honor." In Philemon, Paul returns the runaway slave Onesimus to his master, appealing for kindness but neither demanding manumission nor condemning the institution. These texts were cited accurately by American slaveholders as biblical endorsement.</p>
+
+  <h3>The Abolition Argument</h3>
+  <p>Hector Avalos (<em>Slavery, Abolitionism, and the Ethics of Biblical Scholarship</em>, Sheffield Phoenix Press, 2011) documents that pro-slavery advocates cited scripture at least as effectively as abolitionists — more straightforwardly, because the explicit texts were on their side. Avalos argues that one factor in abolition's eventual triumph was the abandonment of the Bible as the supreme ethical authority — the rise of Enlightenment human-rights arguments that owed nothing to Leviticus.</p>
+
+  <h3>Why "Cultural Context" Concedes the Game</h3>
+  <p>The dominant apologetic — that biblical slavery was milder than transatlantic chattel slavery, and that God was "meeting people where they were" — implicitly concedes everything. If God accommodated the moral limitations of an ancient culture rather than revealing the transcultural truth that owning human beings is wrong, then the moral content of the text is indexed to human cultural development, not to divine omniscience. The apologists supply the premises of the argument themselves.</p>
+</section>
+
+<!-- READING LIST -->
+<section class="content-section" id="reading">
+  <div class="section-label">
+    <span class="section-num">—</span>
+    <h2 class="section-title">Scholarly Reading List</h2>
+  </div>
+  <p>The load-bearing sources for this reference. Start with Friedman and Finkelstein/Silberman. Read the primary sources — Gilgamesh, Amenemope, the Hymn to Aten — in parallel with the biblical text.</p>
+
+  <div class="reading-list">
+    <div class="book-card">
+      <div class="book-title">Who Wrote the Bible?</div>
+      <div class="book-author">Richard Elliott Friedman (1987)</div>
+      <p>The clearest accessible introduction to the Documentary Hypothesis. The essential starting point.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">The Bible Unearthed</div>
+      <div class="book-author">Israel Finkelstein &amp; Neil Asher Silberman (2001)</div>
+      <p>The archaeology of ancient Israel and what it does and doesn't confirm about the biblical narrative.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">The Early History of God</div>
+      <div class="book-author">Mark S. Smith (1990/2002)</div>
+      <p>Yahweh and the other deities in ancient Israel. The Canaanite roots of Israelite religion.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">Did God Have a Wife?</div>
+      <div class="book-author">William G. Dever (2005)</div>
+      <p>Archaeology and folk religion in ancient Israel. Asherah, the household figurines, and the suppressed goddess.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">Misquoting Jesus</div>
+      <div class="book-author">Bart D. Ehrman (2005)</div>
+      <p>The manuscript tradition of the New Testament and how scribes changed it — deliberately and accidentally.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">Forged</div>
+      <div class="book-author">Bart D. Ehrman (2011)</div>
+      <p>Which New Testament books were written in the name of apostles who didn't write them, and why it matters.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">Did Jesus Exist?</div>
+      <div class="book-author">Bart D. Ehrman (2012)</div>
+      <p>The secular case for a historical Jesus — and the honest assessment of how weak the non-Christian evidence actually is.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">A Marginal Jew (5 vols.)</div>
+      <div class="book-author">John P. Meier (1991–2016)</div>
+      <p>The most rigorous application of historical-critical method to the traditions about Jesus. Minimal but honest conclusions.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">The Text of the New Testament</div>
+      <div class="book-author">Bruce M. Metzger &amp; Bart D. Ehrman</div>
+      <p>The standard scholarly treatment of the manuscript tradition, textual criticism methodology, and major variants.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">Is God a Moral Monster?</div>
+      <div class="book-author">Paul Copan (2010)</div>
+      <p>Read this as the best available apologetic defense of the conquest narratives and slavery passages — and note where it concedes human authorship.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">Slavery, Abolitionism, and the Ethics of Biblical Scholarship</div>
+      <div class="book-author">Hector Avalos (2011)</div>
+      <p>The Bible's relationship to slavery and the honest history of which arguments actually ended it.</p>
+    </div>
+    <div class="book-card">
+      <div class="book-title">On the Historicity of Jesus</div>
+      <div class="book-author">Richard Carrier (2014)</div>
+      <p>The peer-reviewed case for mythicism. Serious minority position — engage it to understand what it does and does not establish.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Rivers of Myth · github.com/jontification/mythmaking · Evidence-graded comparative religion reference · No tracking, no ads
+</footer>
+
+</body>
+</html>

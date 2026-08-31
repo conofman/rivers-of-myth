@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Consistency Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f; --basalt-2: #1e1b14; --parchment: #ede3cc; --parchment-dim: #cfc4a8;
+    --ink: #2a2416; --lapis: #3d6ea5; --brick: #a8523a; --oxblood: #8a3636; --verdigris: #5f8577;
+    --gold: #c19a5b; --line-faint: rgba(237,227,204,0.14);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--basalt); color:var(--parchment); font-family:'Source Serif 4', serif; }
+  ::selection{ background:var(--gold); color:var(--basalt); }
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .sitenav{ position:sticky; top:0; z-index:50; background:rgba(22,20,15,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line-faint); }
+  .sitenav-inner{ max-width:1500px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px; }
+  .sitenav-mark{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment); white-space:nowrap; }
+  .sitenav-links{ display:flex; gap:14px; margin-left:auto; flex-wrap:wrap; }
+  .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+
+  header{ max-width:820px; margin:0 auto; padding:64px 28px 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1{ font-size:clamp(30px, 5vw, 48px); line-height:1.08; margin:0 0 20px; }
+  header p{ font-size:16.5px; line-height:1.65; color:var(--parchment-dim); max-width:680px; margin:0 0 14px; }
+  .privacy-note{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--gold); border:1px dashed rgba(193,154,91,0.4); background:rgba(193,154,91,0.06); padding:10px 14px; border-radius:3px; max-width:640px; }
+
+  main{ max-width:820px; margin:0 auto; padding:20px 28px 40px; }
+
+  .q-card{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:4px; margin-bottom:20px; overflow:hidden; }
+  .q-head{ padding:22px 24px 18px; }
+  .q-num{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--gold); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px; }
+  .q-principle{ font-size:12.5px; color:var(--parchment-dim); font-family:'IBM Plex Mono', monospace; margin-bottom:14px; line-height:1.5; }
+  .q-scenario{ font-size:15.5px; line-height:1.62; color:var(--parchment); margin:0; }
+
+  .reveal-btn{
+    display:flex; align-items:center; gap:8px; width:100%; text-align:left;
+    background:rgba(193,154,91,0.08); border:none; border-top:1px solid var(--line-faint);
+    color:var(--gold); font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.05em;
+    text-transform:uppercase; padding:14px 24px; cursor:pointer; transition:background 0.15s;
+  }
+  .reveal-btn:hover{ background:rgba(193,154,91,0.15); }
+  .reveal-btn .arrow{ transition:transform 0.2s; }
+  .reveal-btn.open .arrow{ transform:rotate(90deg); }
+
+  .q-mirror{
+    max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+    background:rgba(0,0,0,0.15); border-top:1px solid var(--line-faint);
+  }
+  .q-mirror-inner{ padding:20px 24px 22px; }
+  .q-mirror-label{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--verdigris); margin-bottom:8px; }
+  .q-mirror p{ font-size:14.3px; line-height:1.6; color:var(--parchment-dim); margin:0 0 12px; }
+  .q-prompt{ font-style:italic; color:var(--parchment); border-left:2px solid var(--gold); padding-left:12px; }
+
+  footer{ max-width:820px; margin:0 auto; padding:20px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
+  footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <a href="canon.html">Book Got Made</a>
+      <a href="geography.html">Third Base</a>
+      <a href="hell.html">Hell's Tree</a>
+      <a href="pantheon.html">El &amp; Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html" class="active">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">A Different Kind of Test</div>
+  <h1>The Consistency Test</h1>
+  <p>Belief is a porthole into character, not just religious belief, but the deeper habit underneath it: do you apply a principle because it's true, or because of who it currently benefits? Four constitutional scenarios below. Read the first version, form your honest reaction, then reveal the mirror, the same principle, same clause, opposite political direction.</p>
+  <p>This isn't a partisan scorecard and there's no score. It's a private check on whether your answer tracks the principle or tracks the team.</p>
+  <div class="privacy-note">Nothing you do on this page is recorded, sent anywhere, or shared. It's just you and the four cards.</div>
+</header>
+
+<main>
+
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num">01</div>
+      <div class="q-principle">Due Process — Fifth &amp; Fourteenth Amendments: no person shall be deprived of liberty without due process of law, a protection that applies to any person on U.S. soil, not only citizens.</div>
+      <p class="q-scenario">Federal agents detain someone and begin removal proceedings based on their appearance and neighborhood, before any judge or hearing reviews the case.</p>
+    </div>
+    <button class="reveal-btn" onclick="toggleCard(this)">
+      <span class="arrow">▶</span> Reveal the mirror
+    </button>
+    <div class="q-mirror">
+      <div class="q-mirror-inner">
+        <div class="q-mirror-label">Same clause, opposite direction</div>
+        <p>Federal agents detain a U.S. citizen and begin removal proceedings based on public statements they've made criticizing the government, before any judge or hearing reviews the case.</p>
+        <p class="q-prompt">Same due-process clause, same "before a judge weighs in" structure. Did your answer change based on who's being detained, or on what due process actually requires?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num">02</div>
+      <div class="q-principle">First Amendment — freedom of speech, press, and peaceable assembly, protections that exist specifically to shield speech the government in power dislikes.</div>
+      <p class="q-scenario">A federal agency revokes a news outlet's press credentials after it published a string of stories critical of the current administration.</p>
+    </div>
+    <button class="reveal-btn" onclick="toggleCard(this)">
+      <span class="arrow">▶</span> Reveal the mirror
+    </button>
+    <div class="q-mirror">
+      <div class="q-mirror-inner">
+        <div class="q-mirror-label">Same clause, opposite direction</div>
+        <p>A federal agency revokes a news outlet's press credentials after it published a string of stories favorable to the political side you disagree with, under a past administration you opposed.</p>
+        <p class="q-prompt">The First Amendment's entire purpose is protecting speech power doesn't like. If credential-pulling only bothers you when it happens to outlets you already agree with, that's not a free-press principle, it's a team preference.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num">03</div>
+      <div class="q-principle">Fourth Amendment — protection against unreasonable search and seizure without a warrant or individualized probable cause.</div>
+      <p class="q-scenario">Law enforcement conducts warrantless searches of phones and homes concentrated in neighborhoods associated with a religious or ethnic minority, citing general security concerns.</p>
+    </div>
+    <button class="reveal-btn" onclick="toggleCard(this)">
+      <span class="arrow">▶</span> Reveal the mirror
+    </button>
+    <div class="q-mirror">
+      <div class="q-mirror-inner">
+        <div class="q-mirror-label">Same clause, opposite direction</div>
+        <p>Law enforcement conducts warrantless searches of phones and homes concentrated in neighborhoods associated with gun owners or a political movement you personally belong to, citing general security concerns.</p>
+        <p class="q-prompt">Same warrant requirement, same "general concern" justification. Notice whether your discomfort tracks the constitutional question or the specific group being searched.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-head">
+      <div class="q-num">04</div>
+      <div class="q-principle">Fourteenth &amp; Fifteenth Amendments — equal protection under the law, and the right to vote regardless of race or other protected status.</div>
+      <p class="q-scenario">A state controlled by the political party you support passes a law that makes voting meaningfully harder in districts that reliably vote against that party.</p>
+    </div>
+    <button class="reveal-btn" onclick="toggleCard(this)">
+      <span class="arrow">▶</span> Reveal the mirror
+    </button>
+    <div class="q-mirror">
+      <div class="q-mirror-inner">
+        <div class="q-mirror-label">Same clause, opposite direction</div>
+        <p>A state controlled by the opposite party passes a law that makes voting meaningfully harder in districts that reliably vote against that party.</p>
+        <p class="q-prompt">If the first law is "election security" and the second is voter suppression, the standard being applied isn't the Fourteenth or Fifteenth Amendment, it's who benefits.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>The connection to the rest of this site isn't incidental. A tradition that trains people to distrust their own reasoning and defer to an unquestionable authority is training a muscle, and that muscle doesn't know the difference between a pulpit and a podium. Whether the answers above stayed consistent or flipped with the team is worth sitting with honestly, no one's watching, and no one's grading it.</p>
+</footer>
+
+<script>
+function toggleCard(btn){
+  var mirror = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  if(isOpen){
+    mirror.style.maxHeight = null;
+    btn.classList.remove('open');
+    btn.querySelector('.arrow').textContent = '▶';
+  } else {
+    mirror.style.maxHeight = mirror.scrollHeight + 'px';
+    btn.classList.add('open');
+    btn.querySelector('.arrow').textContent = '▼';
+  }
+}
+</script>
+
+</body>
+</html>

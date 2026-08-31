@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myth Match — Origins and Parallels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f;
+    --basalt-2: #1e1b14;
+    --parchment: #ede3cc;
+    --parchment-dim: #cfc4a8;
+    --ink: #2a2416;
+    --lapis: #3d6ea5;
+    --brick: #a8523a;
+    --oxblood: #8a3636;
+    --verdigris: #5f8577;
+    --gold: #c19a5b;
+    --line-faint: rgba(237,227,204,0.14);
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background:var(--basalt);
+    color:var(--parchment);
+    font-family:'Source Serif 4', serif;
+  }
+
+  ::selection{ background:var(--gold); color:var(--basalt); }
+
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  /* nav */
+  .sitenav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(22,20,15,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-faint);
+  }
+  .sitenav-inner{
+    max-width:1500px; margin:0 auto;
+    padding:14px 40px;
+    display:flex; align-items:center; gap:28px;
+  }
+  .sitenav-mark{
+    display:flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--parchment); white-space:nowrap;
+  }
+  .sitenav-links{ display:flex; gap:22px; margin-left:auto; }
+  .sitenav-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--parchment-dim); text-decoration:none;
+    padding-bottom:3px; border-bottom:2px solid transparent;
+    transition:color 0.15s, border-color 0.15s;
+  }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+
+  header{
+    max-width:920px;
+    margin:0 auto;
+    padding:64px 28px 20px;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; letter-spacing:0.18em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(32px, 5vw, 50px);
+    line-height:1.08;
+    margin:0 0 20px;
+  }
+  header p{
+    font-size:16.5px; line-height:1.65;
+    color:var(--parchment-dim);
+    max-width:680px; margin:0 0 14px;
+  }
+
+  .key{
+    max-width:920px; margin:8px auto 0;
+    padding:0 28px 28px;
+    display:flex; flex-wrap:wrap; gap:14px 28px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px;
+    color:var(--parchment-dim);
+    border-bottom:1px solid var(--line-faint);
+  }
+  .key-item{ display:flex; align-items:center; gap:8px; }
+  .key-pill{
+    display:inline-block; padding:2px 8px; border-radius:2px;
+    font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase;
+  }
+  .key-pill.strong{ background:rgba(61,110,165,0.22); color:#9fc1e6; border:1px solid rgba(61,110,165,0.5); }
+  .key-pill.parallel{ background:rgba(95,133,119,0.22); color:#a9c9bb; border:1px solid rgba(95,133,119,0.5); }
+  .key-pill.contested{ background:rgba(138,54,54,0.18); color:#d99b9b; border:1px dashed rgba(138,54,54,0.6); }
+
+  main{
+    max-width:920px;
+    margin:0 auto;
+    padding:36px 28px 40px;
+  }
+
+  .myth-item{
+    border:1px solid var(--line-faint);
+    border-radius:3px;
+    margin-bottom:12px;
+    background:var(--basalt-2);
+    overflow:hidden;
+  }
+
+  .myth-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .myth-item summary::-webkit-details-marker{ display:none; }
+
+  .myth-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--gold);
+    flex-shrink:0; width:22px;
+  }
+  .myth-title{
+    font-family:'Spectral', serif;
+    font-weight:600; font-size:18px;
+    color:var(--parchment);
+    flex:1;
+  }
+  .myth-route{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--parchment-dim);
+    text-transform:uppercase; letter-spacing:0.03em;
+    display:none;
+  }
+  .myth-chevron{
+    width:18px; height:18px; flex-shrink:0;
+    position:relative;
+  }
+  .myth-chevron::before, .myth-chevron::after{
+    content:""; position:absolute; background:var(--parchment-dim);
+    top:50%; left:50%; width:10px; height:1.6px;
+    transform-origin:center;
+  }
+  .myth-chevron::before{ transform:translate(-50%,-50%) rotate(90deg); transition:transform 0.2s; }
+  .myth-chevron::after{ transform:translate(-50%,-50%); }
+  details[open] .myth-chevron::before{ transform:translate(-50%,-50%) rotate(0deg); }
+
+  .myth-item summary:hover .myth-title{ color:var(--gold); }
+
+  .myth-body{
+    padding:0 20px 26px 58px;
+    border-top:1px solid var(--line-faint);
+    padding-top:20px;
+  }
+
+  .myth-origin h4, .myth-parallels h4{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 9px;
+  }
+  .myth-origin p{
+    font-size:14.5px; line-height:1.65; color:var(--parchment-dim);
+    margin:0 0 22px; max-width:680px;
+  }
+
+  .parallel-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:640px){ .parallel-grid{ grid-template-columns:1fr; } }
+
+  .parallel-card{
+    background:var(--parchment);
+    color:var(--ink);
+    border-radius:2px;
+    padding:14px 16px 15px;
+  }
+  .parallel-card.greek{ border-left:4px solid var(--brick); }
+  .parallel-card.biblical{ border-left:4px solid var(--oxblood); }
+  .parallel-card.egyptian{ border-left:4px solid var(--gold); }
+
+  .parallel-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; font-weight:600;
+    margin-bottom:7px;
+    display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  }
+  .evidence{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9.5px; letter-spacing:0.04em; text-transform:uppercase;
+    padding:2px 6px; border-radius:2px;
+  }
+  .evidence.strong{ background:rgba(61,110,165,0.16); color:var(--lapis); border:1px solid rgba(61,110,165,0.4); }
+  .evidence.parallel{ background:rgba(95,133,119,0.16); color:#3f5c50; border:1px solid rgba(95,133,119,0.4); }
+  .evidence.contested{ background:rgba(138,54,54,0.12); color:#8a3636; border:1px dashed rgba(138,54,54,0.5); }
+
+  .parallel-card p{
+    font-size:13.2px; line-height:1.52; margin:0; color:#4a4130;
+  }
+
+  footer{
+    max-width:920px; margin:0 auto;
+    padding:20px 28px 90px;
+    border-top:1px solid var(--line-faint);
+    padding-top:32px;
+  }
+  footer p{
+    font-size:14px; line-height:1.7; color:var(--parchment-dim);
+    max-width:700px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html" class="active">Myth Match</a>
+      <a href="canon.html">How the Book Got Made</a>
+      <a href="geography.html">Born on Third Base</a>
+      <a href="hell.html">Hell's Family Tree</a>
+      <a href="pantheon.html">El and Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Topic by Topic</div>
+  <h1>Myth Match</h1>
+  <p>Fourteen recurring story-patterns, each traced back to its earliest documented source and matched against what shows up later in Greek myth and the Hebrew Bible or New Testament. Click a topic to open it.</p>
+  <p>Not every match is equally solid. Some are near word-for-word structural copies. Others are loose family resemblances that get overclaimed online. The tags say which is which.</p>
+</header>
+
+<div class="key">
+  <div class="key-item"><span class="key-pill strong">Strong</span> direct textual or linguistic dependence</div>
+  <div class="key-item"><span class="key-pill parallel">Parallel</span> real structural echo, independent or convergent</div>
+  <div class="key-item"><span class="key-pill contested">Contested</span> disputed or a stretch beyond the sources</div>
+</div>
+
+<main>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">01</span><span class="myth-title">The Great Deluge</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Sumer &amp; Akkad, c. 2100–1200 BCE</h4>
+        <p>The Sumerian Eridu Genesis, the Old Babylonian Atrahasis epic, and the flood tablet folded into Gilgamesh all share one plot: the gods decide to wipe out a troublesome humanity, one man is secretly warned, he builds a boat, loads his family and animals, survives the flood, sends out birds to test for dry land, and offers sacrifice on landing. Later texts didn't invent this shape, they inherited it.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Hebrew Bible — Genesis 6–9 <span class="evidence strong">strong</span></div>
+            <p>Noah's flood follows the same sequence almost beat for beat: divine warning, an ark, paired animals, a raven and dove sent out, an altar on landing. Most scholars treat this as direct transmission, likely during or after the Babylonian exile.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Deucalion &amp; Pyrrha <span class="evidence parallel">parallel</span></div>
+            <p>Zeus floods a corrupted humanity; a warned couple survives by boat and repopulates the earth. Likely a separate descendant of the same regional flood tradition rather than a copy of either Mesopotamian or Hebrew versions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">02</span><span class="myth-title">Creation Out of Watery Chaos</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Babylon, Enuma Elish, c. 1750–1100 BCE</h4>
+        <p>Before anything else exists, there is only Tiamat (salt water) and Apsu (fresh water) mingled together. Marduk defeats Tiamat in combat, splits her body to form sky and sea, and organizes the cosmos, earning kingship over the gods for it.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Hebrew Bible — Genesis 1 <span class="evidence strong">strong</span></div>
+            <p>The Hebrew word for the primordial deep, tehom, is linguistically related to Tiamat. Formless waters get separated and ordered into a structured world, this time by a single god's spoken word rather than a battle.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Hesiod's Theogony <span class="evidence contested">contested</span></div>
+            <p>Chaos, a yawning void, gives rise to the first gods and eventually an ordered cosmos under Zeus. The chaos-to-order-under-a-king shape is common, but this is a looser, more general resemblance than the Genesis link.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">03</span><span class="myth-title">Storm-God vs. Chaos-Serpent</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Mesopotamia &amp; the Levant, c. 1800–1300 BCE</h4>
+        <p>Marduk battles the sea-monster Tiamat; at Ugarit, the storm-god Baal battles Yam (the sea) and the seven-headed serpent Lotan. A young storm-god defeating a chaos-serpent to establish or defend his rule becomes a stock plot across the region, reinforced by the Hittite storm-god's battle with the serpent Illuyanka.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Hebrew Bible — Leviathan &amp; Rahab <span class="evidence strong">strong</span></div>
+            <p>Psalm 74, Isaiah 27, and Job 41 all describe Yahweh crushing a sea-serpent, Leviathan or Rahab, imagery inherited fairly directly from the Canaanite Baal-Yam conflict.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Zeus vs. Typhon <span class="evidence strong">strong</span></div>
+            <p>Zeus battles the serpentine monster Typhon for control of the cosmos. Scholars trace a fairly direct line through the Hittite Illuyanka myth, making this one of the better-documented cross-cultural borrowings on this list.</p>
+          </div>
+        </div>
+        <div class="parallel-grid" style="margin-top:14px;">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Revelation 12, the Dragon <span class="evidence contested">contested</span></div>
+            <p>Michael's battle with the "great red dragon" reuses the same stock imagery, but this is a much later, typological reuse rather than a direct genetic link back to Mesopotamia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">04</span><span class="myth-title">Forbidden Fruit vs. Forbidden Immortality</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Akkad, Adapa and the South Wind, c. 1400 BCE</h4>
+        <p>Adapa, a wise man favored by the god Ea, is summoned before the sky-god Anu. Ea warns him not to eat or drink anything offered to him there, claiming it will kill him. In fact it was the bread and water of immortality. Adapa refuses it and loses eternal life through obedience, not defiance.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Genesis 2–3, Eden <span class="evidence contested">contested</span></div>
+            <p>Adam and Eve lose immortality by eating forbidden food rather than refusing it, the mechanism is inverted. A real thematic echo, but not a direct copy, and scholars disagree on how strong the link actually is.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Prometheus, loosely <span class="evidence contested">contested</span></div>
+            <p>There's no close Greek match. Prometheus stealing fire is the nearest cousin in spirit, humanity gaining a divine boon at a cost, but the plot mechanics don't line up closely enough to call it a parallel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">05</span><span class="myth-title">The Dying, Mourned Consort</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Sumer, Dumuzid, c. 1900 BCE</h4>
+        <p>Dumuzid, shepherd-consort of Inanna, is taken to the underworld and permitted to return for part of the year, tied to the seasonal cycle of vegetation and flocks. Women mourned him annually, a cult persistent enough that Ezekiel 8:14 records women "weeping for Tammuz" at the Jerusalem temple itself.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Adonis <span class="evidence strong">strong</span></div>
+            <p>A young consort of Aphrodite, dead young and mourned annually in the Adonia festival. His name is a direct loan from the Semitic title "adon," lord, a documented linguistic transmission.</p>
+          </div>
+          <div class="parallel-card egyptian">
+            <div class="parallel-tag">Egyptian — Osiris <span class="evidence contested">contested</span></div>
+            <p>Often lumped in with Dumuzid and Adonis as a "dying-and-rising god," but Osiris becomes lord of the dead rather than returning among the living, and Egyptian tradition is old enough to be independent. Scholar Jonathan Z. Smith has argued the whole category overreaches what the primary texts show.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">06</span><span class="myth-title">The Exposed Infant Destined for Greatness</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Akkad, Legend of Sargon, composed c. 8th–7th c. BCE</h4>
+        <p>Sargon's mother, a priestess, sets him adrift in a reed basket sealed with bitumen on a river. He's found by a water-drawer, raised outside his birth family, and rises to found an empire under the goddess Ishtar's favor.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Exodus 2, Moses <span class="evidence strong">strong</span></div>
+            <p>Set adrift in a bitumen-sealed basket on the Nile to escape a death decree, found by royalty, raised outside his birth family, rises to lead his people. One of the closest mechanical matches on this whole list.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Oedipus, Perseus <span class="evidence contested">contested</span></div>
+            <p>Both are exposed as infants and rise to unexpected greatness, but this is a widespread folklore pattern found across many unrelated cultures, not a specific line back to Sargon.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">07</span><span class="myth-title">Law Given by a God</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Babylon, Code of Hammurabi, c. 1754 BCE</h4>
+        <p>The prologue and stele show Hammurabi receiving the rod and ring of authority directly from Shamash, the sun-and-justice god, legitimizing the code as divinely sanctioned rather than merely royal.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Exodus 19–20, Sinai <span class="evidence contested">contested</span></div>
+            <p>Moses receives the Law from Yahweh atop a mountain amid fire and smoke. The underlying idea, that a law code needs divine legitimation, is common across the ancient Near East, so this reads more like a shared convention than a specific borrowing.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Lycurgus, Minos <span class="evidence contested">contested</span></div>
+            <p>Lycurgus claimed Delphic sanction for Sparta's laws, Minos claimed his came from Zeus on Mount Ida. Same convention, independently applied.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">08</span><span class="myth-title">The Assembly of the Gods</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Mesopotamia, throughout Enuma Elish &amp; Atrahasis</h4>
+        <p>The great gods deliberate and vote as a council, the puhru, deciding things like the flood or Marduk's elevation to kingship, modeled directly on the royal councils of Mesopotamian earthly kings.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Psalm 82, Job 1–2 <span class="evidence strong">strong</span></div>
+            <p>Yahweh presides over a "divine council" of heavenly beings, including, in Job, the Adversary presenting himself among them. Scholars trace this fairly directly to the Canaanite council of El, itself downstream of the Mesopotamian assembly tradition.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Council of Olympus <span class="evidence parallel">parallel</span></div>
+            <p>Zeus presides over the Olympians deliberating on mortal affairs. Likely as much a case of both cultures independently projecting their own royal councils onto the divine sphere as it is direct borrowing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">09</span><span class="myth-title">The Tower That Reached Too High</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Babylon, Etemenanki and ziggurat culture</h4>
+        <p>Etemenanki, the "temple of the foundation of heaven and earth," was a massive stepped tower tied to Marduk's cult in Babylon, part of a broader Mesopotamian tradition of monumental towers built to close the distance between earth and heaven.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Genesis 11, Babel <span class="evidence strong">strong</span></div>
+            <p>Humanity builds a tower "with its top in the heavens" and is scattered and confused in language for the attempt. Widely read by scholars as a polemical Hebrew reworking of Babylonian ziggurat culture, complete with a wordplay on "Babel" and the Hebrew word for confusion.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — the Aloadae <span class="evidence contested">contested</span></div>
+            <p>Giants stack Mount Pelion on Mount Ossa to storm Olympus and are struck down. Same hubris-punished-by-heaven shape, but this fits the broader Greek pattern of hubris and nemesis more than a specific echo of Babel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">10</span><span class="myth-title">The Garden of the Gods</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Sumer, Enki and Ninhursag, c. 2000 BCE</h4>
+        <p>Dilmun is described as a pure, bright land where there is no sickness, death, or predation, a divine garden associated with the gods themselves rather than ordinary humans.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Genesis 2, Eden <span class="evidence parallel">parallel</span></div>
+            <p>A garden planted by God, containing the tree of life, later lost to humanity. Widely cited as a plausible conceptual ancestor, though the specific plot details diverge quite a bit.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — the Golden Age <span class="evidence contested">contested</span></div>
+            <p>Hesiod's lost first age of humanity, living without toil or death, and the guarded garden of the Hesperides. Part of a "lost paradise" theme found independently across many ancient cultures, not a specific transmission from Dilmun.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">11</span><span class="myth-title">Descent to the Underworld and Return</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Sumer, Inanna's Descent, c. 1900 BCE</h4>
+        <p>Inanna journeys to her sister Ereshkigal's realm, is stripped at seven gates, is killed, and is eventually revived on the condition someone else, Dumuzid, takes her place below.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Persephone <span class="evidence strong">strong</span></div>
+            <p>Taken by Hades, her mother's grief withers the world, and a negotiated partial return explains the seasons. Close structurally, transmitted through the broader Near Eastern mythic complex rather than a direct one-to-one copy.</p>
+          </div>
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">The Harrowing of Hell <span class="evidence contested">contested</span></div>
+            <p>A later Christian tradition, not found in the canonical Gospels themselves, describing Christ's descent to free righteous souls between crucifixion and resurrection. Developed centuries after the New Testament, its relationship to older descent myths is debated rather than established.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">12</span><span class="myth-title">The Man Who Escaped Death</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Akkad, Epic of Gilgamesh, Utnapishtim</h4>
+        <p>Granted eternal life by the gods after the flood as a singular exception, Utnapishtim lives on at the mouth of the rivers, visited by Gilgamesh in his own search for immortality.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Genesis 5:24, Enoch <span class="evidence contested">contested</span></div>
+            <p>"He walked with God, and he was not, for God took him." A rare exception to ordinary death, later expanded heavily in the apocryphal Book of Enoch. Same broad category, quite different mechanics.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Elysium <span class="evidence contested">contested</span></div>
+            <p>Certain heroes, like Menelaus in the Odyssey, are promised translation to the Isles of the Blessed rather than ordinary death. A broader Greek category of heroic exception, not a direct line from Utnapishtim.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">13</span><span class="myth-title">The Shepherd-King</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Mesopotamian royal ideology, earliest king lists onward</h4>
+        <p>Kings are consistently titled the "shepherd" appointed by the gods to tend and protect their people, a standard piece of political theology used from the earliest Sumerian rulers through Hammurabi's code.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">David, Psalm 23, John 10 <span class="evidence strong">strong</span></div>
+            <p>David rises from shepherd to king, Yahweh is shepherd of Israel, and Christ is later called the Good Shepherd. A well-attested piece of inherited ancient Near Eastern royal and divine metaphor.</p>
+          </div>
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Homer, "shepherd of the people" <span class="evidence parallel">parallel</span></div>
+            <p>Agamemnon and other Greek leaders repeatedly carry this exact epithet in the Iliad, a shared Aegean-Near Eastern royal metaphor rather than a specific line of transmission.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="myth-item">
+    <summary><span class="myth-num">14</span><span class="myth-title">The Judgment of the Soul</span><span class="myth-chevron"></span></summary>
+    <div class="myth-body">
+      <div class="myth-origin">
+        <h4>Origin — Egypt, not Mesopotamia, Book of the Dead, c. 2000 BCE+</h4>
+        <p>Worth flagging as the exception on this list: Mesopotamian myth generally describes one grim shared underworld, Irkalla, regardless of virtue. Individual moral judgment after death, the heart weighed against the feather of Ma'at, is a distinctly Egyptian contribution.</p>
+      </div>
+      <div class="myth-parallels">
+        <h4>Where it resurfaces</h4>
+        <div class="parallel-grid">
+          <div class="parallel-card greek">
+            <div class="parallel-tag">Greek — Minos, Rhadamanthus <span class="evidence contested">contested</span></div>
+            <p>Judges who sort souls in the underworld by their conduct in life. Plausibly shaped by Egyptian and wider Near Eastern contact, but not a specifically Mesopotamian inheritance.</p>
+          </div>
+          <div class="parallel-card biblical">
+            <div class="parallel-tag">Matthew 25, Revelation 20 <span class="evidence contested">contested</span></div>
+            <p>The dead judged individually and separated to reward or punishment. This development is tied more directly to Zoroastrian and later apocalyptic Jewish tradition than to Egypt or Mesopotamia specifically.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </details>
+
+</main>
+
+<footer>
+  <p>Evidence tags reflect the strength of the textual, linguistic, or historical case, not how satisfying a story is. Several of the "contested" entries here are included because they circulate widely online with more confidence than the primary sources support, not because the connection is worthless. Where a folk-motif shows up across many unrelated cultures (the exposed infant, the lost golden age), that's usually a sign of convergent human storytelling rather than a specific line of transmission, and it's marked as such.</p>
+</footer>
+
+</body>
+</html>

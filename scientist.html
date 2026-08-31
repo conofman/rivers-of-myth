@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>God as Scientist — A Hypothesis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #0e1420; --basalt-2: #16202f; --parchment: #eaf0f5; --parchment-dim: #a9bccb;
+    --ink: #10202c; --lapis: #5b9bd9; --lapis-dim: #3d6ea5; --gold: #c19a5b;
+    --line-faint: rgba(234,240,245,0.12);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--basalt); color:var(--parchment); font-family:'Source Serif 4', serif;
+    background-image:
+      linear-gradient(rgba(234,240,245,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(234,240,245,0.025) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  ::selection{ background:var(--lapis); color:var(--basalt); }
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .sitenav{ position:sticky; top:0; z-index:50; background:rgba(14,20,32,0.94); backdrop-filter:blur(6px); border-bottom:1px solid var(--line-faint); }
+  .sitenav-inner{ max-width:1500px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px; }
+  .sitenav-mark{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment); white-space:nowrap; }
+  .sitenav-links{ display:flex; gap:14px; margin-left:auto; flex-wrap:wrap; }
+  .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--lapis); border-color:var(--lapis); }
+
+  header{ max-width:860px; margin:0 auto; padding:64px 28px 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--lapis); margin-bottom:18px; }
+  h1{ font-size:clamp(30px, 5vw, 48px); line-height:1.08; margin:0 0 20px; }
+  header p{ font-size:16.5px; line-height:1.65; color:var(--parchment-dim); max-width:680px; margin:0 0 14px; }
+  .register-note{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--lapis); border:1px dashed rgba(91,155,217,0.4); background:rgba(91,155,217,0.06); padding:10px 14px; border-radius:3px; max-width:660px; line-height:1.6; }
+
+  section{ max-width:860px; margin:0 auto; padding:10px 28px 20px; }
+  .section-head{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--lapis); margin:0 0 8px; padding-top:44px; border-top:1px solid var(--line-faint); }
+  .section-sub{ font-size:15px; line-height:1.62; color:var(--parchment-dim); max-width:700px; margin:0 0 26px; }
+
+  .hypothesis-block{ background:var(--basalt-2); border:1px solid rgba(91,155,217,0.3); border-radius:4px; padding:26px 28px; margin-bottom:10px; }
+  .hypothesis-block p{ font-family:'Spectral', serif; font-style:italic; font-size:19px; line-height:1.55; color:var(--parchment); margin:0; }
+
+  .info-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  @media (max-width:640px){ .info-grid{ grid-template-columns:1fr; } }
+  .info-card{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:3px; padding:20px 22px; }
+  .info-card h3{ font-size:16px; margin:0 0 10px; color:var(--parchment); }
+  .info-card p{ font-size:13.6px; line-height:1.6; color:var(--parchment-dim); margin:0 0 10px; }
+  .info-card p:last-child{ margin-bottom:0; }
+
+  .lab-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:8px; }
+  @media (max-width:640px){ .lab-grid{ grid-template-columns:1fr; } }
+  .lab-card{ border-radius:3px; padding:22px 24px; }
+  .lab-card.fixed{ background:rgba(91,155,217,0.08); border:1px solid rgba(91,155,217,0.35); }
+  .lab-card.variable{ background:rgba(193,154,91,0.08); border:1px solid rgba(193,154,91,0.35); }
+  .lab-card h4{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 12px; }
+  .lab-card.fixed h4{ color:var(--lapis); }
+  .lab-card.variable h4{ color:var(--gold); }
+  .lab-card p{ font-size:13.8px; line-height:1.6; color:var(--parchment-dim); margin:0; }
+  .lab-card .examples{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--parchment); margin-top:12px; line-height:1.8; }
+
+  .quote-block{ border-left:3px solid var(--lapis); padding-left:18px; margin:22px 0; }
+  .quote-block p{ font-style:italic; font-size:15px; line-height:1.6; color:var(--parchment); margin:0; }
+  .quote-block .attrib{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--parchment-dim); margin-top:8px; }
+
+  .not-list{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:8px; }
+  @media (max-width:640px){ .not-list{ grid-template-columns:1fr; } }
+  .not-item{ background:rgba(234,240,245,0.04); border:1px solid var(--line-faint); border-radius:3px; padding:14px 16px; font-size:13.4px; line-height:1.5; color:var(--parchment-dim); }
+  .not-item strong{ color:var(--parchment); }
+
+  .honesty-block{ background:rgba(91,155,217,0.06); border:1px solid rgba(91,155,217,0.3); border-radius:4px; padding:26px 28px; margin:10px 0; }
+  .honesty-block .label{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--lapis); margin-bottom:14px; }
+  .honesty-block p{ font-family:'Spectral', serif; font-style:italic; font-size:18px; line-height:1.55; color:var(--parchment); margin:0 0 12px; }
+  .honesty-block .note{ font-family:'Source Serif 4', serif; font-style:normal; font-size:14px; line-height:1.6; color:var(--parchment-dim); }
+
+  footer{ max-width:860px; margin:0 auto; padding:20px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
+  footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#5b9bd9" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <a href="canon.html">Book Got Made</a>
+      <a href="geography.html">Third Base</a>
+      <a href="hell.html">Hell's Tree</a>
+      <a href="pantheon.html">El &amp; Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html" class="active">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">A Different Register</div>
+  <h1>God as Scientist</h1>
+  <p>Every other page on this site takes something apart: a doctrine, a translation choice, a myth's real origin. This one puts something forward instead. It isn't a historical claim and it isn't evidence of anything. It's a hypothesis, offered the way a person offers a hypothesis, provisionally, because it's the most intellectually honest shape a first mover could take without smuggling in a morality nobody asked for.</p>
+  <div class="register-note">Everything on the rest of this site is argued from evidence. This page is argued from coherence. That distinction matters, and it's kept visible on purpose.</div>
+</header>
+
+<section>
+  <div class="section-head">The Hypothesis</div>
+  <div class="hypothesis-block">
+    <p>A non-interventionist creator, running an experiment. Not to torment, not to judge, not to be worshipped, but to find out whether something built from nothing more than rules and constants could develop genuine consciousness, and then, on its own, choose to love.</p>
+  </div>
+  <p class="section-sub">The Scientist doesn't intervene for the same reason any scientist doesn't intervene in a running experiment: intervention corrupts the data. A hand reaching into the dish to comfort the culture isn't kindness, it's contamination. Non-intervention here isn't cruelty. It's the discipline the question requires.</p>
+</section>
+
+<section>
+  <div class="section-head">What It Dissolves</div>
+  <p class="section-sub">Not solves. Dissolves, the way a real category error disappears once you stop asking the wrong question of it.</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>The Problem of Evil</h3>
+      <p>Every attempt to reconcile an all-powerful, all-loving God with a world full of unearned suffering runs into the same wall: why doesn't he stop it? A Scientist running an experiment isn't claiming to be all-loving or all-powerful in the first place. The question a theologian spends a career failing to answer, a lab notebook never has to ask.</p>
+    </div>
+    <div class="info-card">
+      <h3>The Foreknowledge Paradox</h3>
+      <p>If God already knows every choice you'll make, in what sense is it a choice at all? A Scientist testing a hypothesis doesn't know the outcome in advance, that's what makes it an experiment rather than a foregone conclusion. Curiosity replaces omniscience, and the paradox has nothing left to grip.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">The Laboratory</div>
+  <p class="section-sub">Two categories of thing exist in this framework, and they behave completely differently.</p>
+  <div class="lab-grid">
+    <div class="lab-card fixed">
+      <h4>Fixed — the walls and floor</h4>
+      <p>Locked, controlled, identical everywhere they're measured. The environment the experiment runs inside, not the thing being tested.</p>
+      <div class="examples">the gravitational constant<br>the speed of light<br>the golden ratio's recursive structure<br>harmonic intervals in music</div>
+    </div>
+    <div class="lab-card variable">
+      <h4>Variable — the thing being tested</h4>
+      <p>Chaotic, context-dependent, expressed differently in every culture and every life. Introduced deliberately, to see what happens.</p>
+      <div class="examples">love</div>
+    </div>
+  </div>
+  <p class="section-sub">The math is in service of the hypothesis, not the point of it. A universe this precisely calibrated isn't the miracle. What a creature built from that calibration chooses to do with it, that's the actual experiment.</p>
+</section>
+
+<section>
+  <div class="section-head">The Constant</div>
+  <p class="section-sub">A quieter piece of the framework, borrowed knowingly from a television show's better idea: what if the people you feel like you've always known are the same people you keep finding, iteration after iteration of the same running experiment?</p>
+  <div class="quote-block">
+    <p>"See you in another lifetime, brother."</p>
+    <div class="attrib">Desmond Hume, LOST, the line this piece of the hypothesis is named after</div>
+  </div>
+  <p class="section-sub">Under this reading, deja vu and the specific, disproportionate familiarity of certain people aren't glitches. They're the same constant, showing up again, because it can, and does, and has.</p>
+</section>
+
+<section>
+  <div class="section-head">The Infinite Regress, Dissolved</div>
+  <p class="section-sub">The oldest objection to any first-mover idea: then what created the creator? This framework's answer isn't an answer, it's a rejection of the question's premise.</p>
+  <p class="section-sub">Causality is time-dependent. "What caused X" only means something inside a timeline, one event before another. A being or process operating outside time isn't first in a sequence, it's outside the category sequence applies to. Asking what created the creator, in a genuinely timeless dimensionality, is a category error, the same shape of mistake as asking what's north of the North Pole. This isn't original to theology or to Jon alone, physicists working on block universe theory and the philosophy of time have made structurally similar moves, but he arrived at it independently, reasoning from the same instinct that produced the rest of the hypothesis.</p>
+</section>
+
+<section>
+  <div class="section-head">What This Isn't</div>
+  <p class="section-sub">Being precise about the boundaries is what keeps this from becoming just another unfalsifiable god-claim with better branding.</p>
+  <div class="not-list">
+    <div class="not-item"><strong>Not omniscient.</strong> A Scientist testing a hypothesis doesn't know how it ends.</div>
+    <div class="not-item"><strong>Not omnipotent.</strong> Bound by the same constants it set as the lab's walls.</div>
+    <div class="not-item"><strong>Not omnibenevolent.</strong> Absence during suffering isn't claimed to be love. It's claimed to be method.</div>
+    <div class="not-item"><strong>Not demanding belief.</strong> Nothing in this framework asks to be worshipped, obeyed, or even believed. If the hypothesis ever resolves, the answer gets offered, never imposed, the one distinction that actually separates a Scientist from a god.</div>
+  </div>
+</section>
+
+<div class="honesty-block">
+  <div class="label">The Honest Limitation</div>
+  <p>"I can't see it as a resolution, when I can't say that I believe it to be real."</p>
+  <div class="note">That's the actual center of this page, not a caveat tacked onto the end of it. The hypothesis is offered without the certainty that made the god it replaced feel unbearable. Held loosely enough that letting go of it, if the reasoning ever demanded it, would cost nothing. That's the whole difference between a belief and a thought experiment, and it's the difference this framework insists on keeping.</div>
+</div>
+
+<footer>
+  <p>Everything else on this site asks what people got wrong about the record. This page asks a different question: once you've cleared all of that away, what's left that's actually worth thinking about? Not an answer. A hypothesis, held the way a hypothesis should be held, with real interest and zero certainty.</p>
+</footer>
+
+</body>
+</html>

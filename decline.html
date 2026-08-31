@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post-Christianity and the Dawn of What</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f; --basalt-2: #1e1b14; --parchment: #ede3cc; --parchment-dim: #cfc4a8;
+    --ink: #2a2416; --lapis: #3d6ea5; --brick: #a8523a; --oxblood: #8a3636; --verdigris: #5f8577;
+    --gold: #c19a5b; --line-faint: rgba(237,227,204,0.14);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--basalt); color:var(--parchment); font-family:'Source Serif 4', serif; }
+  ::selection{ background:var(--gold); color:var(--basalt); }
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .sitenav{ position:sticky; top:0; z-index:50; background:rgba(22,20,15,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line-faint); }
+  .sitenav-inner{ max-width:1500px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px; }
+  .sitenav-mark{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment); white-space:nowrap; }
+  .sitenav-links{ display:flex; gap:16px; margin-left:auto; flex-wrap:wrap; }
+  .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+  header{ max-width:920px; margin:0 auto; padding:64px 28px 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1{ font-size:clamp(30px, 5vw, 50px); line-height:1.08; margin:0 0 20px; }
+  header p{ font-size:16.5px; line-height:1.65; color:var(--parchment-dim); max-width:680px; margin:0 0 14px; }
+  section{ max-width:920px; margin:0 auto; padding:10px 28px 20px; }
+  .section-head{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin:0 0 8px; padding-top:44px; border-top:1px solid var(--line-faint); }
+  .section-sub{ font-size:15px; line-height:1.62; color:var(--parchment-dim); max-width:700px; margin:0 0 26px; }
+
+  .bar-group{ margin-bottom:8px; }
+  .bar-row{ display:grid; grid-template-columns:100px 1fr 46px; align-items:center; gap:12px; margin-bottom:10px; }
+  .bar-label{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--parchment); }
+  .bar-track{ height:22px; background:rgba(237,227,204,0.08); border-radius:2px; overflow:hidden; }
+  .bar-fill{ height:100%; border-radius:2px; background:var(--brick); display:flex; align-items:center; }
+  .bar-value{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--parchment-dim); text-align:right; }
+
+  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:8px; }
+  @media (max-width:700px){ .stat-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .stat-grid{ grid-template-columns:1fr; } }
+  .stat-card{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:3px; padding:18px 16px; }
+  .stat-num{ font-family:'Spectral', serif; font-weight:700; font-size:30px; color:var(--gold); line-height:1; margin-bottom:6px; }
+  .stat-label{ font-size:12.6px; line-height:1.5; color:var(--parchment-dim); }
+
+  .gap-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:8px; }
+  @media (max-width:640px){ .gap-grid{ grid-template-columns:1fr; } }
+  .gap-card{ background:var(--parchment); color:var(--ink); border-radius:2px; padding:17px 19px; }
+  .gap-card.belong{ border-left:4px solid var(--verdigris); }
+  .gap-card.believe{ border-left:4px solid var(--oxblood); }
+  .gap-card h4{ font-family:'IBM Plex Mono', monospace; font-size:11px; text-transform:uppercase; letter-spacing:0.04em; margin:0 0 10px; }
+  .gap-card .num{ font-family:'Spectral', serif; font-weight:700; font-size:26px; margin:0 0 4px; }
+  .gap-card .num-label{ font-size:12px; color:#6b5f45; margin-bottom:10px; }
+  .gap-card p{ font-size:12.6px; line-height:1.5; margin:0; color:#4a4130; }
+
+  .callout{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:3px; padding:20px 22px; margin-bottom:8px; }
+  .callout h3{ font-size:16px; margin:0 0 10px; color:var(--parchment); }
+  .callout p{ font-size:14px; line-height:1.62; color:var(--parchment-dim); margin:0 0 10px; }
+  .callout p:last-child{ margin-bottom:0; }
+
+  footer{ max-width:920px; margin:0 auto; padding:20px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
+  footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
+  footer .sources{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--parchment-dim); line-height:2; margin-top:16px; }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <a href="canon.html">Book Got Made</a>
+      <a href="geography.html">Third Base</a>
+      <a href="hell.html">Hell's Tree</a>
+      <a href="pantheon.html">El &amp; Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html" class="active">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Data</div>
+  <h1>Post-Christianity and the Dawn of What</h1>
+  <p>Western religious decline isn't a prediction or a culture-war talking point, it's a fifty-year trend line with consistent numbers behind it. What's less often shown is what actually happens on the other side: not a clean switch to atheism, but a slow separation of belonging from believing, and a decline that is, so far, almost entirely a Western phenomenon rather than a global one.</p>
+</header>
+
+<section>
+  <div class="section-head">The American Trend</div>
+  <p class="section-sub">The share of U.S. adults who claim no religious affiliation, the "nones," measured consistently across five decades of survey data.</p>
+  <div class="bar-group">
+    <div class="bar-row"><div class="bar-label">1972</div><div class="bar-track"><div class="bar-fill" style="width:5%;"></div></div><div class="bar-value">5%</div></div>
+    <div class="bar-row"><div class="bar-label">1990</div><div class="bar-track"><div class="bar-fill" style="width:8%;"></div></div><div class="bar-value">~8%</div></div>
+    <div class="bar-row"><div class="bar-label">2007</div><div class="bar-track"><div class="bar-fill" style="width:16%;"></div></div><div class="bar-value">16%</div></div>
+    <div class="bar-row"><div class="bar-label">2014</div><div class="bar-track"><div class="bar-fill" style="width:23%;"></div></div><div class="bar-value">23%</div></div>
+    <div class="bar-row"><div class="bar-label">2023–24</div><div class="bar-track"><div class="bar-fill" style="width:29%; background:var(--gold);"></div></div><div class="bar-value">29%</div></div>
+  </div>
+  <p class="section-sub" style="margin-top:16px;">Growth accelerated sharply in the 1990s and has slowed somewhat since 2019, but the direction hasn't reversed in fifty years of measurement. Every age group, education level, and region shows the same trend line, up.</p>
+</section>
+
+<section>
+  <div class="section-head">Believing Without Belonging: Scandinavia</div>
+  <p class="section-sub">Sweden and Denmark show where the American trend may eventually head, and it isn't straightforward atheism. Formal church membership stays surprisingly high while practice and literal belief collapse almost entirely, the two separate rather than move together.</p>
+  <div class="gap-grid">
+    <div class="gap-card belong">
+      <h4>What people still belong to</h4>
+      <div class="num">68.8%</div>
+      <div class="num-label">of Swedes are formal Church of Sweden members, down from 95% forty years ago</div>
+      <p>Membership in the Church of Denmark stands at 70% as of 2026. People keep the formal, often inherited, affiliation even as practice disappears underneath it.</p>
+    </div>
+    <div class="gap-card believe">
+      <h4>What people actually believe</h4>
+      <div class="num">3% / 7%</div>
+      <div class="num-label">of Swedes / Danes believe the Bible is the literal word of God</div>
+      <p>Only 3% of Swedes and 7% of Danes attend church weekly, among the lowest rates in the world. About a third of Swedes say they believe in some kind of god or spiritual force at all, well under half.</p>
+    </div>
+  </div>
+  <p class="section-sub" style="margin-top:16px;">Sociologist Grace Davie's phrase for the broader pattern is "believing without belonging" in most Western contexts; Scandinavia runs it in reverse, belonging without believing, institutional membership persisting as cultural inheritance long after the theology underneath it has quietly emptied out.</p>
+</section>
+
+<section>
+  <div class="section-head">Where This Might Be Headed</div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">41%</div>
+      <div class="stat-label">Pew's upper-bound projection for U.S. religiously unaffiliated adults by 2070, if current switching patterns continue and Christian retention doesn't fall below roughly 50%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">31%</div>
+      <div class="stat-label">of people raised Christian in the U.S. become unaffiliated by age 30, in each successive generation measured</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">21%</div>
+      <div class="stat-label">of people raised with no religion become Christian by age 30, the much smaller reverse flow</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">The Part That's Easy to Miss</div>
+  <div class="callout">
+    <h3>Secularization Is a Western Story, Not a Global One</h3>
+    <p>As of 2020, roughly 84% of the world's population identifies with a religious group, and that share had barely moved in the prior decade. The countries driving religious growth globally, concentrated in sub-Saharan Africa and parts of Asia, have significantly higher fertility rates than the secularizing West.</p>
+    <p>The plain implication: even as Sweden, Denmark, and increasingly the United States drift toward unaffiliation, the global religious population is still growing in absolute terms, and may continue to for decades. What looks like the end of religion from inside a Western living room looks like relocation from a wider vantage point, not disappearance.</p>
+  </div>
+</section>
+
+<footer>
+  <p>None of this predicts where any individual reader lands. Trend lines describe populations, not people. What the data does support is a specific, falsifiable claim: institutional religious affiliation in the West has been declining consistently for fifty years, the decline outpaces any reversal on record, and the story most often told about what replaces it, mass atheism, undersells how much of it is actually a quiet uncoupling of identity from belief rather than a clean conversion to unbelief.</p>
+  <div class="sources">
+    Source: Pew Research Center, U.S. Religious Landscape Studies (2007, 2014, 2023–24) · "How the Global Religious Landscape Changed From 2010 to 2020" · "Modeling the Future of Religion in America" (2022) · Church of Sweden statistics (Jonas Bromander) · Kirkeministeriet, Church of Denmark · Grace Davie, Religion in Britain Since 1945
+  </div>
+</footer>
+
+</body>
+</html>

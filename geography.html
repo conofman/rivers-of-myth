@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Born on Third Base — The Geography of Belief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --basalt: #16140f;
+    --basalt-2: #1e1b14;
+    --parchment: #ede3cc;
+    --parchment-dim: #cfc4a8;
+    --ink: #2a2416;
+    --lapis: #3d6ea5;
+    --brick: #a8523a;
+    --oxblood: #8a3636;
+    --verdigris: #5f8577;
+    --gold: #c19a5b;
+    --line-faint: rgba(237,227,204,0.14);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; background:var(--basalt); color:var(--parchment); font-family:'Source Serif 4', serif; }
+  ::selection{ background:var(--gold); color:var(--basalt); }
+  h1,h2,h3,h4{ font-family:'Spectral', serif; font-weight:600; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  .sitenav{ position:sticky; top:0; z-index:50; background:rgba(22,20,15,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line-faint); }
+  .sitenav-inner{ max-width:1500px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px; }
+  .sitenav-mark{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color:var(--parchment); white-space:nowrap; }
+  .sitenav-links{ display:flex; gap:22px; margin-left:auto; flex-wrap:wrap; }
+  .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
+  .sitenav-links a:hover{ color:var(--parchment); }
+  .sitenav-links a.active{ color:var(--gold); border-color:var(--gold); }
+
+  header{ max-width:920px; margin:0 auto; padding:64px 28px 20px; }
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1{ font-size:clamp(32px, 5vw, 50px); line-height:1.08; margin:0 0 20px; }
+  header p{ font-size:16.5px; line-height:1.65; color:var(--parchment-dim); max-width:680px; margin:0 0 14px; }
+
+  section{ max-width:920px; margin:0 auto; padding:10px 28px 20px; }
+  .section-head{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin:0 0 8px; padding-top:44px; border-top:1px solid var(--line-faint); }
+  .section-sub{ font-size:15px; line-height:1.6; color:var(--parchment-dim); max-width:680px; margin:0 0 28px; }
+
+  /* stat grid */
+  .stat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:8px; }
+  @media (max-width:700px){ .stat-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:480px){ .stat-grid{ grid-template-columns:1fr; } }
+  .stat-card{ background:var(--basalt-2); border:1px solid var(--line-faint); border-radius:3px; padding:20px 18px; }
+  .stat-num{ font-family:'Spectral', serif; font-weight:700; font-size:34px; color:var(--gold); line-height:1; margin-bottom:8px; }
+  .stat-label{ font-size:13.3px; line-height:1.5; color:var(--parchment-dim); }
+
+  /* bar rows */
+  .bar-group{ margin-bottom:30px; }
+  .bar-group-label{ font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--parchment-dim); margin-bottom:14px; }
+  .bar-row{ display:grid; grid-template-columns:150px 1fr 46px; align-items:center; gap:12px; margin-bottom:10px; }
+  .bar-label{ font-size:13.5px; color:var(--parchment); }
+  .bar-track{ height:10px; background:rgba(237,227,204,0.08); border-radius:2px; overflow:hidden; }
+  .bar-fill{ height:100%; border-radius:2px; }
+  .bar-value{ font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--parchment-dim); text-align:right; }
+  @media (max-width:560px){ .bar-row{ grid-template-columns:110px 1fr 40px; } .bar-label{ font-size:12px; } }
+
+  /* extremes grid */
+  .extreme-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:6px; }
+  @media (max-width:640px){ .extreme-grid{ grid-template-columns:1fr; } }
+  .extreme-card{ background:var(--parchment); color:var(--ink); border-radius:2px; padding:16px 18px; }
+  .extreme-card.oxblood{ border-left:4px solid var(--oxblood); }
+  .extreme-card.verdigris{ border-left:4px solid var(--verdigris); }
+  .extreme-card h4{ font-size:15px; margin:0 0 6px; }
+  .extreme-card p{ font-size:13px; line-height:1.55; margin:0; color:#4a4130; }
+
+  .pullquote{ max-width:820px; margin:56px auto 10px; padding:0 28px; text-align:center; }
+  .pullquote blockquote{ font-family:'Spectral', serif; font-style:italic; font-size:clamp(22px,3.4vw,30px); line-height:1.4; color:var(--parchment); margin:0 0 16px; }
+  .pullquote .attrib{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--gold); }
+  .pullquote .caveat{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--parchment-dim); margin-top:10px; max-width:520px; margin-left:auto; margin-right:auto; }
+
+  footer{ max-width:920px; margin:0 auto; padding:20px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
+  footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
+  footer .sources{ font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--parchment-dim); line-height:2; margin-top:16px; }
+</style>
+</head>
+<body>
+
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <span class="sitenav-mark">
+      <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
+      Rivers of Myth
+    </span>
+    <div class="sitenav-links">
+      <a href="index.html">Lineage Map</a>
+      <a href="myth-match.html">Myth Match</a>
+      <a href="canon.html">How the Book Got Made</a>
+      <a href="geography.html" class="active">Born on Third Base</a>
+      <a href="hell.html">Hell's Family Tree</a>
+      <a href="pantheon.html">El and Asherah</a>
+      <a href="rites.html">Borrowed Rites</a>
+      <a href="decline.html">Post-Christianity</a>
+      <a href="consistency.html">Consistency Test</a>
+      <a href="scientist.html">God as Scientist</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="eyebrow">Geography of Belief</div>
+  <h1>Born on Third Base</h1>
+  <p>Ask someone why they believe what they believe and they'll usually describe a search: scripture, prayer, a moment of certainty. The data tells a plainer story. Religion tracks birthplace and upbringing more reliably than almost anything else about a person, and once you're in, staying has more to do with how it felt as a kid than with what turned out to be true.</p>
+</header>
+
+<section>
+  <div class="section-head">The World Is Sorted, Not Searched</div>
+  <p class="section-sub">Pew's 2020 survey of 201 countries and territories found that most of the planet lives in places dominated by a single religious category, not a marketplace of competing options.</p>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">194 / 201</div>
+      <div class="stat-label">countries and territories where at least half the population belongs to one religious group</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">43</div>
+      <div class="stat-label">countries where 95% or more of the population shares one religion, 25 majority Muslim, 17 majority Christian, 1 majority Buddhist</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">7</div>
+      <div class="stat-label">countries on Earth with no single religious majority at all: the UK, Mauritius, South Korea, Australia, France, Ivory Coast, Singapore</div>
+    </div>
+  </div>
+  <div class="extreme-grid">
+    <div class="extreme-card oxblood">
+      <h4>The least diverse places</h4>
+      <p>Yemen, Afghanistan, and Somalia are each 99.8% or more Muslim. Timor-Leste and Moldova are almost entirely Christian. If you were born in any of these, your religion was decided before you could talk.</p>
+    </div>
+    <div class="extreme-card verdigris">
+      <h4>The most diverse place</h4>
+      <p>Singapore is the world's closest approximation to an even mix: 31% Buddhist, 20% unaffiliated, 19% Christian, 16% Muslim, 5% Hindu. No country anywhere scores a perfect spread.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">Concentration, Not Distribution</div>
+  <p class="section-sub">Some religions aren't just regionally common, they're regionally almost total. Christianity is the outlier here, the most spread-out major religion on Earth, and it still needs a dozen countries to reach barely half its own adherents.</p>
+  <div class="bar-group">
+    <div class="bar-row"><div class="bar-label">Hindus in Asia-Pacific</div><div class="bar-track"><div class="bar-fill" style="width:99%; background:var(--gold);"></div></div><div class="bar-value">99%</div></div>
+    <div class="bar-row"><div class="bar-label">Buddhists in Asia-Pacific</div><div class="bar-track"><div class="bar-fill" style="width:99%; background:var(--gold);"></div></div><div class="bar-value">99%</div></div>
+    <div class="bar-row"><div class="bar-label">Muslims, in 6 countries</div><div class="bar-track"><div class="bar-fill" style="width:52%; background:var(--verdigris);"></div></div><div class="bar-value">52%</div></div>
+    <div class="bar-row"><div class="bar-label">Christians, in 12 countries</div><div class="bar-track"><div class="bar-fill" style="width:51%; background:var(--brick);"></div></div><div class="bar-value">51%</div></div>
+  </div>
+  <p class="section-sub" style="margin-top:-10px;">The Muslim figure is the sharpest: six countries hold 52% of the world's roughly 2 billion Muslims, and those six countries make up only 30% of the world's population. That's concentration well beyond what population size alone would predict.</p>
+</section>
+
+<section>
+  <div class="section-head">Staying Is About Upbringing, Not Evidence</div>
+  <p class="section-sub">Globally, 91% of adults ages 18–54 still hold the religion, or lack of one, they were raised in. Retention varies by tradition, and the pattern below is consistent whether you look at the world or just the United States.</p>
+
+  <div class="bar-group">
+    <div class="bar-group-label">Global retention, ages 18–54</div>
+    <div class="bar-row"><div class="bar-label">Hindu</div><div class="bar-track"><div class="bar-fill" style="width:99%; background:var(--gold);"></div></div><div class="bar-value">99%</div></div>
+    <div class="bar-row"><div class="bar-label">Muslim</div><div class="bar-track"><div class="bar-fill" style="width:99%; background:var(--gold);"></div></div><div class="bar-value">99%</div></div>
+    <div class="bar-row"><div class="bar-label">All religions, global</div><div class="bar-track"><div class="bar-fill" style="width:91%; background:var(--verdigris);"></div></div><div class="bar-value">91%</div></div>
+  </div>
+
+  <div class="bar-group">
+    <div class="bar-group-label">U.S. retention by tradition, Pew Religious Landscape Study 2023–24</div>
+    <div class="bar-row"><div class="bar-label">Hindu</div><div class="bar-track"><div class="bar-fill" style="width:82%; background:var(--brick);"></div></div><div class="bar-value">82%</div></div>
+    <div class="bar-row"><div class="bar-label">Muslim</div><div class="bar-track"><div class="bar-fill" style="width:77%; background:var(--brick);"></div></div><div class="bar-value">77%</div></div>
+    <div class="bar-row"><div class="bar-label">Jewish</div><div class="bar-track"><div class="bar-fill" style="width:76%; background:var(--brick);"></div></div><div class="bar-value">76%</div></div>
+    <div class="bar-row"><div class="bar-label">Protestant</div><div class="bar-track"><div class="bar-fill" style="width:70%; background:var(--brick);"></div></div><div class="bar-value">70%</div></div>
+    <div class="bar-row"><div class="bar-label">Catholic</div><div class="bar-track"><div class="bar-fill" style="width:57%; background:var(--brick);"></div></div><div class="bar-value">57%</div></div>
+    <div class="bar-row"><div class="bar-label">Latter-day Saint</div><div class="bar-track"><div class="bar-fill" style="width:54%; background:var(--brick);"></div></div><div class="bar-value">54%</div></div>
+    <div class="bar-row"><div class="bar-label">Buddhist</div><div class="bar-track"><div class="bar-fill" style="width:45%; background:var(--brick);"></div></div><div class="bar-value">45%</div></div>
+  </div>
+
+  <div class="extreme-grid">
+    <div class="extreme-card oxblood">
+      <h4>What actually predicts staying</h4>
+      <p>Among Americans who had a positive religious experience as children, 84% still identify with that religion as adults. Among those whose experience was negative, 69% now identify with no religion at all. The determining factor Pew found wasn't doctrine, it was how it felt growing up.</p>
+    </div>
+  </div>
+</section>
+
+<div class="pullquote">
+  <blockquote>"How thoughtful of God to arrange matters so that, wherever you happen to be born, the local religion always turns out to be the true one."</blockquote>
+  <div class="attrib">Widely attributed to Carl Sagan</div>
+  <div class="caveat">This line circulates everywhere under Sagan's name, but no one has traced it to a specific book, lecture, or interview. It may be a paraphrase that picked up his name along the way. Treat the attribution as unverified, the argument itself stands on its own regardless of who first said it.</div>
+</div>
+
+<footer>
+  <p>None of this proves any particular religion false. It's a fact about how belief gets distributed, not a verdict on any single tradition's truth claims. But it is a hard number to reconcile with the idea that most believers arrived at their faith through independent investigation: overwhelmingly, they arrived at it by being born in the right place to the right parents, and they stayed because it felt good, not because they checked.</p>
+  <div class="sources">
+    Source: Pew Research Center, "Religious Diversity Around the World" (2026) · "How the Global Religious Landscape Changed From 2010 to 2020" · "Globally, 1 in 10 Adults Under 55 Have Left Their Childhood Religion" (2025) · "Why Do Some Americans Leave Their Religion While Others Stay" (2025) · U.S. Religious Landscape Study 2023–24
+  </div>
+</footer>
+
+</body>
+</html>
