@@ -52,8 +52,7 @@
     display:flex; align-items:center; gap:8px;
     font-family:'IBM Plex Mono', monospace;
     font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
-    color:var(--parchment); white-space:nowrap;
-  }
+    color:var(--parchment); white-space:nowrap; text-decoration:none;}
   .sitenav-links{ display:flex; gap:22px; margin-left:auto; }
   .sitenav-links a{
     font-family:'IBM Plex Mono', monospace;
@@ -239,11 +238,11 @@
 
 <nav class="sitenav">
   <div class="sitenav-inner">
-    <span class="sitenav-mark">
+    <a class="sitenav-mark" href="index.html" aria-label="Home">
       <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><path d="M0 6 Q5 0 10 6 T20 6" stroke="#c19a5b" stroke-width="1.4"/></svg>
       Rivers of Myth
-    </span>
-    <div class="sitenav-links">
+    </a>
+    <div class="sitenav-links"><a href="index.html">Home</a>
       <a href="index.html">Lineage Map</a>
       <a href="myth-match.html" class="active">Myth Match</a>
       <a href="canon.html">How the Book Got Made</a>
