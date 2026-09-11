@@ -29,23 +29,6 @@
   .sitenav-links a{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; letter-spacing:0.04em; text-transform:uppercase; color:var(--parchment-dim); text-decoration:none; padding-bottom:3px; border-bottom:2px solid transparent; transition:color 0.15s, border-color 0.15s; }
   .sitenav-links a:hover{ color:var(--parchment); }
   .sitenav-links a.active{ color:var(--lapis); border-color:var(--lapis); }
-  .sitenav-links .nav-group{ position:relative; display:flex; align-items:center; }
-  .sitenav-links .nav-dropdown{
-    display:none; position:absolute; top:100%; left:0;
-    background:var(--basalt-2); border:1px solid var(--line-faint); border-top:2px solid var(--lapis);
-    min-width:240px; z-index:200; box-shadow:0 8px 22px rgba(0,0,0,0.35); padding:6px 0;
-  }
-  .sitenav-links .nav-group:hover .nav-dropdown,
-  .sitenav-links .nav-group:focus-within .nav-dropdown{ display:block; }
-  .sitenav-links .nav-dropdown a{
-    display:block; padding:8px 16px; font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase;
-    color:var(--parchment-dim); border-bottom:none; white-space:normal;
-  }
-  .sitenav-links .nav-dropdown a:hover{ color:var(--parchment); border-color:transparent; }
-  .sitenav-links .nav-dropdown .drop-section{
-    padding:10px 16px 4px; font-family:'IBM Plex Mono', monospace; font-size:9.5px;
-    color:var(--lapis); letter-spacing:0.12em; text-transform:uppercase; opacity:0.75;
-  }
 
   header{ max-width:860px; margin:0 auto; padding:64px 28px 20px; }
   .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--lapis); margin-bottom:18px; }
@@ -94,7 +77,17 @@
 
   footer{ max-width:860px; margin:0 auto; padding:20px 28px 90px; border-top:1px solid var(--line-faint); padding-top:32px; }
   footer p{ font-size:14px; line-height:1.7; color:var(--parchment-dim); max-width:700px; }
-  .site-copyright { text-align: center; padding: 2rem 0 1rem; font-size: 0.8rem; color: var(--parchment-dim); }
+
+/* Bible Tests dropdown */
+.nav-drop{position:relative;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.035em;text-transform:uppercase;color:var(--parchment-dim)}
+.nav-drop summary{list-style:none;cursor:pointer;padding-bottom:3px;border-bottom:2px solid transparent;white-space:nowrap;user-select:none}
+.nav-drop summary::-webkit-details-marker{display:none}.nav-drop summary:hover{color:var(--parchment)}
+.nav-drop.active summary{color:var(--gold);border-color:var(--gold)}.nav-caret{font-size:9px;margin-left:2px}
+.nav-drop-menu{position:absolute;right:0;top:calc(100% + 12px);width:330px;max-height:min(72vh,620px);overflow:auto;background:#1e1b14;border:1px solid rgba(237,227,204,.22);border-radius:4px;padding:8px;box-shadow:0 18px 45px rgba(0,0,0,.48);z-index:200;text-transform:none;letter-spacing:0}
+.nav-drop-menu a,.sitenav-links .nav-drop-menu a{display:block;padding:10px 11px!important;border:0!important;border-radius:3px;color:#cfc4a8!important;text-decoration:none!important;font-family:'Source Serif 4',serif!important;font-size:13px!important;line-height:1.25;text-transform:none!important;letter-spacing:0!important}
+.nav-drop-menu a:hover{background:rgba(193,154,91,.1);color:#ede3cc!important}.nav-drop-menu a span{display:block;font-family:'Spectral',serif;font-size:14px;color:#ede3cc;margin-bottom:2px}.nav-drop-menu a small{display:block;font-size:11.5px;line-height:1.35;color:#a99f87}.nav-drop-menu .hub-link{border-bottom:1px solid rgba(237,227,204,.12)!important;margin-bottom:5px;padding-bottom:12px!important}.nav-drop-menu .hub-link span{color:#c19a5b}
+@media(max-width:760px){.nav-drop-menu{position:fixed;left:12px;right:12px;top:58px;width:auto;max-height:76vh}.nav-drop{font-size:9px}}
+
 </style>
 </head>
 <body>
@@ -106,41 +99,15 @@
       Rivers of Myth
     </span>
     <div class="sitenav-links">
-      <a href="index.html">Home</a>
-      <a href="lineage.html">Lineage Map</a>
+      <a href="index.html">Lineage Map</a>
       <a href="myth-match.html">Myth Match</a>
-      <div class="nav-group">
-        <a href="scrutiny.html">Biblical Scrutiny &#9662;</a>
-        <div class="nav-dropdown">
-          <div class="drop-section">The Document</div>
-          <a href="scrutiny.html#contradictions">I &mdash; Internal Contradictions</a>
-          <a href="scrutiny.html#authorship">II &mdash; Authorship Questions</a>
-          <a href="scrutiny.html#jedp">III &mdash; The Four Sources (JEDP)</a>
-          <a href="scrutiny.html#flood">IV &mdash; The Flood: A Case Study</a>
-          <a href="scrutiny.html#anachronisms">V &mdash; Anachronisms &amp; the Patriarchs</a>
-          <a href="scrutiny.html#moses">VI &mdash; Moses &amp; the Exodus</a>
-          <div class="drop-section">Origins</div>
-          <a href="scrutiny.html#borrowed">VII &mdash; Borrowed Mythology</a>
-          <a href="scrutiny.html#polytheism">VIII &mdash; Polytheistic Origins</a>
-          <a href="scrutiny.html#canon">IX &mdash; Formation of the Canon</a>
-          <div class="drop-section">What It Got Wrong</div>
-          <a href="scrutiny.html#prophecy">X &mdash; Failed Prophecies</a>
-          <a href="scrutiny.html#transmission">XI &mdash; Textual Corruption</a>
-          <a href="scrutiny.html#jesus">XII &mdash; The Historical Jesus Problem</a>
-          <a href="scrutiny.html#virgin">XIII &mdash; The Virgin Birth Problem</a>
-          <div class="drop-section">What It Conceals</div>
-          <a href="scrutiny.html#violence">XIV &mdash; Divine Violence</a>
-          <a href="scrutiny.html#slavery">XV &mdash; Slavery &amp; the Bible</a>
-          <a href="scrutiny.html#reading">&mdash; Scholarly Reading List</a>
-        </div>
-      </div>
       <a href="canon.html">Book Got Made</a>
       <a href="geography.html">Third Base</a>
       <a href="hell.html">Hell's Tree</a>
       <a href="pantheon.html">El &amp; Asherah</a>
       <a href="rites.html">Borrowed Rites</a>
       <a href="decline.html">Post-Christianity</a>
-      <a href="consistency.html">Consistency Test</a>
+      <a href="consistency.html">Consistency Test</a><details class="nav-drop"><summary>Bible Tests <span class="nav-caret">▾</span></summary><div class="nav-drop-menu"><a href="bible-tests.html" class="hub-link"><span>All Bible Tests</span><small>Choose a test or read how they work.</small></a><a href="revelation-test.html"><span>The Revelation Test</span><small>Can you know which message really came from God?</small></a><a href="three-claims-test.html"><span>The Three Claims Test</span><small>Why would a perfect creator make a world with suffering?</small></a><a href="free-will-test.html"><span>The Free Will Test</span><small>If God already knows your choice, could you really choose differently?</small></a><a href="prayer-test.html"><span>The Prayer Test</span><small>If God already knows and has a plan, what does asking him change?</small></a><a href="hell-test.html"><span>The Hell Test</span><small>Can endless punishment be just?</small></a><a href="hiddenness-test.html"><span>The Hiddenness Test</span><small>If God wants to be known, why can sincere seekers miss him?</small></a><a href="moral-authority-test.html"><span>The Moral Authority Test</span><small>Is something good because God says so, or does God say it because it is good?</small></a><a href="original-sin-test.html"><span>The Original Sin Test</span><small>Can guilt fairly pass from one person to another?</small></a><a href="faith-test.html"><span>The Faith Test</span><small>When is faith trust — and when is it belief without enough evidence?</small></a><a href="salvation-lottery-test.html"><span>The Salvation Lottery</span><small>How much should birthplace affect a person’s chance of being saved?</small></a></div></details>
       <a href="scientist.html" class="active">God as Scientist</a>
     </div>
   </div>
@@ -207,7 +174,7 @@
 <section>
   <div class="section-head">The Infinite Regress, Dissolved</div>
   <p class="section-sub">The oldest objection to any first-mover idea: then what created the creator? This framework's answer isn't an answer, it's a rejection of the question's premise.</p>
-  <p class="section-sub">Causality is time-dependent. "What caused X" only means something inside a timeline, one event before another. A being or process operating outside time isn't first in a sequence, it's outside the category sequence applies to. Asking what created the creator, in a genuinely timeless dimensionality, is a category error, the same shape of mistake as asking what's north of the North Pole. This isn't orginal to theology or to the author of this website alone, physicists working on block universe theory and the philosophy of time have made structurally similar moves, but he arrived at it independently, reasoning from the same instinct that produced the rest of the hypothesis.</p>
+  <p class="section-sub">Causality is time-dependent. "What caused X" only means something inside a timeline, one event before another. A being or process operating outside time isn't first in a sequence, it's outside the category sequence applies to. Asking what created the creator, in a genuinely timeless dimensionality, is a category error, the same shape of mistake as asking what's north of the North Pole. This isn't original to theology or to Jon alone, physicists working on block universe theory and the philosophy of time have made structurally similar moves, but he arrived at it independently, reasoning from the same instinct that produced the rest of the hypothesis.</p>
 </section>
 
 <section>
@@ -231,6 +198,5 @@
   <p>Everything else on this site asks what people got wrong about the record. This page asks a different question: once you've cleared all of that away, what's left that's actually worth thinking about? Not an answer. A hypothesis, held the way a hypothesis should be held, with real interest and zero certainty.</p>
 </footer>
 
-<div class="site-copyright">© 2026 Rivers of Myth. All rights reserved.</div>
 </body>
 </html>
